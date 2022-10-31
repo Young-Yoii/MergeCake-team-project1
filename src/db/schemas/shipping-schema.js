@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 
-const shippingSchema = new Schema(
+const ShippingSchema = new Schema(
   {
     EMAIL: {
       type: String,
