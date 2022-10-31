@@ -29,4 +29,4 @@ const ProductSchema = new Schema(
   }
 );
 
-export { UserSchema };
+export { ProductSchema };
