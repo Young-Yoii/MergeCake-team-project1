@@ -3,16 +3,16 @@ import { Schema } from "mongoose";
 const ShippingSchema = new Schema(
   {
     EMAIL: {
-      type: String,
-      required: true,
+      type:  Schema.Types.ObjectId,
+      ref: 'User'
     },
-    TASTE: {
+    STATE: {
       type: String,
       required: true,
     },
     ORDER_NO: {
-      type: String,
-      required: true,
+        type:  Schema.Types.ObjectId,
+        ref: 'Order'
     },
     TOTALPRICE: {
       type: Number,
@@ -20,7 +20,7 @@ const ShippingSchema = new Schema(
     }
   },
   {
-    collection: "shipping",
+    collection: "Shipping",
     timestamps: true,
   }
 );

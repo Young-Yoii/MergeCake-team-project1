@@ -2,10 +2,6 @@ import { Schema } from "mongoose";
 
 const OrderSchema = new Schema(
   {
-    taste: {
-      type: String,
-      required: true,
-    },
     orderNo: {
       type: String,
       required: true,
@@ -60,7 +56,7 @@ const OrderSchema = new Schema(
     },
   },
   {
-    collection: "Users",
+    collection: "Order",
     timestamps: true,
   }
 );
