@@ -2,23 +2,23 @@ import { Schema } from "mongoose";
 
 const UserSchema = new Schema(
   {
-    email: {
+    EMAIL: { // hyun - pk 처리
       type: String,
       required: true,
     },
-    fullName: {
+    FULL_NAME: {
       type: String,
       required: true,
     },
-    password: {
+    PASSWORD: {
       type: String,
       required: true,
     },
-    phoneNumber: {
+    PHONE_NUMBER: { // hyun - int로 받을건지, string으로 받을건지 (- 입력여부에 따라 변경)
       type: String,
-      required: false,
+      required: true,
     },
-    address: {
+    ADDRESS: { // hyun - schema 형식으로 받을건지
       type: new Schema(
         {
           postalCode: String,
@@ -31,14 +31,14 @@ const UserSchema = new Schema(
       ),
       required: false,
     },
-    role: {
+    ROLE: {
       type: String,
-      required: false,
-      default: "basic-user",
+      required: true,
+      default: "user", // "admin", "user", "non-user"
     },
   },
   {
-    collection: "users",
+    collection: "User",
     timestamps: true,
   }
 );

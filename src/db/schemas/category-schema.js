@@ -1,8 +1,8 @@
 import { Schema } from "mongoose";
 
-const OrderSchema = new Schema(
+const CategorySchema = new Schema(
   {
-    ORDER_NO: { // order_no 생성할때 초성이랑 날짜,난수? 합쳐서 생성하려고 하는데, 그러면 string해야되는뎅 중요x!!
+    CATEGORY_NAME: { // "맛" "시트" ...
       type: String,
       required: true,
     },
@@ -20,9 +20,9 @@ const OrderSchema = new Schema(
     }
   },
   {
-    collection: "Order",
+    collection: "Category",
     timestamps: true,
   }
 );
 
-export { OrderSchema };
+export { CategorySchema };
