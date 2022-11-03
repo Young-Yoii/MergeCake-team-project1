@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 
-const SelectSchema = new Schema( // table 이름이 product는 아닌듯!!
+const SelectSchema = new Schema(
   {
     SELECT_NO: {
       type: Number,
@@ -16,7 +16,7 @@ const SelectSchema = new Schema( // table 이름이 product는 아닌듯!!
     },
     UPDATED_TIME: {
       type: String,
-      required: true,
+      required: false,
     }
   },
   {

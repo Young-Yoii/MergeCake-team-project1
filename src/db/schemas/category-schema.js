@@ -6,8 +6,8 @@ const CategorySchema = new Schema(
       type: String,
       required: true,
     },
-    PRODUCT_NO: { // 여기는 참조가 아닌가???
-      type: Number,
+    VALUE: {
+      type: String,
       required: true,
     },
     CREATED_TIME: {
@@ -16,7 +16,7 @@ const CategorySchema = new Schema(
     },
     UPDATED_TIME: {
       type: String,
-      required: true,
+      required: false,
     }
   },
   {

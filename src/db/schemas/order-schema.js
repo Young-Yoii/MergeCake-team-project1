@@ -2,11 +2,11 @@ import { Schema } from "mongoose";
 
 const OrderSchema = new Schema(
   {
-    ORDER_NO: { // order_no 생성할때 초성이랑 날짜,난수? 합쳐서 생성하려고 하는데, 그러면 string해야되는뎅 중요x!!
-      type: String,
+    ORDER_NO: {
+      type: Number,
       required: true,
     },
-    PRODUCT_NO: { // 여기는 참조가 아닌가???
+    PRODUCT_NO: {
       type: Number,
       required: true,
     },
@@ -16,7 +16,7 @@ const OrderSchema = new Schema(
     },
     UPDATED_TIME: {
       type: String,
-      required: true,
+      required: false,
     }
   },
   {

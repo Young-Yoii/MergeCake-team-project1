@@ -2,15 +2,15 @@ import { Schema } from "mongoose";
 
 const ShippingSchema = new Schema(
   {
-    EMAIL: { // hyun - pk 처리
+    EMAIL: {
       type:  String,
       required: true
     },
-    STATE: { // hyun - pk 아닌데 dbdiagram 수정 필요
+    STATE: {
       type: String,
       required: true
     },
-    ORDER_NO: { // hyun - pk 처리
+    ORDER_NO: {
         type: String,
         required: true
     },
@@ -18,13 +18,13 @@ const ShippingSchema = new Schema(
       type: Number,
       required: true,
     },
-    CREATED_TIME: { // hyun - 우리 형식에 맞게 변경
+    CREATED_TIME: {
       type: String,
       required: true,
     },
     UPDATED_TIME: {
       type: String,
-      required: true,
+      required: false,
     }
   },
   {
