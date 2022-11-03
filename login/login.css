@@ -1,0 +1,86 @@
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: #888;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+header {
+  height: 300px;
+}
+
+h2 {
+  text-align: center;
+}
+
+/* login-container */
+.login-container {
+  width: 460px;
+  background-color: hsl(271, 74%, 85%);
+  border-radius: 5px;
+
+  padding: 20px;
+  margin: 50px auto 10px auto;
+}
+
+/* login-wrap */
+.input-text {
+  font-size: 18px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+
+  font-weight: 400;
+  line-height: 30px;
+  padding: 10px 10px;
+}
+
+input:focus {
+  border: solid 1px hsl(272, 99%, 36%);
+  outline: none;
+}
+
+/* login-btn */
+.login-btn {
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  background-color: #000000;
+  color: #ffffff;
+  margin-top: 10px;
+  padding: 15px 0;
+}
+
+.login-btn:hover {
+  background-color: hsl(272, 50%, 34%);
+}
+
+/* 아이디 찾기, 비밀번호 찾기, 회원가입 */
+.account-wrap {
+  padding: 20px 0 35px;
+  text-align: center;
+}
+
+li {
+  display: inline-block;
+}
+
+li + li::before {
+  content: "|";
+  margin: 0 8px;
+}
+
+/* 쿠폰 정보 */
+.coupon-info {
+  text-align: center;
+}

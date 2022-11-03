@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="product.css" />
+    
+    
+    <title>Document</title>
+</head>
+<body>
+  <header></header>
+  <section class="cate-list container">
+    <ul class="cate-list-inner">
+      <li><a herf="/../${}">디자인</a></li>
+      <li><a herf="/../${}">시트</a></li>
+      <li><a herf="/../${}">사이즈</a></li>
+      <li><a herf="/../${}">이미지</a></li>
+      <li><a herf="/../${}">레터링</a></li>
+      <li><a herf="/../${}">토핑</a></li>
+    </ul>
+  </section>
+
+  <section class="product container">
+   <!--케익이미지 및 정보-->
+    <div class ="product-info-wrap">
+      <div class="product-img">
+         <img src="./assets/logo.png"  width="90%" />
+      </div>
+      <p class="product-price" id="productPrice">가격: </p>
+      <p class="product-price" id="productPrice">18,000원</p>
+      <div class="product-info">
+        <div class="info-tit">
+          <p>상세정보</p>
+          <div class="info-arrow-wrap">
+            <span class="info-arrow-top">↑</span>
+            <span class="info-arrow-bottom">↓</span>
+          </div><!--이후 svg로 대체-->
+        </div>
+        <div class="info-text">
+          <p>칼로리</p>
+          <p>원재료</p>
+          <p>중량(g)</p>
+        </div>
+      </div>
+    </div>
+
+    <!--케이크 상세-->
+    <!--디자인선택-->
+    <div class="product-opt-wrap">
+      <h2 class="design product-tit">디자인</h2>
+      <div class="design product-opt">
+        <ul>
+          <li>
+            <label class="select-design" for="s1">
+              <input name="cake-design" type="radio" id="s1" value="">
+              <div class="design-info">
+                <img src="assets/round.png" alt="케익시트모양_라운드" />
+              </div>
+            </input>
+            </label>
+          </li>
+          <li>
+            <label class="select-design" for="s2">
+              <input name="cake-design" type="radio" id="s2" value="">
+              <div class="design-info">
+                <img src="assets/squre.png" alt="케익시트모양_사각" />
+              </div>
+            </label>
+          </li>
+          <li>
+            <label class="select-design" for="s3">
+              <input name="cake-design" type="radio" id="s3" value="">
+              <div class="design-info">
+                <img src="assets/heart.png" alt="케익시트모양_하트" />
+              </div>
+            </label>
+          </li>
+        </ul>
+      </div>
+      <h2 class="taste product-tit">시트</h2>
+      <div class="taste product-opt">
+        <div class="taste-sheet">
+          <ul>
+            <p>시트 선택</p>
+            <li>
+              <label class="select-sheet" for="s1">
+                <input name="cake-sheet" type="radio" id="" value="">
+                <div class="sheet-info">
+                  <span class="sheet-name">초코</span>
+                </div>
+              </label>
+            </li>
+            <li>
+              <label class="select-sheet" for="s1">
+                <input name="cake-sheet" type="radio" id="" value="">
+                <div class="sheet-info">
+                  <span class="sheet-name">치즈</span>
+                </div>
+              </label>
+            </li>
+            <li>
+              <label class="select-sheet" for="s1">
+                <input name="cake-sheet" type="radio" id="" value="">
+                <div class="sheet-info">
+                  <span class="sheet-name">생크림</span>
+                </div>
+              </label>
+            </li>
+            <li>
+              <label class="select-sheet" for="s1">
+                <input name="cake-sheet" type="radio" id="" value="">
+                <div class="sheet-info">
+                  <span class="sheet-name">얼그레이</span>
+                </div>
+              </label>
+            </li>
+          </ul>
+        </div>
+        <div class="taste-cream">
+        <!--컬러선택 템플릿 만들어서 재사용 하기-->
+          <ul>
+          <p>크림 선택</p>
+            <li>
+              <label class="select-cream" for="selectCream01">
+                <input name="cake-cream" type="radio" id="selectCream01" value="">
+                <div class="cream-info"></div>
+              </label>
+            </li>
+            <li>
+              <label class="select-cream" for="selectCream02">
+                <input name="cake-cream" type="radio" id="selectCream02" value="">
+                <div class="cream-info"></div>
+              </label>
+            </li>
+            <li>
+              <label class="select-cream" for="selectCream03">
+                <input name="cake-cream" type="radio" id="selectCream03" value="">
+                <div class="cream-info"></div>
+              </label>
+            </li>
+            <li>
+              <label class="select-cream" for="">
+                <input name="cake-cream" type="radio" id="" value="">
+                <div class="cream-info"></div>
+              </label>
+            </li>
+            <li>
+              <label class="select-cream" for="color">
+                <input type="color" name="cake-cream" id="color" value="">
+              </label>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!--크기 선택-->
+      <h2 class="size product-tit">사이즈</h2>
+      <div class="size product-opt">
+        <ul>
+          <li>
+            <label class="select-size" for="">
+              <input name="cake-size" type="radio" id="" value="">
+              <div class="size-info">
+                  <span class="sheet-size">
+                    미니 </br>
+                    100mm * 50mm
+                  </span>
+              </div>
+            </label>
+          </li>
+          <li>
+            <label class="select-size" for="">
+              <input name="cake-size" type="radio" id="" value="">
+              <div class="size-info">
+                  <span class="sheet-name">1호</span>
+              </div>
+            </label>
+          </li>
+          <li>
+            <label class="select-size" for="">
+              <input name="cake-size" type="radio" id="" value="">
+              <div class="size-info">
+                  <span class="sheet-name">2호</span>
+              </div>
+            </label>
+          </li>
+          <li>
+            <label class="select-size" for="">
+              <input name="cake-size" type="radio" id="" value="">
+              <div class="size-info">
+                  <span class="sheet-name">3호</span>
+              </div>
+            </label>
+          </li>
+          <li>
+            <label class="select-size" for="">
+              <input name="cake-size" type="radio" id="" value="">
+              <div class="size-info">
+                  <span class="sheet-name">4호</span>
+              </div>
+            </label>
+          </li>
+        </ul>
+      </div>
+      <!--이미지-->
+      <h2 class="add-img product-tit">이미지</h2>
+        <form method="post" enctype="multipart/form-data" class="add-img product-opt">
+              <label for="chooseFile" class="choose-add-img">
+                이미지 선택
+              </label>
+          <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)" >
+          <div class="file-info">
+            <div class="file-input">
+                <p>FILE NAME: </p>
+                <p id="fileName"></p>
+            </div>
+            <div class="add-img-submit-button">
+                <div class="submitButton" id="submitButton">첨부</div>
+            </div>
+          </div>
+          <div class="image-show" id="image-show"></div>  
+        </form>
+      <!--문구-->
+      <h2 class="lettering product-tit">레터링</h2>
+      <div class="lettering product-opt">
+        <input type="text" class="select-lettering" name="cake-lettering" placeholder="문구를 입력 해 주세요" id="sl" value="" >
+        <ul>
+          <p>레터링 색상</p>
+          <li>
+            <label class="select-cream" for="s2">
+              <input name="cake-cream" type="radio" id="s2" value="">
+              <div class="cream-info"></div>
+            </label>
+          </li>
+          <li>
+            <label class="select-cream" for="s2">
+              <input name="cake-cream" type="radio" id="s2" value="">
+              <div class="cream-info"></div>
+            </label>
+          </li>
+          <li>
+            <label class="select-cream" for="">
+              <input name="cake-cream" type="radio" id="s2" value="">
+              <div class="cream-info"></div>
+            </label>
+          </li>
+          <li>
+            <label class="select-cream" for="">
+              <input name="cake-cream" type="radio" id="s2" value="">
+              <div class="cream-info"></div>
+            </label>
+          </li>
+          <li>
+            <label class="select-cream" for="s2">
+              <input type="color" name="cake-cream" id="s2" value="">
+            </label>
+          </li>
+        </ul>
+      </div>
+      <!--토핑-->
+      <h2 class="topping product-tit">토핑</h2>
+      <div class="topping product-opt">
+        <div class="topping-fruit">
+          <ul>
+            <p>과일</p>
+            <li>
+              <label class="select-fruit" for="s1">
+                <input name="cake-fruit" type="radio" id="" value="">
+                <div class="fruit-info">
+                  <img src="assets/strawberry.png" alt="딸기" />
+                </div>
+              </label>
+            </li>
+            <li>
+              <label class="select-fruit" for="s1">
+                <input name="cake-fruit" type="radio" id="" value="">
+                <div class="fruit-info">
+                  <img src="assets/cherry.png" alt="체리" />
+                </div>
+              </label>
+            </li>
+            <li>
+              <label class="select-fruit" for="s1">
+                <input name="cake-fruit" type="radio" id="" value="">
+                <div class="fruit-info">
+                  <img src="assets/kiwi.png" alt="키위" />
+                </div>
+              </label>
+            </li>
+          <ul>
+        </div>
+        <div class="topping-cream">
+          <ul>
+            <p>크림 디자인</p>
+            <li>
+              <label class="select-topping-cream" for="s1">
+                <input name="cream-design" type="radio" id="" value="">
+                <div class="cream-design-info">
+                  <img src="assets/cream01.png" alt="크림모양" />
+                </div>
+              </label>
+            </li>
+            <li>
+              <label class="select-topping-cream" for="s1">
+                <input name="cream-design" type="radio" id="" value="">
+                <div class="cream-design-info">
+                  <img src="assets/cream02.png" alt="크림모양" />
+                </div>
+              </label>
+            </li>
+            <li>
+              <label class="select-topping-cream" for="s1">
+                <input name="cream-design" type="radio" id="" value="">
+                <div class="cream-design-info">
+                  <img src="assets/cream03.png" alt="크림모양" />
+                </div>
+              </label>
+            </li>
+          <ul>
+        </div>
+        <div class="topping-cream-color" id="ToppingCreamColor">
+          <ul>
+            <p>크림색상</p>
+            <li>
+              <label class="select-cream" for="s2">
+                <input name="cake-cream" type="radio" id="" value="">
+                <div class="cream-info"></div>
+              </label>
+            </li>
+            <li>
+              <label class="select-cream" for="">
+                <input name="cake-cream" type="radio" id="" value="">
+                <div class="cream-info"></div>
+              </label>
+            </li>
+            <li>
+              <label class="select-cream" for="">
+                <input name="cake-cream" type="radio" id="" value="">
+                <div class="cream-info"></div>
+              </label>
+            </li>
+            <li>
+              <label class="select-cream" for="">
+                <input name="cake-cream" type="radio" id="" value="">
+                <div class="cream-info"></div>
+              </label>
+            </li>
+            <li>
+              <label class="select-cream" for="color">
+                <input type="color" name="cake-cream" id="color" value="">
+              </label>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="product-opt-button">
+        <button class="prev">이전</button>
+        <button class="next">다음</button>    
+      </div>    
+    </div>      
+  </section>
+
+  <!--장바구니/결제버튼-->
+  <div class="product-button container">
+    <button id="basketSubmit">장바구니 담기</button>
+    <button id="orderSubmit">바로 결제하기</button>
+  </div>
+    
+
+    <footer></footer>
+
+
+    <script src="product.js"></script>
+</body>
+</html>

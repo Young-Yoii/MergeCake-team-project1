@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="../reset.css" />
+    <link rel="stylesheet" href="admin-category.css" />
+    
+    
+    <title>Document</title>
+</head>
+<body>
+  <header></header>
+
+  <section class="admin-category container">
+    <div class="admin-cate-list">
+      <div class="cate-edit-button">
+        <button class="cate-create" id="cateCreate">카테고리 추가</button>
+        <button class="cate-delete" id="cateDelete">삭제</button>
+      </div>
+      <div class="cate-list">
+        <ul>
+          <li>
+            <div class="cate-list-has-child">
+              <span class="cate-name">카테고리 이름</span>
+              <button class="cate-tree-button">^</span>
+            </div>
+              <ul>
+                <li class="cate-list-child">
+                  <span class="cate-name">작은 카테고리 이름</span>
+                </li>
+                <li>
+                  <span>작은 카테고리 이름</span>
+                </li>
+              </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="admin_cate_edit">
+      <div class="cate-input-name">
+          <p>카테고리 명</p>
+          <input type="text">
+      </div>
+      <div class="cate opt-val">
+        <p>옵션 선택</p>
+        <label class="select-opt" for="s2">
+           <input name="select-opt" type="radio" id="s2" value="">
+                <span>앨범형</span>
+        </label>
+        <label class="select-opt" for="s2">
+          <input name="select-opt" type="radio" id="s2" value="">
+               <span>문구입력형</span>
+       </label>
+       <label class="select-opt" for="s2">
+          <input name="select-opt" type="radio" id="s2" value="">
+               <span>텍스트형</span>
+       </label>
+       <label class="select-opt" for="s2">
+          <input name="select-opt" type="radio" id="s2" value="">
+               <span>색상선택형</span>
+       </label>
+      </div>
+      <div class="cate album">
+        <div class="image-show-wrap">
+          <ul>
+            <li>
+              <div class="image-show" id="image-show">
+                <button class="delete-opt" id="deleteOpt">-</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <form method="post" enctype="multipart/form-data" class="cate img-addfile">
+          <label for="chooseFile" class="choose-img-file">
+            추가할 이미지 선택
+          </label>
+          <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)" >
+        </form>
+      </div>
+      <div class="cate input-create">
+        <ul>
+          <li>
+            <label class="cate-input-create" for="s1">
+              <input type="text" class="input-create" name="input-create" placeholder="문구를 입력 해 주세요" id="sl" value="" >
+              <button>+</button>
+              <ul>
+                <li>
+                  <span>추가된 옵션이 보입니다.</span>
+                  <button>-</button>
+                </li>
+              </ul>
+            </label>
+          </li>
+        </ul>
+      </div>
+      <div class="cate text-create">
+        <ul>
+          <li>
+            <label class="cate-text-create" for="s1">
+              <input type="text" class="text-create" name="text-create" placeholder="문구를 입력 해 주세요" id="sl" value="" >
+              <button>+</button>
+              <ul>
+                <li>
+                  <span>추가된 옵션이 보입니다.
+                   
+                  </span>
+                  <button>-</button>
+                </li>
+              </ul>
+            </label>
+          </li>
+        </ul>
+      </div>
+      <div class="cate create-color">
+        <ul>
+          <li>
+            <label class="cate-create-color" for="color">
+              <input type="color" name="cake-cream" id="color" value="">
+            </label>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <span>추가된 옵션이 보입니다.</span>
+            <button>-</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  
+  <div class="cate-update-button container">
+    <button class="cate-update">저장</button>
+  </div>
+
+
+
+    <footer></footer>
+</body>
+</html>

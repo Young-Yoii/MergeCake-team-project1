@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./user-order.css" />
+
+    <title>마이페이지-주문조회</title>
+  </head>
+  <body>
+    <header></header>
+
+    <h2>마이페이지</h2>
+
+    <div class="user-container">
+      <p class="user-name">홍길동님</p>
+      <div class="user-info">
+        <a href="#" class="user-order">주문조회</a>
+        <a href="#" class="user-edit">정보수정</a>
+      </div>
+    </div>
+
+    <div class="product-container">
+      <table class="product-list">
+        <caption>
+          주문 내역 조회
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col" colspan="2">상품정보</th>
+            <th scope="col">주문일자</th>
+            <th scope="col">주문번호</th>
+            <th scope="col">주문금액(수량)</th>
+            <th scope="col">주문상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>케이크 사진</td>
+            <td>
+              <div>
+                <sapn>모양: </sapn>
+                <span>하트</span>
+              </div>
+            </td>
+            <td>2022.10.24</td>
+            <td>T1CZ4423D25</td>
+            <td>
+              <div>10,000원</div>
+              <div>1개</div>
+            </td>
+            <td>배송완료</td>
+          </tr>
+          <tr>
+            <td>케이크 사진</td>
+            <td>
+              <div>
+                <sapn>모양: </sapn>
+                <span>하트</span>
+              </div>
+            </td>
+            <td>2022.10.31</td>
+            <td>B4CZ4423D25</td>
+            <td>
+              <div>8,000원</div>
+              <div>1개</div>
+            </td>
+            <td>주문완료</td>
+            <!-- <td>수정 | 취소</td> => pug로 구현하기..! -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

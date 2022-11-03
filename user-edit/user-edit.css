@@ -1,0 +1,86 @@
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* header */
+header {
+  height: 300px;
+}
+
+h2 {
+  text-align: center;
+}
+
+/* user-container */
+.user-container {
+  height: 180px;
+  background-color: #f4f6f7b1;
+  padding: 0 60px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-name {
+  flex-grow: 1;
+  font-size: 30px;
+}
+
+.user-info {
+  font-size: 15px;
+}
+
+/* info-table */
+.info-container {
+  margin: 100px 200px;
+  font-size: 15px;
+}
+
+.info-list {
+  width: 100%;
+  margin-top: 50px;
+  border: none;
+}
+
+caption {
+  text-align: left;
+  padding: 8px 0 6px 15px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr {
+  border-bottom: 1px solid #f4f6f7;
+}
+
+th {
+  background-color: #f6f9fa;
+  text-align: left;
+
+  padding: 12px 0 10px 14px;
+}
+
+td {
+  padding: 8px 0 6px 15px;
+}
+
+/* edit button */
+.edit-btn {
+  display: inline-block;
+  cursor: pointer;
+  padding: 0 10px;
+  border: 1px solid #d7dbdc;
+  background-color: #fff;
+  line-height: 24px;
+  font-size: 11px;
+  color: #646465;
+
+  margin-left: 8px;
+}

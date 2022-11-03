@@ -1,0 +1,229 @@
+@import "../reset.css";
+@import "../global.css";
+
+
+input[type="radio"] {
+    opacity: 0;
+    display:none;
+}
+
+
+/*---카테고리---*/
+
+.cate-list-inner {
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height:40px;
+    position:relative;
+}
+
+.cate-list-inner::before, .cate-list-inner::after {
+    content:'';
+    width: 100%;
+    height: 3px;
+    background-color: #000;
+    position:absolute;
+}
+
+.cate-list-inner::before{
+    top:0;
+}
+
+.cate-list-inner::after {
+    bottom: 0;
+}
+
+/*--------------*/
+
+/*---메인옵션---*/
+.product{
+    display: flex;
+    justify-content: space-around;
+    height:500px;
+}
+
+/*임시 자리생성*/
+/*케익이미지 및 정보*/
+.product-info-wrap{
+    width:25%;
+}
+
+.product-img{
+    text-align: center;
+}
+
+.product-price{
+    padding-bottom: 10px;
+}
+
+.info-tit{
+    display: flex;
+}
+
+.info-text p{
+    position: relative;
+    padding-bottom:5px;
+}
+.info-text p:after {
+    content:'';
+    background-color: gray;
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    left:0;
+    bottom: 0;
+}
+
+/*케익옵션*/
+.product-opt-wrap{
+    width: 65%;
+    padding:25px;
+    background-color: lavender;
+    position: relative;
+}
+
+.product-opt{
+    width: 100%;
+    box-sizing: border-box;
+    /* position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+ */
+}
+
+.product-tit {
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #2fa599;
+}
+
+.product-opt div ul, .product-opt ul {
+    display: flex;
+    align-items: center;
+}
+
+.product-opt ul li{
+    padding:40px 0px;
+    box-sizing: border-box;
+}
+
+.design ul, .size ul {
+    justify-content: space-evenly;
+}
+
+.taste-sheet ul, .taste-cream ul, .lettering ul, .topping-fruit ul, 
+.topping-cream ul, .topping-cream-color ul {
+    justify-content: space-between;
+}
+
+.design, .size, .add-img, .lettering, .topping {
+    display:none;
+}
+
+
+
+
+/*디자인*/
+.select-design input:checked + .design-info {
+    background-color: pink;
+    border:none;
+    border-radius: 0 20px 0 0;
+}
+
+.design-info{
+    display:block;
+    border:1px solid #999;
+    width:180px;
+    height:180px;
+    text-align: center;
+}
+
+.design-info img{
+    width:100%
+}
+
+.design-info span{
+    font-size: 1.2rem;
+    color:#000;
+    font-weight: 600;
+
+}
+
+
+/*시트,크림*/
+.cream-info{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: chocolate;
+}
+
+/*색상*/
+.select-cream input:checked + .cream-info {
+    border:1px solid violet;
+}
+
+/*이미지*/
+.add-img, .lettering, .size{
+    text-align: center;
+}
+.choose-add-img{
+    border: 1px solid;
+    padding: 5px 50px;
+}
+.file-info{
+    display: flex;
+    justify-content: space-around;
+    padding:40px 0px;
+}
+
+/*문구*/
+.select-lettering{
+    padding: 10px 20px;
+    text-align: center;
+}
+
+/*토핑*/
+.fruit-info, .cream-design-info{
+    display:block;
+    border:1px solid #999;
+    width:180px;
+    height:180px;
+    text-align: center;
+}
+
+.fruit-info img{
+    width:90%
+}
+.cream-design-info img{
+    width:100%
+}
+
+/*--버튼--*/
+.product-opt-button{
+    position: absolute;
+    right:25px;
+    bottom: 25px;
+}
+.product-opt-button button{
+    padding:5px 10px;
+    border:1px solid #000;
+}
+.product-button {
+    position: absolute;
+    right:3%;
+}
+.product-button button{
+    padding: 10px 40px;
+    border-radius: 0px;
+    background-color: #fff;
+}
+
+.product-button button:hover {
+    background-color:violet ;
+    color:#fff;
+    transform: translate();
+    transition: all 0.5s;
+}

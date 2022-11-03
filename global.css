@@ -1,0 +1,10 @@
+.container{
+    max-width: 100%;
+    padding: 0 50px;
+    margin-bottom: 150px;
+}
+
+input[type="file"] {
+    opacity: 0;
+    display:none;
+}
