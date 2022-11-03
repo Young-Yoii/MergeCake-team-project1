@@ -8,7 +8,7 @@ const UserSchema = new Schema(
     },
     FULL_NAME: {
       type: String,
-      required: true,
+      required: false,
     },
     PASSWORD: {
       type: String,
@@ -16,19 +16,19 @@ const UserSchema = new Schema(
     },
     PHONE_NUMBER: {
       type: String,
-      required: true,
+      required: false,
     },
     ZIP_CODE: {
       type: Number,
-      required: true,
+      required: false,
     },
     ADDRESS1: {
       type: String,
-      required: true,
+      required: false,
     },
     ADDRESS2: {
       type: String,
-      required: true,
+      required: false,
     },
     ROLE: {
       type: String,
