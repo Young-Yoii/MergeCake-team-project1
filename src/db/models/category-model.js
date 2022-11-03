@@ -4,45 +4,37 @@ import { CategorySchema } from "../schemas/category-schema";
 const Category = model("Category", CategorySchema);
 
 export class CategoryModel {
-
-  //카테고리 이름으로 검색
-  async findByName(name) {
-    const category = await Category.findOne({ name });
-    return category;
-  }
-
-
-  //카테고리 value 로 검색
-  /*
-  async findByValue(value) {
-    const value = await User.findOne({ value: value });
-    return value;
-  } */
-
-  //카테고리 만들기
+  // 1. 카테고리 및 상품 추가
   async create(categoryInfo) {
-    const createdNewCategory = await Category.create(categoryInfo);
-    return createdNewCategory;
+    const newCategory = await Category.create(categoryInfo);
+
+    return newCategory;
   }
 
-  //전체 검색 
+  // 2-1. 카테고리 및 상춤 전체 조회
   async findAll() {
     const categorys = await Category.find({});
     return categorys;
   }
 
-  //업데이트
-  async update({ name, update }) {
-    const filter = { CATEGORY_NAME: name };
+  // 2-2. 카테고리 이름으로 조회
+  async findByName(categoryName) {
+    const category = await Category.findOne({ categoryName });
+    return category;
+  }
+
+  // 3-1. 카테고리 수정
+  async update({ categoryName, categoryInfo }) {
+    const filter = { CATEGORY_NAME: categoryName };
     const option = { returnOriginal: false };
 
     const updatedCategory = await Category.findOneAndUpdate(filter, update, option);
     return updatedCategory;
   }
 
-  //삭제 
-  async delete(categoryId) {
-    const deletedCategory = await Product.deleteOne({ _id: categoryId });
+  // 4. 카테고리 및 상품 삭제
+  async delete(categoryName) {
+    const deletedCategory = await Category.deleteOne({ CATEGORY_NAME: categoryName });
     return deletedCategory;
   }
 }

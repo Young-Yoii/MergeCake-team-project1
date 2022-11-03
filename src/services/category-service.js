@@ -22,18 +22,31 @@ class CategoryService {
   }
 
   // 3-1. 카테고리 수정
-  async udtCategory(name, update) {
-    const afterName = name;
-    const { beforeName } = update;
+  async updateCategory(categoryName, categoryInfo) {
+    const { CATEGORY_NAME, VALUE, DETAIL } = categoryInfo;
+    const updateCategory = { CATEGORY_NAME, VALUE, DETAIL };
 
-    const updatedCategory = await this.categoryModel.update(name, update);
+    const updatedCategory = await this.categoryModel.update({ categoryName, update: updateCategory });
 
     return updatedCategory;
   }
 
-  // 3-2. 상품 수정
+  // 3-2. 상품 수정 // hyun - const 없이 바로 되는 지 확인
+  async updateCategory(productInfo, categoryInfo) {
+    // const { CATEGORY_NAME, VALUE } = productInfo;
+    // const categoryInfo = { CATEGORY_NAME, VALUE };
 
-  // 4. 카테고리 삭제
+    const updatedCategory = await this.categoryModel.update({ productInfo, update: categoryInfo });
+
+    return updatedCategory;
+  }
+
+  // 4. 카테고리 및 상품 삭제
+  async deleteCategory(categoryName) {
+    const deletedCategory = await this.categoryModel.delete(categoryName);
+
+    return deletedCategory;
+  }
 }
 
 const categoryService = new CategoryService(categoryModel);
