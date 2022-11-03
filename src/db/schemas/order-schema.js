@@ -6,7 +6,7 @@ const OrderSchema = new Schema(
       type: Number,
       required: true,
     },
-    PRODUCT_NO: {
+    SELECT_NO: {
       type: Number,
       required: true,
     },
