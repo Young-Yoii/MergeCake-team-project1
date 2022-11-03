@@ -19,11 +19,12 @@ const ShippingSchema = new Schema(
       required: true,
     },
     CREATED_TIME: {
-      type: String,
+      type: Date,
       required: true,
+      default: Date.now
     },
     UPDATED_TIME: {
-      type: String,
+      type: Date,
       required: false,
     }
   },
