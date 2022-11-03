@@ -1,9 +1,9 @@
 import { model } from "mongoose";
 import { CategorySchema } from "../schemas/category-schema";
 
-const Category = model("categorys", CategorySchema);
+const Category = model("Category", CategorySchema);
 
-export class UserModel {
+export class CategoryModel {
 
   //카테고리 이름으로 검색
   async findByName(name) {
@@ -12,11 +12,12 @@ export class UserModel {
   }
 
 
-  //카테고리 value 로 검색 
+  //카테고리 value 로 검색
+  /*
   async findByValue(value) {
     const value = await User.findOne({ value: value });
     return value;
-  }
+  } */
 
   //카테고리 만들기
   async create(categoryInfo) {
@@ -31,11 +32,11 @@ export class UserModel {
   }
 
   //업데이트
-  async update({ categoryId, update }) {
-    const filter = { _id: categoryId };
+  async update({ name, update }) {
+    const filter = { CATEGORY_NAME: name };
     const option = { returnOriginal: false };
 
-    const updatedCategory = await User.findOneAndUpdate(filter, update, option);
+    const updatedCategory = await Category.findOneAndUpdate(filter, update, option);
     return updatedCategory;
   }
 
