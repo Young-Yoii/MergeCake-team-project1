@@ -24,17 +24,17 @@ export class CategoryModel {
   }
 
   // 3-1. 카테고리 수정
-  async update({ categoryName, categoryInfo }) {
+  async update({ categoryName, update }) {
     const filter = { CATEGORY_NAME: categoryName };
     const option = { returnOriginal: false };
 
-    const updatedCategory = await Category.findOneAndUpdate(filter, update, option);
+    const updatedCategory = await Category.update(filter, update, option);
     return updatedCategory;
   }
 
   // 4. 카테고리 및 상품 삭제
   async delete(categoryName) {
-    const deletedCategory = await Category.deleteOne({ CATEGORY_NAME: categoryName });
+    const deletedCategory = await Category.deleteMany({ CATEGORY_NAME: categoryName });
     return deletedCategory;
   }
 }

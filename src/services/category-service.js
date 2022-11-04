@@ -32,7 +32,7 @@ class CategoryService {
   }
 
   // 3-2. 상품 수정 // hyun - const 없이 바로 되는 지 확인
-  async updateCategory(productInfo, categoryInfo) {
+  async updateProduct(productInfo, categoryInfo) {
     // const { CATEGORY_NAME, VALUE } = productInfo;
     // const categoryInfo = { CATEGORY_NAME, VALUE };
 

@@ -98,7 +98,7 @@ categoryRouter.patch("/category/:categoryName&&categoryInfo", async (req, res, n
     const categoryInfo = { CATEGORY_NAME, VALUE, DETAIL };
 
     // db에 추가
-    const updatedCategory = await categoryService.updateCategory(productInfo, categoryInfo);
+    const updatedCategory = await categoryService.updateProduct(productInfo, categoryInfo);
 
     // 추가된 데이터를 프론트에 다시 보내줌
     res.status(201).json(updatedCategory);
