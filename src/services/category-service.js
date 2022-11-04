@@ -1,4 +1,4 @@
-import { categoryModel } from "../db";
+import {categoryModel, orderModel} from "../db";
 
 class CategoryService {
   constructor(categoryModel) {
@@ -33,9 +33,7 @@ class CategoryService {
 
   // 3-2. 상품 수정 // hyun - const 없이 바로 되는 지 확인
   async updateProduct(productInfo, categoryInfo) {
-    const productId = await this.categoryModel.findByInfo(productInfo);
-
-    const updatedCategory = await this.categoryModel.updateProduct({ productId, update: categoryInfo });
+    const updatedCategory = await this.categoryModel.updateProduct({ productInfo, update: categoryInfo });
 
     return updatedCategory;
   }
