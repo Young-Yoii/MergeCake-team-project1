@@ -33,19 +33,25 @@ class CategoryService {
 
   // 3-2. 상품 수정 // hyun - const 없이 바로 되는 지 확인
   async updateProduct(productInfo, categoryInfo) {
-    // const { CATEGORY_NAME, VALUE } = productInfo;
-    // const categoryInfo = { CATEGORY_NAME, VALUE };
+    const productId = await this.categoryModel.findByInfo(productInfo);
 
-    const updatedCategory = await this.categoryModel.update({ productInfo, update: categoryInfo });
+    const updatedCategory = await this.categoryModel.updateProduct({ productId, update: categoryInfo });
 
     return updatedCategory;
   }
 
-  // 4. 카테고리 및 상품 삭제
+  // 4-1. 카테고리 및 상품 삭제
   async deleteCategory(categoryName) {
     const deletedCategory = await this.categoryModel.delete(categoryName);
 
     return deletedCategory;
+  }
+
+  // 4-2. 상품 삭제
+  async deleteProduct(productInfo) {
+    const deletedProduct = await this.categoryModel.deleteProduct(productInfo);
+
+    return deletedProduct;
   }
 }
 

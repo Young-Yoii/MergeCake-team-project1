@@ -18,8 +18,8 @@ export class CategoryModel {
   }
 
   // 2-2. 카테고리 이름으로 조회
-  async findByName(categoryName) {
-    const category = await Category.findOne({ categoryName });
+  async findByInfo(categoryInfo) {
+    const category = await Category.findOne({ categoryInfo });
     return category;
   }
 
@@ -32,9 +32,26 @@ export class CategoryModel {
     return updatedCategory;
   }
 
-  // 4. 카테고리 및 상품 삭제
+  // 3-2. 상품 수정
+  async updateProduct({ productInfo, update }) {
+    const filter = { CATEGORY_NAME: productInfo.categoryName, VALUE: productInfo.productName };
+    const option = { returnOriginal: false };
+
+    const updatedCategory = await Category.update(filter, update, option);
+    return updatedCategory;
+  }
+
+  // 4-1. 카테고리 및 상품 삭제
   async delete(categoryName) {
     const deletedCategory = await Category.deleteMany({ CATEGORY_NAME: categoryName });
+
+    return deletedCategory;
+  }
+
+  // 4-2. 상품 삭제
+  async deleteProduct(productInfo) {
+    const deletedCategory = await Category.deleteOne({ CATEGORY_NAME: productInfo.categoryName, VALUE: productInfo.productName });
+
     return deletedCategory;
   }
 }

@@ -79,7 +79,7 @@ categoryRouter.patch("/category/:categoryName", async (req, res, next) => {
 });
 
 // 3-2. 상품 수정
-categoryRouter.patch("/category/:categoryName&&categoryInfo", async (req, res, next) => {
+categoryRouter.patch("/category/:categoryName/:productName", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -92,22 +92,22 @@ categoryRouter.patch("/category/:categoryName&&categoryInfo", async (req, res, n
 
     // req에서 데이터 가져오기
     const categoryName = req.params.categoryName;
-    const productName = req.params.categoryInfo;
+    const productName = req.params.productName;
     const productInfo = { categoryName, productName };
     const { CATEGORY_NAME, VALUE, DETAIL } = req.body;
     const categoryInfo = { CATEGORY_NAME, VALUE, DETAIL };
 
     // db에 추가
-    const updatedCategory = await categoryService.updateProduct(productInfo, categoryInfo);
+    const updatedProduct = await categoryService.updateProduct(productInfo, categoryInfo);
 
     // 추가된 데이터를 프론트에 다시 보내줌
-    res.status(201).json(updatedCategory);
+    res.status(201).json(updatedProduct);
   } catch (error) {
     next(error);
   }
 });
 
-// 4. 카테고리 및 상품 삭제
+// 4-1. 카테고리 및 상품 삭제
 categoryRouter.delete("/category/:categoryName", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
@@ -127,6 +127,33 @@ categoryRouter.delete("/category/:categoryName", async (req, res, next) => {
 
     // 추가된 데이터를 프론트에 다시 보내줌
     res.status(201).json(deletedCategory);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// 4-2. 상품 삭제
+categoryRouter.delete("/category/:categoryName/:productName", async (req, res, next) => {
+  try {
+    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+    /*
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        "headers의 Content-Type을 application/json으로 설정해주세요"
+      );
+    } */
+
+    // req에서 데이터 가져오기
+    const categoryName = req.params.categoryName;
+    const productName = req.params.productName;
+    const productInfo = { categoryName, productName };
+
+    // db에 추가
+    const deletedProduct = await categoryService.deleteProduct(productInfo);
+
+    // 추가된 데이터를 프론트에 다시 보내줌
+    res.status(201).json(deletedProduct);
   } catch (error) {
     next(error);
   }
