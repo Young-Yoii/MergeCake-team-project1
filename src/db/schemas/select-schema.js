@@ -9,15 +9,6 @@ const SelectSchema = new Schema(
     OPTIONS: {
       type: Object,
       required: true,
-    },
-    CREATED_TIME: {
-      type: Date,
-      required: true,
-      default: Date.now
-    },
-    UPDATED_TIME: {
-      type: Date,
-      required: false,
     }
   },
   {

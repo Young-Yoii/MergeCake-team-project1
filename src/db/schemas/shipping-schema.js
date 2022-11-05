@@ -8,7 +8,8 @@ const ShippingSchema = new Schema(
     },
     STATE: {
       type: String,
-      required: true
+      required: true,
+      default: "주문완료"
     },
     ORDER_NO: {
         type: String,

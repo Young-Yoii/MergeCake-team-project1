@@ -1,10 +1,81 @@
 import { Router } from "express";
+import { orderService } from "../services";
 import { categoryService } from "../services";
+import {mypageRouter} from "./mypage-router";
 
-const categoryRouter = Router();
+const adminRouter = Router();
+// 1) ordercheck
+// 1. 주문 조회
+adminRouter.get("/ordercheck", async (req, res, next) => {
+  try {
+    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+    /*
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        "headers의 Content-Type을 application/json으로 설정해주세요"
+      );
+    } */
 
+    const orders = await orderService.findOrderAll();
+
+    // 추가된 데이터를 프론트에 다시 보내줌
+    res.status(201).json(orders);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// 3. 배송상태 수정
+adminRouter.patch("/ordercheck/:orderno", async (req, res, next) => {
+  try {
+    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+    /*
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        "headers의 Content-Type을 application/json으로 설정해주세요"
+      );
+    } */
+
+    const orderno = req.params.orderno;
+    const { STATE } = req.body;
+
+    const changedState = await orderService.changeState(orderno, STATE);
+
+    // 추가된 데이터를 프론트에 다시 보내줌
+    res.status(201).json(changedState);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// 4. 주문 삭제
+adminRouter.delete("/ordercheck/:orderno", async (req, res, next) => {
+  try {
+    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+    /*
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        "headers의 Content-Type을 application/json으로 설정해주세요"
+      );
+    } */
+
+    const orderno = req.params.orderno;
+
+    const deletedOrder = await orderService.deleteOrder(orderno);
+
+    // 추가된 데이터를 프론트에 다시 보내줌
+    res.status(201).json(deletedOrder);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// 3) category
 // 1. 카테고리 및 상품 추가
-categoryRouter.post("/category", async (req, res, next) => {
+adminRouter.post("/category", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -30,7 +101,7 @@ categoryRouter.post("/category", async (req, res, next) => {
 });
 
 // 2. 카테고리 및 상품 조회
-categoryRouter.get("/category", async (req, res, next) => {
+adminRouter.get("/category", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -52,7 +123,7 @@ categoryRouter.get("/category", async (req, res, next) => {
 });
 
 // 3-1. 카테고리 수정
-categoryRouter.patch("/category/:categoryName", async (req, res, next) => {
+adminRouter.patch("/category/:categoryName", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -79,7 +150,7 @@ categoryRouter.patch("/category/:categoryName", async (req, res, next) => {
 });
 
 // 3-2. 상품 수정
-categoryRouter.patch("/category/:categoryName/:productName", async (req, res, next) => {
+adminRouter.patch("/category/:categoryName/:productName", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -108,7 +179,7 @@ categoryRouter.patch("/category/:categoryName/:productName", async (req, res, ne
 });
 
 // 4-1. 카테고리 및 상품 삭제
-categoryRouter.delete("/category/:categoryName", async (req, res, next) => {
+adminRouter.delete("/category/:categoryName", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -133,7 +204,7 @@ categoryRouter.delete("/category/:categoryName", async (req, res, next) => {
 });
 
 // 4-2. 상품 삭제
-categoryRouter.delete("/category/:categoryName/:productName", async (req, res, next) => {
+adminRouter.delete("/category/:categoryName/:productName", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -159,4 +230,4 @@ categoryRouter.delete("/category/:categoryName/:productName", async (req, res, n
   }
 });
 
-export { categoryRouter };
+export { adminRouter };

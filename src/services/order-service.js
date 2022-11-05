@@ -5,122 +5,162 @@ class OrderService {
     this.orderModel = orderModel;
   }
 
-  // 1. 주문 추가
-  // 주문 완료까지? 그럼 return을 주문 완료로 해도 되는 건지
-  async addOrder(orderInfo) {
-    // 객체 destructuring
-    const { email, fullName, password } = orderInfo;
+  // 0. ORDER_NO 생성
+  async findMaxOrderNo() {
+    const maxOrderNo = await this.orderModel.findMaxOrderNo();
 
-    // const newUserInfo = { fullName, email, password: hashedPassword };
+    return maxOrderNo;
+  }
 
-    // db에 저장
+  // 1-1. 주문 추가
+  async addOrder(options, maxOrderNo) {
+    const maxSelectNo = await this.orderModel.findMaxSelectNo();
+    const selectInfo = {
+      SELECT_NO: maxSelectNo,
+      OPTIONS: options
+    }
+    const createdNewSelect = await this.orderModel.createSelect(selectInfo);
+
+    const orderInfo = {
+      ORDER_NO: maxOrderNo,
+      SELECT_NO: createdNewSelect.SELECT_NO
+    };
     const createdNewOrder = await this.orderModel.createOrder(orderInfo);
 
-    return createdNewOrder;
+    const newOrder = { createdNewSelect, createdNewOrder }
+
+    return newOrder;
   }
 
-  // 2. 주문 조회 - ALL (Admin)
+  // 1-2. 주문 추가
+  async addShipping(maxOrderNo, sumprice) {
+    // hyun - email 가져오기
+    const shippingInfo = {
+      EMAIL: "test@naver.com",
+      ORDER_NO: maxOrderNo,
+      TOTAL_PRICE: sumprice
+    };
+    const createdNewShipping = await this.orderModel.createShipping(shippingInfo);
+
+    return createdNewShipping;
+  }
+
+  // 2-0. 주문 조회 (함수화)
+  async findOrder(shippings) {
+    let orderList = [];
+    let selectList = [];
+
+    for (const [key, value] of Object.entries(shippings)) {
+      selectList = [];
+
+      const orderNo = { ORDER_NO: value.ORDER_NO};
+      const orders = await this.orderModel.findByOrderNo(orderNo);
+
+      for (const [key2, value2] of Object.entries(orders)) {
+        const selectNo = { SELECT_NO: value2.SELECT_NO };
+        const selects = await this.orderModel.findBySelectNo(selectNo);
+
+        const selectLists = {
+          select_no: value2.SELECT_NO,
+          selectData: selects
+        };
+
+        selectList.push(selectLists);
+      }
+
+      const orderData = {
+        email: value.EMAIL,
+        state: value.STATE,
+        total_price: value.price,
+        order_no: value.ORDER_NO,
+        orderData: selectList
+      };
+
+      orderList.push(orderData);
+      // shippings.orderList = orderData;
+    }
+
+    return orderList;
+  }
+
+  // 2-1. 주문 전체 조회 (admin)
   async findOrderAll() {
-    const orders = await this.orderModel.findOrderAll();
-    return orders;
+    const shippings = await this.orderModel.findShippingAll();
+
+    const orderList = await this.findOrder(shippings);
+
+    return orderList;
   }
 
-  // 2. 주문 조회 - One (User)
-  async findOrderAll() {
-    const orders = await this.orderModel.findOrderAll();
-    return orders;
+  // 2-2. 주문 조회 (user)
+  async findMyOrder(email) {
+    const shippings = await this.orderModel.findByEmail(email);
+
+    const orderList = await this.findOrder(shippings);
+
+    return orderList;
   }
 
-  // 로그인
-  async getUserToken(loginInfo) {
-    // 객체 destructuring
-    const { email, password } = loginInfo;
-
-    // 우선 해당 이메일의 사용자 정보가  db에 존재하는지 확인
-    const user = await this.userModel.findByEmail(email);
-    if (!user) {
-      throw new Error(
-        "해당 이메일은 가입 내역이 없습니다. 다시 한 번 확인해 주세요."
-      );
+  // 3-1. 주문 수정
+  async updateOrder(selectno, OPTIONS) {
+    const updateInfo = {
+      select_no: selectno,
+      update: {
+        OPTIONS: OPTIONS,
+        updatedAt: Date.now
+      }
     }
 
-    // 이제 이메일은 문제 없는 경우이므로, 비밀번호를 확인함
+    const updatedOrder = await this.orderModel.updateOrder(updateInfo);
 
-    // 비밀번호 일치 여부 확인
-    const correctPasswordHash = user.password; // db에 저장되어 있는 암호화된 비밀번호
-
-    // 매개변수의 순서 중요 (1번째는 프론트가 보내온 비밀번호, 2번쨰는 db에 있떤 암호화된 비밀번호)
-    const isPasswordCorrect = await bcrypt.compare(
-      password,
-      correctPasswordHash
-    );
-
-    if (!isPasswordCorrect) {
-      throw new Error(
-        "비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요."
-      );
-    }
-
-    // 로그인 성공 -> JWT 웹 토큰 생성
-    const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
-
-    // 2개 프로퍼티를 jwt 토큰에 담음
-    const token = jwt.sign({ userId: user._id, role: user.role }, secretKey);
-
-    return { token };
+    return updatedOrder;
   }
 
-  // 사용자 목록을 받음.
-  async getUsers() {
-    const users = await this.userModel.findAll();
-    return users;
+  // 3-2. 주문 취소
+  async cancelOrder(orderno) {
+    const cancelInfo = {
+      order_no: orderno,
+      update: {
+        STATE: "주문 취소",
+        updatedAt: Date.now
+      }
+    }
+
+    const cancelOrder = await this.orderModel.updateState(cancelInfo);
+
+    return cancelOrder;
   }
 
-  // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
-  async setUser(userInfoRequired, toUpdate) {
-    // 객체 destructuring
-    const { userId, currentPassword } = userInfoRequired;
-
-    // 우선 해당 id의 유저가 db에 있는지 확인
-    let user = await this.userModel.findById(userId);
-
-    // db에서 찾지 못한 경우, 에러 메시지 반환
-    if (!user) {
-      throw new Error("가입 내역이 없습니다. 다시 한 번 확인해 주세요.");
+  // 3-3. 배송상태 수정
+  async changeState(orderno, STATE) {
+    const updateInfo = {
+      order_no: orderno,
+      update: {
+        STATE: STATE,
+        updatedAt: Date.now
+      }
     }
 
-    // 이제, 정보 수정을 위해 사용자가 입력한 비밀번호가 올바른 값인지 확인해야 함
+    const changedState = await this.orderModel.updateState(updateInfo);
 
-    // 비밀번호 일치 여부 확인
-    const correctPasswordHash = user.password;
-    const isPasswordCorrect = await bcrypt.compare(
-      currentPassword,
-      correctPasswordHash
-    );
+    return changedState;
+  }
 
-    if (!isPasswordCorrect) {
-      throw new Error(
-        "현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요."
-      );
+  // 4. 주문 삭제
+  async deleteOrder(orderno) {
+    const orderNo = { ORDER_NO: orderno }
+    const findOrders = await this.orderModel.findByOrderNo(orderNo);
+
+    // select 삭제
+    for (const [key, value] of Object.entries(findOrders)) {
+      const selectno = value.SELECT_NO;
+      const deletedSelect = await this.orderModel.deleteSelect(selectno);
     }
 
-    // 이제 드디어 업데이트 시작
+    // Shipping, Order 삭제
+    const deletedOrder = await this.orderModel.deleteShippingAndOrder(orderno);
 
-    // 비밀번호도 변경하는 경우에는, 회원가입 때처럼 해쉬화 해주어야 함.
-    const { password } = toUpdate;
-
-    if (password) {
-      const newPasswordHash = await bcrypt.hash(password, 10);
-      toUpdate.password = newPasswordHash;
-    }
-
-    // 업데이트 진행
-    user = await this.userModel.update({
-      userId,
-      update: toUpdate,
-    });
-
-    return user;
+    return deletedOrder;
   }
 }
 
