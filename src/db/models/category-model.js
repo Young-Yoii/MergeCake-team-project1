@@ -11,16 +11,10 @@ export class CategoryModel {
     return newCategory;
   }
 
-  // 2-1. 카테고리 및 상춤 전체 조회
+  // 2. 카테고리 및 상춤 전체 조회
   async findAll() {
     const categorys = await Category.find({});
     return categorys;
-  }
-
-  // 2-2. 카테고리 이름으로 조회
-  async findByInfo(categoryInfo) {
-    const category = await Category.findOne({ categoryInfo });
-    return category;
   }
 
   // 3-1. 카테고리 수정
