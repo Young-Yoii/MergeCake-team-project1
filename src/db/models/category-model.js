@@ -17,6 +17,34 @@ export class CategoryModel {
     return categorys;
   }
 
+  // 2-1. 대카테고리 중복 제거 조회
+  async findBigCategory() {
+    const bigCategorys = await Category.distinct('CATEGORY_BIG');
+
+    return bigCategorys;
+  }
+
+  // 2-2. 소카테고리 중복 제거 조회
+  async findSmallCategory(smallCategoryInfo) {
+    const smallCategorys = await Category.find(smallCategoryInfo).distinct('CATEGORY_SMALL');
+
+    return smallCategorys;
+  }
+
+  // 2-3. 소카테고리 및 상품 조회
+  async findCategoryInfo(bigCategoryInfo) {
+    const smallCategorys = await Category.find(bigCategoryInfo);
+
+    return smallCategorys;
+  }
+
+  // 2-3. 상품 조회
+  async findValue(valueInfo) {
+    const values = await Category.find(valueInfo)
+
+    return values;
+  }
+
   // 3-1. 카테고리 수정
   async update({ categoryName, update }) {
     const filter = { CATEGORY_NAME: categoryName };

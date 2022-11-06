@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { orderService } from "../services";
 import { categoryService } from "../services";
-import {mypageRouter} from "./mypage-router";
+// 이거 왜 여깄지??
+// import {mypageRouter} from "./mypage-router";
 
 const adminRouter = Router();
 // 1) ordercheck
@@ -87,8 +88,8 @@ adminRouter.post("/category", async (req, res, next) => {
     } */
 
     // req에서 데이터 가져오기
-    const { CATEGORY_NAME, VALUE, DETAIL } = req.body;
-    const categoryInfo = { CATEGORY_NAME, VALUE, DETAIL };
+    const { CATEGORY_BIG, CATEGORY_SMALL, VALUE, DETAIL } = req.body;
+    const categoryInfo = { CATEGORY_BIG, CATEGORY_SMALL, VALUE, DETAIL };
 
     // db에 추가
     const newCategory = await categoryService.addCategory(categoryInfo);
@@ -100,7 +101,29 @@ adminRouter.post("/category", async (req, res, next) => {
   }
 });
 
-// 2. 카테고리 및 상품 조회
+// 2-1. 대카테고리, 소카테고리 조회
+adminRouter.get("/category", async (req, res, next) => {
+  try {
+    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+    /*
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        "headers의 Content-Type을 application/json으로 설정해주세요"
+      );
+    } */
+
+    // db에 추가
+    const categorys = await categoryService.findCategoryAll();
+
+    // 추가된 데이터를 프론트에 다시 보내줌
+    res.status(201).json(categorys);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// 2-2. 대카테고리, 소카테고리 선택 시 상품 조회
 adminRouter.get("/category", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
