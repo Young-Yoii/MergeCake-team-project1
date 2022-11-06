@@ -7,17 +7,54 @@ class CategoryService {
 
   // 1. 카테고리 및 상품 추가
   async addCategory(categoryInfo) {
-    const { CATEGORY_NAME, VALUE, DETAIL } = categoryInfo;
-
-    // db에 저장
     const createdNewCategory = await this.categoryModel.create(categoryInfo);
 
     return createdNewCategory;
   }
 
-  // 2. 카테고리 조회
+  // 2-0. 카테고리 조회 (3중 객체로 대카테고리, 소카테고리, 상품 반환)
   async findCategoryAll() {
-    const categorys = await this.categoryModel.findAll();
+    let bigCategoryObj = {};
+    let smallCategoryObj = {};
+    let valueObj = {};
+
+    const bigCategorys = await this.categoryModel.findBigCategory();
+
+    for(let index in bigCategorys) {
+      smallCategoryObj = {};
+
+      const smallCategoryInfo = { CATEGORY_BIG: bigCategorys[index]};
+      const smallCategorys = await this.categoryModel.findSmallCategory(smallCategoryInfo);
+
+      for(let index2 in smallCategorys) {
+        valueObj = {};
+
+        const valueInfo = { CATEGORY_SMALL: smallCategorys[index2]};
+        const values = await this.categoryModel.findValue(valueInfo);
+
+        for(let index3 in values) {
+          valueObj[values[index3].VALUE] = values[index3].DETAIL;
+        }
+        smallCategoryObj[smallCategorys[index2]] = valueObj;
+      }
+      bigCategoryObj[bigCategorys[index]] = smallCategoryObj;
+    }
+
+    return bigCategoryObj;
+  }
+
+  // 2-1. 대카테고리 조회
+  async findBigCategory() {
+    const bigCategorys = await this.categoryModel.findBigCategory();
+
+    return bigCategorys;
+  }
+
+  // 2-2. 소카테고리 및 상품 조회
+  async findCategoryInfo(bigCategory) {
+    const bigCategoryInfo = { CATEGORY_BIG: bigCategory }
+    const categorys = await this.categoryModel.findCategoryInfo(bigCategoryInfo);
+
     return categorys;
   }
 
