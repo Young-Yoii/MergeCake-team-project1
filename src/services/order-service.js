@@ -146,6 +146,23 @@ class OrderService {
     return changedState;
   }
 
+  // 3-3. 배송상태 수정 ,운송장 번호 추가
+  async changeStateAndWaybill(orderno, waybill, STATE) {
+    const updateInfo = {
+      order_no: orderno,
+      waybill : waybill, 
+      update: {
+        STATE: STATE,
+        updatedAt: Date.now
+      }
+    }
+
+    const changedState = await this.orderModel.updateState(updateInfo);
+
+    return changedState;
+  }
+
+
   // 4. 주문 삭제
   async deleteOrder(orderno) {
     const orderNo = { ORDER_NO: orderno }

@@ -23,7 +23,8 @@ const ShippingSchema = new Schema(
     TOTAL_PRICE: {
       type: Number,
       required: true,
-    }
+    },
+
   },
   {
     collection: "Shipping",

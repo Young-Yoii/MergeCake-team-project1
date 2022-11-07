@@ -38,7 +38,7 @@ adminRouter.patch("/ordercheck/:orderno", async (req, res, next) => {
         "headers의 Content-Type을 application/json으로 설정해주세요"
       );
     } */
-
+    
     const orderno = req.params.orderno;
     const { STATE } = req.body;
 
@@ -50,6 +50,30 @@ adminRouter.patch("/ordercheck/:orderno", async (req, res, next) => {
     next(error);
   }
 });
+
+//3-1 배송상태 , 운송장 번호
+adminRouter.patch("/ordercheck/:orderno/:waybill", async (req, res, next) => {
+  try {
+    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+    /*
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        "headers의 Content-Type을 application/json으로 설정해주세요"
+      );
+    } */
+    const {orderno, waybill} = req.params;
+    const { STATE } = req.body;
+
+    const changedState = await orderService.changeStateAndWaybill(orderno, waybill , STATE);
+
+    // 추가된 데이터를 프론트에 다시 보내줌
+    res.status(201).json(changedState);
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 // 4. 주문 삭제
 adminRouter.delete("/ordercheck/:orderno", async (req, res, next) => {
