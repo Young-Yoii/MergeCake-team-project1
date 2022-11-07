@@ -58,17 +58,62 @@ class CategoryService {
     return categorys;
   }
 
-  // 3-1. 카테고리 수정
-  async updateCategory(categoryName, categoryInfo) {
-    const { CATEGORY_NAME, VALUE, DETAIL } = categoryInfo;
-    const updateCategory = { CATEGORY_NAME, VALUE, DETAIL };
+  // 2-3. 대카테고리, 소카테고리 조회
+  async findCategory() {
+    let bigCategoryObj = {};
+    let smallCategoryObj = [];
 
-    const updatedCategory = await this.categoryModel.update({ categoryName, update: updateCategory });
+    const bigCategorys = await this.categoryModel.findBigCategory();
+
+    for(let index in bigCategorys) {
+      smallCategoryObj = [];
+
+      const smallCategoryInfo = { CATEGORY_BIG: bigCategorys[index]};
+      const smallCategorys = await this.categoryModel.findSmallCategory(smallCategoryInfo);
+
+      for(let index2 in smallCategorys) {
+        smallCategoryObj.push(smallCategorys[index2]);
+      }
+      bigCategoryObj[bigCategorys[index]] = smallCategoryObj;
+    }
+    return bigCategoryObj;
+  }
+
+  // 2-4. 상품 조회
+  async findProduct(bigCategory, smallCategory) {
+    const categoryInfo = {
+      CATEGORY_BIG: bigCategory,
+      CATEGORY_SMALL: smallCategory
+    }
+
+    const products = await this.categoryModel.findCategoryInfo(categoryInfo);
+
+    return products;
+  }
+
+  // 3-1. 대카테고리 수정
+  async updateBigCategory(bigCategory, categoryInfo) {
+    const updateInfo = {
+      CATEGORY_BIG: categoryInfo
+    }
+
+    const updatedCategory = await this.categoryModel.updateBigCategory({ bigCategory, update: updateInfo });
 
     return updatedCategory;
   }
 
-  // 3-2. 상품 수정 // hyun - const 없이 바로 되는 지 확인
+  // 3-2. 소카테고리 수정
+  async updateSmallCategory(bigCategory, smallCategory, categoryInfo) {
+    const updateInfo = {
+      CATEGORY_SMALL: categoryInfo
+    }
+
+    const updatedCategory = await this.categoryModel.updateSmallCategory({ bigCategory, smallCategory, update: updateInfo });
+
+    return updatedCategory;
+  }
+
+  // 3-3. 상품 수정
   async updateProduct(productInfo, categoryInfo) {
     const updatedCategory = await this.categoryModel.updateProduct({ productInfo, update: categoryInfo });
 
@@ -76,8 +121,8 @@ class CategoryService {
   }
 
   // 4-1. 카테고리 및 상품 삭제
-  async deleteCategory(categoryName) {
-    const deletedCategory = await this.categoryModel.delete(categoryName);
+  async deleteCategory(categoryInfo) {
+    const deletedCategory = await this.categoryModel.delete(categoryInfo);
 
     return deletedCategory;
   }

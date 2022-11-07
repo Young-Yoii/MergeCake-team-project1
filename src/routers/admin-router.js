@@ -101,7 +101,7 @@ adminRouter.post("/category", async (req, res, next) => {
   }
 });
 
-// 2-1. 대카테고리, 소카테고리 조회
+// 2-3. 대카테고리, 소카테고리 조회
 adminRouter.get("/category", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
@@ -114,7 +114,7 @@ adminRouter.get("/category", async (req, res, next) => {
     } */
 
     // db에 추가
-    const categorys = await categoryService.findCategoryAll();
+    const categorys = await categoryService.findCategory();
 
     // 추가된 데이터를 프론트에 다시 보내줌
     res.status(201).json(categorys);
@@ -124,7 +124,7 @@ adminRouter.get("/category", async (req, res, next) => {
 });
 
 // 2-2. 대카테고리, 소카테고리 선택 시 상품 조회
-adminRouter.get("/category", async (req, res, next) => {
+adminRouter.get("/category/:bigCategory/:smallCategory", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -135,18 +135,20 @@ adminRouter.get("/category", async (req, res, next) => {
       );
     } */
 
-    // db에 추가
-    const categorys = await categoryService.findCategoryAll();
+    const bigCategory = req.params.bigCategory;
+    const smallCategory = req.params.smallCategory;
+
+    const products = await categoryService.findProduct(bigCategory, smallCategory);
 
     // 추가된 데이터를 프론트에 다시 보내줌
-    res.status(201).json(categorys);
+    res.status(201).json(products);
   } catch (error) {
     next(error);
   }
 });
 
-// 3-1. 카테고리 수정
-adminRouter.patch("/category/:categoryName", async (req, res, next) => {
+// 3-1. 대카테고리 수정
+adminRouter.patch("/category/:bigCategory", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -157,13 +159,10 @@ adminRouter.patch("/category/:categoryName", async (req, res, next) => {
       );
     } */
 
-    // req에서 데이터 가져오기
-    const categoryName = req.params.categoryName;
-    const { CATEGORY_NAME, VALUE, DETAIL } = req.body;
-    const categoryInfo = { CATEGORY_NAME, VALUE, DETAIL };
+    const bigCategory = req.params.bigCategory;
+    const categoryInfo = req.body.CATEGORY_BIG;
 
-    // db에 추가
-    const updatedCategory = await categoryService.updateCategory(categoryName, categoryInfo);
+    const updatedCategory = await categoryService.updateBigCategory(bigCategory, categoryInfo);
 
     // 추가된 데이터를 프론트에 다시 보내줌
     res.status(201).json(updatedCategory);
@@ -172,8 +171,33 @@ adminRouter.patch("/category/:categoryName", async (req, res, next) => {
   }
 });
 
-// 3-2. 상품 수정
-adminRouter.patch("/category/:categoryName/:productName", async (req, res, next) => {
+// 3-2. 소카테고리 수정
+adminRouter.patch("/category/:bigCategory/:smallCategory", async (req, res, next) => {
+  try {
+    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
+    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
+    /*
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        "headers의 Content-Type을 application/json으로 설정해주세요"
+      );
+    } */
+
+    const bigCategory = req.params.bigCategory;
+    const smallCategory = req.params.smallCategory;
+    const categoryInfo = req.body.CATEGORY_SMALL;
+
+    const updatedCategory = await categoryService.updateSmallCategory(bigCategory, smallCategory, categoryInfo);
+
+    // 추가된 데이터를 프론트에 다시 보내줌
+    res.status(201).json(updatedCategory);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// 3-3. 상품 수정
+adminRouter.patch("/category/:bigCategory/:smallCategory/:product", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -185,11 +209,13 @@ adminRouter.patch("/category/:categoryName/:productName", async (req, res, next)
     } */
 
     // req에서 데이터 가져오기
-    const categoryName = req.params.categoryName;
-    const productName = req.params.productName;
-    const productInfo = { categoryName, productName };
-    const { CATEGORY_NAME, VALUE, DETAIL } = req.body;
-    const categoryInfo = { CATEGORY_NAME, VALUE, DETAIL };
+    const bigCategory = req.params.bigCategory;
+    const smallCategory = req.params.smallCategory;
+    const product = req.params.product;
+    const productInfo = { bigCategory, smallCategory, product };
+
+    const { VALUE, DETAIL } = req.body;
+    const categoryInfo = { VALUE, DETAIL };
 
     // db에 추가
     const updatedProduct = await categoryService.updateProduct(productInfo, categoryInfo);
@@ -201,8 +227,8 @@ adminRouter.patch("/category/:categoryName/:productName", async (req, res, next)
   }
 });
 
-// 4-1. 카테고리 및 상품 삭제
-adminRouter.delete("/category/:categoryName", async (req, res, next) => {
+// 4-1. 카테고리 삭제 (req.body로 요청해주세요)
+adminRouter.delete("/category", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -213,11 +239,12 @@ adminRouter.delete("/category/:categoryName", async (req, res, next) => {
       );
     } */
 
-    // req에서 데이터 가져오기
-    const categoryName = req.params.categoryName;
+    const categoryInfo = req.body;
+    console.log(req.body)
+    const { big, small, value} = categoryInfo;
+    console.log(big, small)
 
-    // db에 추가
-    const deletedCategory = await categoryService.deleteCategory(categoryName);
+    const deletedCategory = await categoryService.deleteCategory(categoryInfo);
 
     // 추가된 데이터를 프론트에 다시 보내줌
     res.status(201).json(deletedCategory);
