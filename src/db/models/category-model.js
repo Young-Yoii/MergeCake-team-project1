@@ -80,16 +80,9 @@ export class CategoryModel {
     return updatedCategory;
   }
 
-  // 4-1. 카테고리 및 상품 삭제
+  // 4. 카테고리 삭제
   async delete(categoryInfo) {
-    const deletedCategory = await Category.deleteMany({CATEGORY_NAME: categoryInfo });
-
-    return deletedCategory;
-  }
-
-  // 4-2. 상품 삭제
-  async deleteProduct(productInfo) {
-    const deletedCategory = await Category.deleteOne({ CATEGORY_NAME: productInfo.categoryName, VALUE: productInfo.productName });
+    const deletedCategory = await Category.deleteMany(categoryInfo);
 
     return deletedCategory;
   }

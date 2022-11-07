@@ -120,18 +120,11 @@ class CategoryService {
     return updatedCategory;
   }
 
-  // 4-1. 카테고리 및 상품 삭제
+  // 4. 카테고리 및 상품 삭제
   async deleteCategory(categoryInfo) {
     const deletedCategory = await this.categoryModel.delete(categoryInfo);
 
     return deletedCategory;
-  }
-
-  // 4-2. 상품 삭제
-  async deleteProduct(productInfo) {
-    const deletedProduct = await this.categoryModel.deleteProduct(productInfo);
-
-    return deletedProduct;
   }
 }
 
