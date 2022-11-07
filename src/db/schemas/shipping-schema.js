@@ -9,7 +9,8 @@ const ShippingSchema = new Schema(
     STATE: {
       type: String,
       required: true,
-      default: "주문완료"
+      enum: ['주문 완료', '배송 준비', '배송 시작', '배송 완료'],
+      default: "주문 완료"
     },
     WAYBILL: {
       type: String,
