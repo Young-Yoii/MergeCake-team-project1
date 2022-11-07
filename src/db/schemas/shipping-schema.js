@@ -18,15 +18,6 @@ const ShippingSchema = new Schema(
     TOTAL_PRICE: {
       type: Number,
       required: true,
-    },
-    CREATED_TIME: {
-      type: Date,
-      required: true,
-      default: Date.now
-    },
-    UPDATED_TIME: {
-      type: Date,
-      required: false,
     }
   },
   {

@@ -9,15 +9,6 @@ const OrderSchema = new Schema(
     SELECT_NO: {
       type: Number,
       required: true,
-    },
-    CREATED_TIME: {
-      type: Date,
-      required: true,
-      default: Date.now
-    },
-    UPDATED_TIME: {
-      type: Date,
-      required: false,
     }
   },
   {

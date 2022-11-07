@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 
-const SelectSchema = new Schema(
+const CartSchema = new Schema(
   {
     SELECT_NO: {
       type: Number,
@@ -17,4 +17,4 @@ const SelectSchema = new Schema(
   }
 );
 
-export { SelectSchema };
+export { CartSchema };
