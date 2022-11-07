@@ -11,6 +11,10 @@ const ShippingSchema = new Schema(
       required: true,
       default: "주문완료"
     },
+    WAYBILL: {
+      type: String,
+      required: false
+    },
     ORDER_NO: {
         type: String,
         required: true
