@@ -112,8 +112,8 @@ adminRouter.post("/category", async (req, res, next) => {
     } */
 
     // req에서 데이터 가져오기
-    const { CATEGORY_BIG, CATEGORY_SMALL, VALUE, DETAIL } = req.body;
-    const categoryInfo = { CATEGORY_BIG, CATEGORY_SMALL, VALUE, DETAIL };
+    const { CATEGORY_BIG, CATEGORY_SMALL, PRODUCT, DETAIL } = req.body;
+    const categoryInfo = { CATEGORY_BIG, CATEGORY_SMALL, PRODUCT, DETAIL };
 
     // db에 추가
     const newCategory = await categoryService.addCategory(categoryInfo);
@@ -238,8 +238,8 @@ adminRouter.patch("/category/:bigCategory/:smallCategory/:product", async (req, 
     const product = req.params.product;
     const productInfo = { bigCategory, smallCategory, product };
 
-    const { VALUE, DETAIL } = req.body;
-    const categoryInfo = { VALUE, DETAIL };
+    const { PRODUCT, DETAIL } = req.body;
+    const categoryInfo = { PRODUCT, DETAIL };
 
     // db에 추가
     const updatedProduct = await categoryService.updateProduct(productInfo, categoryInfo);
@@ -251,7 +251,7 @@ adminRouter.patch("/category/:bigCategory/:smallCategory/:product", async (req, 
   }
 });
 
-// 4-1. 카테고리 삭제 (req.body로 요청해주세요)
+// 4. 카테고리 삭제 (req.body로 요청해주세요)
 adminRouter.delete("/category", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
@@ -264,41 +264,11 @@ adminRouter.delete("/category", async (req, res, next) => {
     } */
 
     const categoryInfo = req.body;
-    console.log(req.body)
-    const { big, small, value} = categoryInfo;
-    console.log(big, small)
 
     const deletedCategory = await categoryService.deleteCategory(categoryInfo);
 
     // 추가된 데이터를 프론트에 다시 보내줌
     res.status(201).json(deletedCategory);
-  } catch (error) {
-    next(error);
-  }
-});
-
-// 4-2. 상품 삭제
-adminRouter.delete("/category/:categoryName/:productName", async (req, res, next) => {
-  try {
-    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
-    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
-    /*
-    if (is.emptyObject(req.body)) {
-      throw new Error(
-        "headers의 Content-Type을 application/json으로 설정해주세요"
-      );
-    } */
-
-    // req에서 데이터 가져오기
-    const categoryName = req.params.categoryName;
-    const productName = req.params.productName;
-    const productInfo = { categoryName, productName };
-
-    // db에 추가
-    const deletedProduct = await categoryService.deleteProduct(productInfo);
-
-    // 추가된 데이터를 프론트에 다시 보내줌
-    res.status(201).json(deletedProduct);
   } catch (error) {
     next(error);
   }

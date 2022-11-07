@@ -39,10 +39,10 @@ export class CategoryModel {
   }
 
   // 2-4. 상품 조회
-  async findValue(valueInfo) {
-    const values = await Category.find(valueInfo)
+  async findProduct(productInfo) {
+    const products = await Category.find(productInfo)
 
-    return values;
+    return products;
   }
 
   // 3-1. 대카테고리 수정
@@ -71,7 +71,7 @@ export class CategoryModel {
     const filter = {
       CATEGORY_BIG: productInfo.bigCategory,
       CATEGORY_SMALL: productInfo.smallCategory,
-      VALUE: productInfo.product
+      PRODUCT: productInfo.product
     };
 
     const option = { returnOriginal: false };
@@ -80,16 +80,9 @@ export class CategoryModel {
     return updatedCategory;
   }
 
-  // 4-1. 카테고리 및 상품 삭제
+  // 4. 카테고리 삭제
   async delete(categoryInfo) {
-    const deletedCategory = await Category.deleteMany({CATEGORY_NAME: categoryInfo });
-
-    return deletedCategory;
-  }
-
-  // 4-2. 상품 삭제
-  async deleteProduct(productInfo) {
-    const deletedCategory = await Category.deleteOne({ CATEGORY_NAME: productInfo.categoryName, VALUE: productInfo.productName });
+    const deletedCategory = await Category.deleteMany(categoryInfo);
 
     return deletedCategory;
   }

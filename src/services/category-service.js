@@ -30,7 +30,7 @@ class CategoryService {
         valueObj = {};
 
         const valueInfo = { CATEGORY_SMALL: smallCategorys[index2]};
-        const values = await this.categoryModel.findValue(valueInfo);
+        const values = await this.categoryModel.findProduct(valueInfo);
 
         for(let index3 in values) {
           valueObj[values[index3].VALUE] = values[index3].DETAIL;
@@ -120,18 +120,11 @@ class CategoryService {
     return updatedCategory;
   }
 
-  // 4-1. 카테고리 및 상품 삭제
+  // 4. 카테고리 및 상품 삭제
   async deleteCategory(categoryInfo) {
     const deletedCategory = await this.categoryModel.delete(categoryInfo);
 
     return deletedCategory;
-  }
-
-  // 4-2. 상품 삭제
-  async deleteProduct(productInfo) {
-    const deletedProduct = await this.categoryModel.deleteProduct(productInfo);
-
-    return deletedProduct;
   }
 }
 

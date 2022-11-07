@@ -10,7 +10,7 @@ const CategorySchema = new Schema(
       type: String,
       required: true,
     },
-    VALUE: {
+    PRODUCT: {
       type: String,
       required: true,
     },

@@ -1,9 +1,9 @@
 import { model } from "mongoose";
-import { SelectSchema } from "../schemas/select-schema";
+import { CartSchema } from "../schemas/cart-schema";
 import { OrderSchema } from "../schemas/order-schema";
 import { ShippingSchema } from "../schemas/shipping-schema";
 
-const Select = model("Select", SelectSchema);
+const Cart = model("Cart", CartSchema);
 const Order = model("Order", OrderSchema);
 const Shipping = model("Shipping", ShippingSchema);
 
@@ -11,7 +11,7 @@ const Shipping = model("Shipping", ShippingSchema);
 export class OrderModel {
     // 0-1. SELECT_NO 생성
     async findMaxSelectNo() {
-        const maxSelectNo = await Select.findOne().sort('-SELECT_NO')
+        const maxSelectNo = await Cart.findOne().sort('-SELECT_NO')
 
         return maxSelectNo.SELECT_NO + 1;
     }
@@ -25,7 +25,7 @@ export class OrderModel {
 
     // 1-1. 주문 추가 (select)
     async createSelect(selectInfo) {
-        const createdNewSelect = await Select.create(selectInfo);
+        const createdNewSelect = await Cart.create(selectInfo);
         return createdNewSelect;
     }
 
@@ -64,7 +64,7 @@ export class OrderModel {
 
     // 2-4. SELECT_NO로 주문 조회
     async findBySelectNo(selectNo) {
-        const selects = await Select.find(selectNo);
+        const selects = await Cart.find(selectNo);
 
         return selects;
     }
@@ -74,7 +74,7 @@ export class OrderModel {
         const filter = {SELECT_NO: select_no};
         const option = {returnOriginal: false};
 
-        const updatedOrder = await Select.findOneAndUpdate(filter, update, option);
+        const updatedOrder = await Cart.findOneAndUpdate(filter, update, option);
         return updatedOrder;
     }
 
@@ -90,7 +90,7 @@ export class OrderModel {
 
     // 4-1. 주문 삭제 (Select)
     async deleteSelect(selectno) {
-        const deletedSelect = await Select.deleteOne({ SELECT_NO: selectno });
+        const deletedSelect = await Cart.deleteOne({ SELECT_NO: selectno });
 
         return deletedSelect;
     }
