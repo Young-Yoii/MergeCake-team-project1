@@ -30,7 +30,7 @@ class CategoryService {
         valueObj = {};
 
         const valueInfo = { CATEGORY_SMALL: smallCategorys[index2]};
-        const values = await this.categoryModel.findValue(valueInfo);
+        const values = await this.categoryModel.findProduct(valueInfo);
 
         for(let index3 in values) {
           valueObj[values[index3].VALUE] = values[index3].DETAIL;

@@ -88,8 +88,8 @@ adminRouter.post("/category", async (req, res, next) => {
     } */
 
     // req에서 데이터 가져오기
-    const { CATEGORY_BIG, CATEGORY_SMALL, VALUE, DETAIL } = req.body;
-    const categoryInfo = { CATEGORY_BIG, CATEGORY_SMALL, VALUE, DETAIL };
+    const { CATEGORY_BIG, CATEGORY_SMALL, PRODUCT, DETAIL } = req.body;
+    const categoryInfo = { CATEGORY_BIG, CATEGORY_SMALL, PRODUCT, DETAIL };
 
     // db에 추가
     const newCategory = await categoryService.addCategory(categoryInfo);
@@ -214,8 +214,8 @@ adminRouter.patch("/category/:bigCategory/:smallCategory/:product", async (req, 
     const product = req.params.product;
     const productInfo = { bigCategory, smallCategory, product };
 
-    const { VALUE, DETAIL } = req.body;
-    const categoryInfo = { VALUE, DETAIL };
+    const { PRODUCT, DETAIL } = req.body;
+    const categoryInfo = { PRODUCT, DETAIL };
 
     // db에 추가
     const updatedProduct = await categoryService.updateProduct(productInfo, categoryInfo);
