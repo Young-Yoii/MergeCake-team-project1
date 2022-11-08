@@ -1,4 +1,4 @@
-import {categoryModel, orderModel} from "../db";
+import {categoryModel, productModel } from "../db";
 
 class CategoryService {
   constructor(categoryModel) {
@@ -12,7 +12,7 @@ class CategoryService {
     return maxCategoryNo;
   }
 
-  // 1. 카테고리 추가
+  // 1-1. 카테고리 추가
   async addCategory(categoryInfo) {
     const maxCategoryNo = await this.categoryModel.findMaxCategoryNo();
 
@@ -26,6 +26,19 @@ class CategoryService {
     const createdNewCategory = await this.categoryModel.addCategory(categoryInfos);
 
     return createdNewCategory;
+  }
+
+  // 1-2. 상품 추가
+  async addProduct(productInfo) {
+    const productInfos = {
+      CATEGORY_NO: productInfo.CATEGORY_NO,
+      PRODUCT_NAME: productInfo.PRODUCT_NAME,
+      DETAIL: productInfo.DETAIL
+    }
+
+    const createdNewProduct = await this.categoryModel.addProduct(productInfos);
+
+    return createdNewProduct;
   }
 
   // 2-0. 카테고리 조회 (3중 객체로 대카테고리, 소카테고리, 상품 반환)
