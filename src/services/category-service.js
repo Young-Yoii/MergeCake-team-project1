@@ -5,9 +5,23 @@ class CategoryService {
     this.categoryModel = categoryModel;
   }
 
+  // 0. CATEGORY_NO 생성
+  async findMaxCategoryNo() {
+    const maxCategoryNo = await this.categoryModel.findMaxCategoryNo();
+
+    return maxCategoryNo;
+  }
+
   // 1. 카테고리 추가
   async addCategory(categoryInfo) {
-    const createdNewCategory = await this.categoryModel.addCategory(categoryInfo);
+    const maxCategoryNo = await this.categoryModel.findMaxCategoryNo();
+
+    const categoryInfos = {
+      CATEGORY_NO: maxCategoryNo,
+      CATEGORY_NAME: categoryInfo
+    }
+
+    const createdNewCategory = await this.categoryModel.addCategory(categoryInfos);
 
     return createdNewCategory;
   }

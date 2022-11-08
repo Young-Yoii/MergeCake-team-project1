@@ -4,7 +4,14 @@ import { CategorySchema } from "../schemas/category-schema";
 const Category = model("Category", CategorySchema);
 
 export class CategoryModel {
-  // 1. 카테고리 및 상품 추가
+  // 0. CATEGORY_NO 생성
+  async findMaxCategoryNo() {
+    const maxCategoryNo = await Category.findOne().sort('-CATEGORY_NO')
+
+    return maxCategoryNo.CATEGORY_NO + 1;
+  }
+
+  // 1. 카테고리 추가
   async addCategory(categoryInfo) {
     const newCategory = await Category.create(categoryInfo);
 
