@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { autoIncrement } from "mongoose-auto-increment";
+import autoIncrement from "mongoose-auto-increment";
 import { CategorySchema } from "./schemas/category-schema";
 
 const DB_URL =

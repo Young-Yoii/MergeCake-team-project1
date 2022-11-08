@@ -16,9 +16,11 @@ class CategoryService {
   async addCategory(categoryInfo) {
     const maxCategoryNo = await this.categoryModel.findMaxCategoryNo();
 
+    console.log(categoryInfo)
+
     const categoryInfos = {
       CATEGORY_NO: maxCategoryNo,
-      CATEGORY_NAME: categoryInfo
+      CATEGORY_NAME: categoryInfo.CATEGORY_NAME
     }
 
     const createdNewCategory = await this.categoryModel.addCategory(categoryInfos);
