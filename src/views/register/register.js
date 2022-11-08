@@ -1,3 +1,4 @@
+import e from "express";
 import * as Api from "/api.js";
 import { validateEmail } from "/useful-functions.js";
 
@@ -7,6 +8,7 @@ const emailInput = document.querySelector("#emailInput");
 const passwordInput = document.querySelector("#passwordInput");
 const passwordConfirmInput = document.querySelector("#passwordConfirmInput");
 const submitButton = document.querySelector("#submitButton");
+const kakaoButton = document.querySelector("#kakaoButton");
 
 addAllElements();
 addAllEvents();
@@ -17,8 +19,18 @@ async function addAllElements() {}
 // 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 function addAllEvents() {
   submitButton.addEventListener("click", handleSubmit);
+  submitButton.addEventListener("click", kakao);
 }
 
+async function kakao(e) {
+e.preventDefault();
+try {
+  window.location.href = "/kakao";
+} catch (err) {
+  console.error(err.stack);
+  alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+}
+}
 // 회원가입 진행
 async function handleSubmit(e) {
   e.preventDefault();
@@ -61,3 +73,5 @@ async function handleSubmit(e) {
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
 }
+
+
