@@ -19,7 +19,7 @@ app.use(viewsRouter);
 
 // api 라우팅
 app.use("/main", mainRouter);
-app.use("/api", userRouter);
+app.use("/api", userRouter); // login, register만 여기 해당
 app.use("/cart", cartRouter);
 app.use("/mypage", mypageRouter);
 app.use("/admin", adminRouter);
