@@ -52,9 +52,21 @@ class CategoryService {
       CATEGORY_NO: category
     }
 
+    const categoryName = await this.categoryModel.findCategoryName(categoryInfo);
     const products = await this.categoryModel.findProduct(categoryInfo);
 
-    return products;
+    /*
+    for(let i in products) {
+      products[i]['CATEGORY_NAME'] = categoryName.CATEGORY_NAME;
+      console.log(products[i])
+    } */
+
+    const product = {
+      CATEGORY_NAME: categoryName.CATEGORY_NAME,
+      products
+    }
+
+    return product;
   }
 
   // 3-1. 카테고리 수정

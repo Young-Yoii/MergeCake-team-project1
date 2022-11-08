@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { orderService } from "../services";
 import { categoryService } from "../services";
+import {adminRouter} from "./admin-router";
 
 const mainRouter = Router();
 
@@ -33,7 +34,7 @@ mainRouter.post("/product", async (req, res, next) => {
   }
 });
 
-// 2-1. 대카테고리 조회
+// 2-1. 카테고리 조회
 mainRouter.get("/product", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
@@ -45,17 +46,18 @@ mainRouter.get("/product", async (req, res, next) => {
       );
     } */
 
-    const bigCategorys = await categoryService.findBigCategory();
+    // db에 추가
+    const categorys = await categoryService.findCategory();
 
     // 추가된 데이터를 프론트에 다시 보내줌
-    res.status(201).json(bigCategorys);
+    res.status(201).json(categorys);
   } catch (error) {
     next(error);
   }
 });
 
-// 2-2. 소카테고리 및 상품 조회
-mainRouter.get("/product/:bigCategory", async (req, res, next) => {
+// 2-2. 카테고리 선택 시 상품 조회
+mainRouter.get("/product/:categoryNo", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -66,11 +68,12 @@ mainRouter.get("/product/:bigCategory", async (req, res, next) => {
       );
     } */
 
-    const bigCategory = req.params.bigCategory;
-    const categorys = await categoryService.findCategoryInfo(bigCategory);
+    const categoryNo = req.params.categoryNo;
+
+    const products = await categoryService.findProduct(categoryNo);
 
     // 추가된 데이터를 프론트에 다시 보내줌
-    res.status(201).json(categorys);
+    res.status(201).json(products);
   } catch (error) {
     next(error);
   }

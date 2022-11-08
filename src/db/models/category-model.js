@@ -27,14 +27,21 @@ export class CategoryModel {
     return newProduct;
   }
 
-  // 2-1. 카테고리 조회
+  // 2-1. 카테고리 조회 (전체)
   async findCategory() {
     const categorys = await Category.find({});
 
     return categorys;
   }
 
-  // 2-2. 상품 조회
+  // 2-2. 카테고리 조회
+  async findCategoryName(categoryInfo) {
+    const categoryName = await Category.findOne(categoryInfo);
+
+    return categoryName;
+  }
+
+  // 2-3. 상품 조회
   async findProduct(productInfo) {
     const products = await Product.find(productInfo)
 
