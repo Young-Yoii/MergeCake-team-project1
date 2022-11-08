@@ -75,7 +75,6 @@ adminRouter.patch("/ordercheck/:orderno/:waybill", async (req, res, next) => {
   }
 });
 
-
 // 4. 주문 삭제
 adminRouter.delete("/ordercheck/:orderno", async (req, res, next) => {
   try {
@@ -113,7 +112,7 @@ adminRouter.get("/userlist", /*loginRequired,*/  async function (req, res, next)
   });
 
 // 3) category
-// 1. 카테고리 및 상품 추가
+// 1-1. 카테고리 추가
 adminRouter.post("/category", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
@@ -126,8 +125,8 @@ adminRouter.post("/category", async (req, res, next) => {
     } */
 
     // req에서 데이터 가져오기
-    const { CATEGORY_BIG, CATEGORY_SMALL, PRODUCT, DETAIL } = req.body;
-    const categoryInfo = { CATEGORY_BIG, CATEGORY_SMALL, PRODUCT, DETAIL };
+    const { CATEGORY_NAME } = req.body;
+    const categoryInfo = { CATEGORY_NAME };
 
     // db에 추가
     const newCategory = await categoryService.addCategory(categoryInfo);

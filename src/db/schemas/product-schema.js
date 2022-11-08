@@ -1,20 +1,24 @@
 import { Schema } from "mongoose";
 
-const CategorySchema = new Schema(
+const ProductSchema = new Schema(
   {
     CATEGORY_NO: {
       type: Number,
       required: true,
     },
-    CATEGORY_NAME: {
+    PRODUCT_NAME: {
       type: String,
+      required: true,
+    },
+    DETAIL: {
+      type: Object,
       required: true,
     }
   },
   {
-    collection: "Category",
+    collection: "Product",
     timestamps: true,
   }
 );
 
-export { CategorySchema };
+export { ProductSchema };
