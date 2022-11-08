@@ -251,7 +251,7 @@ adminRouter.patch("/category/:bigCategory/:smallCategory/:product", async (req, 
   }
 });
 
-// 4. 카테고리 삭제 (req.body로 요청해주세요)
+// 4. 대카테고리 삭제 (req.body로 요청해주세요)
 adminRouter.delete("/category", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
@@ -262,16 +262,31 @@ adminRouter.delete("/category", async (req, res, next) => {
         "headers의 Content-Type을 application/json으로 설정해주세요"
       );
     } */
-
-    const categoryInfo = req.body;
-
-    const deletedCategory = await categoryService.deleteCategory(categoryInfo);
-
-    // 추가된 데이터를 프론트에 다시 보내줌
+    //const categoryInfo = req.params.categorybig; 
+    //const categoryInfo = req.body.CATEGORY_BIG;
+    const { CATEGORY_BIG , CATEGORY_SMALL , PRODUCT } = req.body;
+    if(CATEGORY_BIG){
+      console.log("deleteBigCategory")
+    const categoryInfo = req.body.CATEGORY_BIG;
+    const deletedCategory = await categoryService.deleteBigCategory(categoryInfo);
     res.status(201).json(deletedCategory);
+    }else if(CATEGORY_SMALL){
+      console.log("deleteSmallCategory")
+      const categoryInfo = req.body.CATEGORY_SMALL;
+      const deletedCategory = await categoryService.deleteSmallCategory(categoryInfo);
+      res.status(201).json(deletedCategory);
+    }else if(PRODUCT){
+      console.log("deleteProduct")
+      const categoryInfo = req.body.PRODUCT;
+      const deletedCategory = await categoryService.deleteProduct(categoryInfo);
+      res.status(201).json(deletedCategory);
+    }
+    // 추가된 데이터를 프론트에 다시 보내줌
+   // res.status(201).json(deletedCategory);
   } catch (error) {
     next(error);
   }
 });
+
 
 export { adminRouter };

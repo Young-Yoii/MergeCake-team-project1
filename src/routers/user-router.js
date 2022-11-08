@@ -3,6 +3,8 @@ import is from "@sindresorhus/is";
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired } from "../middlewares";
 import { userService } from "../services";
+import { transPort } from "../config/email";
+
 
 const userRouter = Router();
 
@@ -150,6 +152,44 @@ async function (req, res, next) {
     res.status(200).json(users);
   } catch (error) {
     next(error);
+  }
+});
+
+//메일 보내서 임시비밀번호로 비밀번호 변경
+userRouter.post("/mail", async (req, res, next) => {
+  // 인증번호 생성
+  let authNum = Math.random().toString().substr(2, 10);
+  // nodeMailer 옵션
+  const mailOptions = {
+    from: process.env.NODEMAILER_USER,
+    to: req.body.EMAIL,
+    subject: "임시 비밀번호 발급.",
+    text: "임시 비밀번호입니다. " + authNum ,
+  };
+
+
+  try {
+    const { EMAIL } = req.body;
+    const users = await userService.setPassword(EMAIL, authNum);
+
+    // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
+    res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+
+  // 메일 전송
+  try{
+  await transPort.sendMail(mailOptions, function (error, info) {
+    console.log(mailOptions);
+    if (error) {
+      console.log(error);
+    }
+    res.status(200).json(authNum);
+    transPort.close();
+  });
+  }catch(e){
+    next(e);
   }
 });
 

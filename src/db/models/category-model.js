@@ -80,9 +80,23 @@ export class CategoryModel {
     return updatedCategory;
   }
 
-  // 4. 카테고리 삭제
-  async delete(categoryInfo) {
-    const deletedCategory = await Category.deleteMany(categoryInfo);
+  // 4. 대카테고리 삭제
+  async deleteBig(categoryInfo) {
+    const deletedCategory = await Category.deleteMany({  CATEGORY_BIG : categoryInfo });
+
+    return deletedCategory;
+  }
+
+    // 4-2. 소카테고리 삭제
+    async deleteSmall(categoryInfo) {
+      const deletedCategory = await Category.deleteMany({  CATEGORY_SMALL : categoryInfo });
+  
+      return deletedCategory;
+    }
+
+      // 4-3. product 삭제
+  async deleteProduct(categoryInfo) {
+    const deletedCategory = await Category.deleteMany({  PRODUCT : categoryInfo });
 
     return deletedCategory;
   }
