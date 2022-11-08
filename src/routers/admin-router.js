@@ -6,6 +6,7 @@ import {userRouter} from "./user-router";
 // import {mypageRouter} from "./mypage-router";
 
 const adminRouter = Router();
+
 // 1) ordercheck
 // 1. 주문 조회
 adminRouter.get("/ordercheck", async (req, res, next) => {

@@ -13,13 +13,6 @@ export class CategoryModel {
     return maxCategoryNo.CATEGORY_NO + 1;
   }
 
-  // 0. PRODUCT 존재 여부 확인
-  async productExist() {
-    const productExist = await Product.count()
-
-    return productExist;
-  }
-
   // 1-1. 카테고리 추가
   async addCategory(categoryInfo) {
     const newCategory = await Category.create(categoryInfo);

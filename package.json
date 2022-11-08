@@ -19,12 +19,7 @@
     "install": "^0.13.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.1",
-    "mongoose-auto-increment": "^5.0.1",
-<<<<<<< HEAD
     "nodemailer": "^6.8.0",
-=======
-    "multer": "^1.4.5-lts.1",
->>>>>>> ce35b364b24a200f7c12cf98f787728b637230a9
     "passport-kakao": "^1.0.1"
   },
   "devDependencies": {
