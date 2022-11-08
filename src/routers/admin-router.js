@@ -1,6 +1,7 @@
 import { Router } from "express";
-import { orderService } from "../services";
+import {orderService, userService} from "../services";
 import { categoryService } from "../services";
+import {userRouter} from "./user-router";
 // 이거 왜 여깄지??
 // import {mypageRouter} from "./mypage-router";
 
@@ -97,6 +98,19 @@ adminRouter.delete("/ordercheck/:orderno", async (req, res, next) => {
     next(error);
   }
 });
+
+// 2) userlist
+adminRouter.get("/userlist", /*loginRequired,*/  async function (req, res, next) {
+    try {
+      // 전체 사용자 목록을 얻음
+      const users = await userService.getUsers();
+
+      // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
+      res.status(200).json(users);
+    } catch (error) {
+      next(error);
+    }
+  });
 
 // 3) category
 // 1. 카테고리 및 상품 추가
