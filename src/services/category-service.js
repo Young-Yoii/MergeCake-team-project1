@@ -1,4 +1,4 @@
-import {categoryModel, productModel } from "../db";
+import {categoryModel } from "../db";
 
 class CategoryService {
   constructor(categoryModel) {
@@ -16,8 +16,6 @@ class CategoryService {
   async addCategory(categoryInfo) {
     const maxCategoryNo = await this.categoryModel.findMaxCategoryNo();
 
-    console.log(categoryInfo)
-
     const categoryInfos = {
       CATEGORY_NO: maxCategoryNo,
       CATEGORY_NAME: categoryInfo.CATEGORY_NAME
@@ -31,7 +29,7 @@ class CategoryService {
   // 1-2. 상품 추가
   async addProduct(productInfo) {
     const productInfos = {
-      CATEGORY_NO: productInfo.CATEGORY_NO,
+      CATEGORY_NO: productInfo.categoryNo,
       PRODUCT_NAME: productInfo.PRODUCT_NAME,
       DETAIL: productInfo.DETAIL
     }
@@ -41,119 +39,56 @@ class CategoryService {
     return createdNewProduct;
   }
 
-  // 2-0. 카테고리 조회 (3중 객체로 대카테고리, 소카테고리, 상품 반환)
-  async findCategoryAll() {
-    let bigCategoryObj = {};
-    let smallCategoryObj = {};
-    let valueObj = {};
-
-    const bigCategorys = await this.categoryModel.findBigCategory();
-
-    for(let index in bigCategorys) {
-      smallCategoryObj = {};
-
-      const smallCategoryInfo = { CATEGORY_BIG: bigCategorys[index]};
-      const smallCategorys = await this.categoryModel.findSmallCategory(smallCategoryInfo);
-
-      for(let index2 in smallCategorys) {
-        valueObj = {};
-
-        const valueInfo = { CATEGORY_SMALL: smallCategorys[index2]};
-        const values = await this.categoryModel.findProduct(valueInfo);
-
-        for(let index3 in values) {
-          valueObj[values[index3].VALUE] = values[index3].DETAIL;
-        }
-        smallCategoryObj[smallCategorys[index2]] = valueObj;
-      }
-      bigCategoryObj[bigCategorys[index]] = smallCategoryObj;
-    }
-
-    return bigCategoryObj;
-  }
-
-  // 2-1. 대카테고리 조회
-  async findBigCategory() {
-    const bigCategorys = await this.categoryModel.findBigCategory();
-
-    return bigCategorys;
-  }
-
-  // 2-2. 소카테고리 및 상품 조회
-  async findCategoryInfo(bigCategory) {
-    const bigCategoryInfo = { CATEGORY_BIG: bigCategory }
-    const categorys = await this.categoryModel.findCategoryInfo(bigCategoryInfo);
+  // 2-1. 카테고리 조회
+  async findCategory() {
+    const categorys = await this.categoryModel.findCategory();
 
     return categorys;
   }
 
-  // 2-3. 대카테고리, 소카테고리 조회
-  async findCategory() {
-    let bigCategoryObj = {};
-    let smallCategoryObj = [];
-
-    const bigCategorys = await this.categoryModel.findBigCategory();
-
-    for(let index in bigCategorys) {
-      smallCategoryObj = [];
-
-      const smallCategoryInfo = { CATEGORY_BIG: bigCategorys[index]};
-      const smallCategorys = await this.categoryModel.findSmallCategory(smallCategoryInfo);
-
-      for(let index2 in smallCategorys) {
-        smallCategoryObj.push(smallCategorys[index2]);
-      }
-      bigCategoryObj[bigCategorys[index]] = smallCategoryObj;
-    }
-    return bigCategoryObj;
-  }
-
-  // 2-4. 상품 조회
-  async findProduct(bigCategory, smallCategory) {
+  // 2-2. 상품 조회
+  async findProduct(category) {
     const categoryInfo = {
-      CATEGORY_BIG: bigCategory,
-      CATEGORY_SMALL: smallCategory
+      CATEGORY_NO: category
     }
 
-    const products = await this.categoryModel.findCategoryInfo(categoryInfo);
+    const products = await this.categoryModel.findProduct(categoryInfo);
 
     return products;
   }
 
-  // 3-1. 대카테고리 수정
-  async updateBigCategory(bigCategory, categoryInfo) {
-    const updateInfo = {
-      CATEGORY_BIG: categoryInfo
+  // 3-1. 카테고리 수정
+  async updateCategory(categoryInfo) {
+    const updatedCategory = await this.categoryModel.updateCategory(categoryInfo);
+
+    return updatedCategory;
+  }
+
+  // 3-2. 상품 수정
+  async updateProduct(categoryNo, update) {
+    const updatedCategory = await this.categoryModel.updateProduct(categoryNo, update);
+
+    return updatedCategory;
+  }
+
+  // 4-1. 카테고리 삭제
+  async deleteCategory(categoryNo) {
+    const productExist = await this.categoryModel.findProduct(categoryNo);
+
+    if(productExist.length === 0) {
+      const deletedCategory = await this.categoryModel.deleteCategory(categoryNo);
+
+      return deletedCategory;
+    } else {
+      return false;
     }
-
-    const updatedCategory = await this.categoryModel.updateBigCategory({ bigCategory, update: updateInfo });
-
-    return updatedCategory;
   }
 
-  // 3-2. 소카테고리 수정
-  async updateSmallCategory(bigCategory, smallCategory, categoryInfo) {
-    const updateInfo = {
-      CATEGORY_SMALL: categoryInfo
-    }
+  // 4-2. 상품 삭제
+  async deleteProduct(deleteInfo) {
+    const deletedProduct = await this.categoryModel.deleteProduct(deleteInfo);
 
-    const updatedCategory = await this.categoryModel.updateSmallCategory({ bigCategory, smallCategory, update: updateInfo });
-
-    return updatedCategory;
-  }
-
-  // 3-3. 상품 수정
-  async updateProduct(productInfo, categoryInfo) {
-    const updatedCategory = await this.categoryModel.updateProduct({ productInfo, update: categoryInfo });
-
-    return updatedCategory;
-  }
-
-  // 4. 카테고리 및 상품 삭제
-  async deleteCategory(categoryInfo) {
-    const deletedCategory = await this.categoryModel.delete(categoryInfo);
-
-    return deletedCategory;
+    return deletedProduct;
   }
 }
 
