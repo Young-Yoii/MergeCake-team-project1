@@ -1,15 +1,44 @@
-import {categoryModel, orderModel} from "../db";
+import {categoryModel, productModel } from "../db";
 
 class CategoryService {
   constructor(categoryModel) {
     this.categoryModel = categoryModel;
   }
 
-  // 1. 카테고리 및 상품 추가
+  // 0. CATEGORY_NO 생성
+  async findMaxCategoryNo() {
+    const maxCategoryNo = await this.categoryModel.findMaxCategoryNo();
+
+    return maxCategoryNo;
+  }
+
+  // 1-1. 카테고리 추가
   async addCategory(categoryInfo) {
-    const createdNewCategory = await this.categoryModel.create(categoryInfo);
+    const maxCategoryNo = await this.categoryModel.findMaxCategoryNo();
+
+    console.log(categoryInfo)
+
+    const categoryInfos = {
+      CATEGORY_NO: maxCategoryNo,
+      CATEGORY_NAME: categoryInfo.CATEGORY_NAME
+    }
+
+    const createdNewCategory = await this.categoryModel.addCategory(categoryInfos);
 
     return createdNewCategory;
+  }
+
+  // 1-2. 상품 추가
+  async addProduct(productInfo) {
+    const productInfos = {
+      CATEGORY_NO: productInfo.CATEGORY_NO,
+      PRODUCT_NAME: productInfo.PRODUCT_NAME,
+      DETAIL: productInfo.DETAIL
+    }
+
+    const createdNewProduct = await this.categoryModel.addProduct(productInfos);
+
+    return createdNewProduct;
   }
 
   // 2-0. 카테고리 조회 (3중 객체로 대카테고리, 소카테고리, 상품 반환)

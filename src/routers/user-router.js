@@ -64,9 +64,7 @@ userRouter.post("/login", async function (req, res, next) {
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
 //jwt 구현하고 loginRequired 넣어주기
 
-userRouter.get("/userlist",  
- // loginRequired,
-async function (req, res, next) {
+userRouter.get("/userlist", /* loginRequired, */async function (req, res, next) {
   try {
     // 전체 사용자 목록을 얻음
     const users = await userService.getUsers();
