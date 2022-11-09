@@ -83,7 +83,10 @@ $searchAddressButton.addEventListener("click", () => {
 });
 
 // 취소 버튼 클릭
-$cancelButton.addEventListener("click", () => {
+$cancelButton.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  console.log("cancel");
   window.location.href = "/cart";
 });
 
@@ -113,27 +116,50 @@ $submitButton.addEventListener("click", async (e) => {
     return alert("상세주소가 입력되지 않았습니다.");
   }
 
-  // 배송지 api 요청
-  try {
-    const userApi = await Api.get("/api/user");
-    const userId = userApi._id;
+  // 🚨 장바구니 정보 DB 저장
+  /**
+   * 지훈님 코드
+   */
 
-    const data = {
-      FULL_NAME: fullName,
-      PHONE_NUMBER: phoneNumber,
-      ZIP_CODE: postcode,
-      ADDRESS1: address + extraAddress,
-      ADDRESS2: detailAddress,
-    };
+  // isChecked = true 일 경우
+  // user 배송지 정보 DB 저장, 페이지 이동
+  if (isChecked) {
+    try {
+      // DB 가져오기
+      const email = sessionStorage.getItem("email");
 
-    await Api.patch(`/api/users/${userId}`, data);
+      const getUsers = async (email) => {
+        const userList = await Api.get("/api/userlist");
+        return userList.find((user) => user.EMAIL === email);
+      };
 
-    alert(`주문이 완료되었습니다.`);
+      const userInfo = await getUsers(email);
+      const targetUserId = userInfo._id;
 
-    // 마이페이지 이동
+      const data = {
+        FULL_NAME: fullName,
+        PHONE_NUMBER: phoneNumber,
+        ZIP_CODE: postcode,
+        ADDRESS1: address + extraAddress,
+        ADDRESS2: detailAddress,
+      };
+
+      await Api.patch(`/api/users/${targetUserId}`, data);
+
+      alert(`주문이 완료되었습니다.`);
+
+      // 🚨 마이페이지 이동
+      // 페이지 이름 맞춰서 경로 수정하기
+      window.location.href = "/mypage";
+    } catch (err) {
+      console.error(err.stack);
+      alert(
+        `문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`
+      );
+    }
+  }
+  // isChecked = true 일 경우, 페이지만 이동
+  else {
     window.location.href = "/mypage";
-  } catch (err) {
-    console.error(err.stack);
-    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
 });
