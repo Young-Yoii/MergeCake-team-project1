@@ -77,10 +77,10 @@ class CategoryService {
   }
 
   // 3-2. 상품 수정
-  async updateProduct(categoryNo, update) {
-    const updatedCategory = await this.categoryModel.updateProduct(categoryNo, update);
+  async updateProduct(categoryNo, productName, update) {
+    const updatedProducted = await this.categoryModel.updateProduct(categoryNo, productName, update);
 
-    return updatedCategory;
+    return updatedProducted;
   }
 
   // 4-1. 카테고리 삭제

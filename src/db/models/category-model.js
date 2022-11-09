@@ -1,6 +1,14 @@
 import { model } from "mongoose";
 import { CategorySchema } from "../schemas/category-schema";
 import { ProductSchema } from "../schemas/product-schema";
+// import autoIncrement from "mongoose-auto-increment";
+/*
+CategorySchema.plugin(autoIncrement.plugin, {
+  model: 'Category',
+  field: 'CATEGORY_NO',
+  startAt: 1,
+  increment: 1
+});*/
 
 const Category = model("Category", CategorySchema);
 const Product = model("Product", ProductSchema);
@@ -60,16 +68,17 @@ export class CategoryModel {
   }
 
   // 3-2. 상품 수정
-  async updateProduct(categoryNo, update) {
+  async updateProduct(categoryNo, productName, update) {
     const filter = {
-      CATEGORY_NO: categoryNo
+      CATEGORY_NO: categoryNo,
+      PRODUCT_NAME: productName
     };
 
     const option = { returnOriginal: false };
 
-    const updatedCategory = await Product.updateOne(filter, update, option);
+    const updatedProducted = await Product.updateOne(filter, update, option);
 
-    return updatedCategory;
+    return updatedProducted;
   }
 
   // 4-1. 카테고리 삭제

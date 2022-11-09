@@ -235,7 +235,7 @@ adminRouter.patch("/category", async (req, res, next) => {
 });
 
 // 3-2. 상품 수정
-adminRouter.patch("/category/:categoryNo", async (req, res, next) => {
+adminRouter.patch("/category/:categoryNo/:productName", async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -248,10 +248,11 @@ adminRouter.patch("/category/:categoryNo", async (req, res, next) => {
 
     // req에서 데이터 가져오기
     const categoryNo = req.params.categoryNo;
+    const productName = req.params.productName;
     const update = req.body;
 
     // db에 추가
-    const updatedProduct = await categoryService.updateProduct(categoryNo, update);
+    const updatedProduct = await categoryService.updateProduct(categoryNo, productName, update);
 
     // 추가된 데이터를 프론트에 다시 보내줌
     res.status(201).json(updatedProduct);

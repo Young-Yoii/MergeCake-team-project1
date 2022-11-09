@@ -1,4 +1,5 @@
 import { Schema } from "mongoose";
+// import autoIncrement from "mongoose-auto-increment";
 
 const CategorySchema = new Schema(
   {
