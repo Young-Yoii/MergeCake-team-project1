@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./edit.css" />
+    <script defer src="./edit.js" type="module"></script>
+
+    <title>마이페이지-정보수정</title>
+  </head>
+  <body>
+    <header></header>
+
+    <h2>마이페이지</h2>
+
+    <div class="user-container">
+      <p class="user-name">홍길동님</p>
+      <div class="user-info">
+        <a href="#" class="user-order">주문조회</a>
+        <a href="#" class="user-edit">정보수정</a>
+      </div>
+    </div>
+
+    <!-- 기본정보 -->
+    <div class="info-container">
+      <table class="info-list">
+        <caption>
+          기본정보
+        </caption>
+        <tbody>
+          <tr>
+            <th scope="row">이메일</th>
+            <td id="email"></td>
+          </tr>
+          <tr>
+            <th scope="row">비밀번호</th>
+            <td>
+              ******
+              <a href="#" id="change-password-btn" class="edit-btn"
+                >비밀번호 변경</a
+              >
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">비밀번호 확인</th>
+            <td>******</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- 추가정보 -->
+    <div class="info-container">
+      <form id="more-information-form">
+        <table class="info-list">
+          <caption>
+            추가정보
+          </caption>
+          <tbody>
+            <tr>
+              <th scope="row">이름</th>
+              <td class="form">
+                <div class="input-field">
+                  <label for="name" class="name"></label>
+                  <input type="text" id="name" name="FULL_NAME" />
+                  <button type="button" class="edit-btn number-change-btn">
+                    수정하기
+                  </button>
+                </div>
+                <div class="button-container">
+                  <button type="button" class="cancel-button">취소</button>
+                  <button class="submit-button">완료</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">휴대전화</th>
+              <td class="form">
+                <div class="input-field">
+                  <label for="phone-number" class="phone-number"></label>
+                  <input type="text" id="phone-number" name="PHONE_NUMBER" />
+                  <button type="button" class="edit-btn number-change-btn">
+                    수정하기
+                  </button>
+                </div>
+                <div class="button-container">
+                  <button type="button" class="cancel-button">취소</button>
+                  <button class="submit-button">완료</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">주소</th>
+              <td class="form">
+                <div class="input-field">
+                  <label for="address" class="address"></label>
+                  <input
+                    type="text"
+                    id="address"
+                    name="ADDRESS1"
+                    readonly
+                    value="ㅁㄴㅇㅁㄴㅇ"
+                  />
+                  <button type="button" class="edit-btn address-change-btn">
+                    수정하기
+                  </button>
+                </div>
+                <div class="button-container">
+                  <button type="button" class="cancel-button">취소</button>
+                  <button class="submit-button">완료</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+    <!-- 계정 탈퇴 -->
+    <div class="info-container">
+      <table class="info-list">
+        <caption>
+          계정 탈퇴
+        </caption>
+        <tbody>
+          <tr>
+            <th scope="row">계정 탈퇴</th>
+            <td>
+              탈퇴 후 복구할 수 없습니다. 신중하게 결정해주세요.
+              <button class="edit-btn secession-btn">탈퇴하기</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

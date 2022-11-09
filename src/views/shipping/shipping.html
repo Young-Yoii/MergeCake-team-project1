@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./shipping.css" />
+    <script defer src="./shipping.js" type="module"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+    <title>배송지 정보</title>
+  </head>
+  <body>
+    <header></header>
+
+    <h2>배송지 정보</h2>
+
+    <form class="form-container">
+      <!-- 이름 -->
+      <div class="fullName-container">
+        <label for="fullNameInput">이름</label>
+        <input type="text" id="fullNameInput" class="input" />
+      </div>
+      <!-- 휴대전화 -->
+      <div class="phoneNumber-container">
+        <label for="phoneNumberInput">휴대전화</label>
+        <input
+          type="text"
+          placeholder="010-1234-5678"
+          id="phoneNumberInput"
+          class="input"
+        />
+        <span id="phoneNumber-error" class="input-error"></span>
+      </div>
+      <!-- 주소 -->
+      <div class="address-container">
+        <label for="searchAddressButton">주소</label>
+        <input
+          type="text"
+          id="postcode"
+          class="findPostcode"
+          placeholder="우편번호"
+        />
+        <input
+          type="button"
+          id="searchAddressButton"
+          class="findPostcode"
+          value="우편번호 찾기"
+        />
+        <br />
+        <input
+          type="text"
+          id="address"
+          placeholder="주소"
+          class="input"
+        /><br />
+        <input
+          type="text"
+          id="detailAddress"
+          placeholder="상세주소"
+          class="input"
+        />
+        <input
+          type="text"
+          id="extraAddress"
+          placeholder="참고항목"
+          class="input"
+        />
+      </div>
+
+      <input type="checkbox" id="checkbox" checked />
+      <label for="checkbox" class="checkbox-label">배송지 정보 저장하기</label>
+
+      <div class="button-container">
+        <button class="cancelButton button">취소</button>
+        <button class="submitButton button">확인</button>
+      </div>
+    </form>
+  </body>
+</html>

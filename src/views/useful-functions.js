@@ -12,6 +12,18 @@ export const validateEmail = (email) => {
     );
 };
 
+// 올바른 비밀번호 형식인지 확인 (true 혹은 false 반환)
+export const validatePassword = (password) => {
+  return String(password).match(
+    /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,16}/
+  );
+};
+
+// 올바른 휴대전화 번호 형식인지 확인 (true 혹은 false 반환)
+export const validatePhoneNumber = (phoneNumber) => {
+  return String(phoneNumber).match(/^\d{3}-\d{3,4}-\d{4}$/);
+};
+
 // 숫자에 쉼표를 추가함. (10000 -> 10,000)
 export const addCommas = (n) => {
   return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
