@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="admin-category.css" />
+    <title>Document</title>
+</head>
+<body>
+  <header>
+		<section class="upper-menu">
+			<nav>
+				<div class="logo">
+					?
+				</div>
+				<div class="menu">
+					<a href="#">로그인</a>
+					<a href="#">마이페이지</a>
+					<a href="#">장바구니</a>
+				</div>
+			</nav>
+		</section>
+	</header>
+
+  <!-- <section class="page-name">
+    <h1>관리자 페이지</h1>
+  </section>
+   -->
+  <section class="main-menu">
+    <nav>
+      <div class="admin">
+        관리자님
+      </div>
+      <div class="menu">
+        <a href="#">주문관리</a>
+        <a href="#">회원관리</a>
+        <a href="#">카테고리관리</a>
+        <a href="#">상품관리</a>
+      </div>
+    </nav>
+  </section>
+
+  <section class="admin-category container">
+    <div class="admin-category-inner">
+      <div class="admin-cate-tit">
+        <h2>카테고리 설정(대분류)</h2>
+      </div>
+      <div class="admin-cate-list-wrap">
+        <div class="edit-button">
+          <button class="cate-create" id="cateCreate">카테고리 추가</button>
+        </div>
+          <ul id="categoryTree"></ul>
+      </div>
+    </div>
+    <div class="cate opt-val" >
+      <p>옵션 설정</p>
+      <table>
+        <tr>
+          <td>
+            <div style="display: flex; flex-direction: column">
+              <input type="text" value="딸기" id="optionName"/>
+                <!-- <fieldset>
+                  <legend>상태 설정</legend>
+                    <div>
+                      <input type="radio" id="use" name="status" value="use" checked>
+                        <label for="use">사용</label>
+                    </div>
+                    <div>
+                      <input type="radio" id="unuse" name="status" value="unuse">
+                        <label for="unuse">미사용</label>
+                    </div>
+                </fieldset> -->
+                <input type="number" value="" min="0" step="100" placeholder="추가금액" id="optionPrice"/>
+                <input type="number" value="" min="0" step="100" placeholder="kcal" id="optionKcal"/>
+                <input type="number" value="" min="0" step="100" placeholder="g(중량)" id="optionGram"/>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><button type="button" id="addOptBtn">옵션 추가</button></td>
+        </tr>
+      </table>
+    </div>
+  </section>
+  <section>
+    <div class="opt-list">
+      <ul id="optContent">
+        <li>
+          <span>옵션이름</span>
+          <span>추가금액</span>
+          <span>칼로리</span>
+          <span>색상</span>
+          <span>중량(g)</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <footer></footer>
+  <script type="module" src="admin-category.js"></script>
+</body>
+</html>
