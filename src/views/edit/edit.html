@@ -51,58 +51,69 @@
     </div>
     <!-- 추가정보 -->
     <div class="info-container">
-      <table class="info-list">
-        <caption>
-          추가정보
-        </caption>
-        <tbody>
-          <tr>
-            <th scope="row">이름</th>
-            <td>
-              <form>
-                <label for="name" class="name"></label>
-                <input type="text" id="name" />
-
-                <button class="edit-btn number-change-btn">수정하기</button>
+      <form id="more-information-form">
+        <table class="info-list">
+          <caption>
+            추가정보
+          </caption>
+          <tbody>
+            <tr>
+              <th scope="row">이름</th>
+              <td class="form">
+                <div class="input-field">
+                  <label for="name" class="name"></label>
+                  <input type="text" id="name" name="FULL_NAME" />
+                  <button type="button" class="edit-btn number-change-btn">
+                    수정하기
+                  </button>
+                </div>
                 <div class="button-container">
-                  <button class="cancel-button">취소</button>
+                  <button type="button" class="cancel-button">취소</button>
                   <button class="submit-button">완료</button>
                 </div>
-              </form>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">휴대전화</th>
-            <td>
-              <form>
-                <label for="phone-number" class="phone-number"></label>
-                <input type="text" id="phone-number" />
-
-                <button class="edit-btn number-change-btn">수정하기</button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">휴대전화</th>
+              <td class="form">
+                <div class="input-field">
+                  <label for="phone-number" class="phone-number"></label>
+                  <input type="text" id="phone-number" name="PHONE_NUMBER" />
+                  <button type="button" class="edit-btn number-change-btn">
+                    수정하기
+                  </button>
+                </div>
                 <div class="button-container">
-                  <button class="cancel-button">취소</button>
+                  <button type="button" class="cancel-button">취소</button>
                   <button class="submit-button">완료</button>
                 </div>
-              </form>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">주소</th>
-            <td>
-              <form>
-                <label for="address" class="address"></label>
-                <input type="text" id="address" />
-
-                <button class="edit-btn address-change-btn">수정하기</button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">주소</th>
+              <td class="form">
+                <div class="input-field">
+                  <label for="address" class="address"></label>
+                  <input
+                    type="text"
+                    id="address"
+                    name="ADDRESS1"
+                    readonly
+                    value="ㅁㄴㅇㅁㄴㅇ"
+                  />
+                  <button type="button" class="edit-btn address-change-btn">
+                    수정하기
+                  </button>
+                </div>
                 <div class="button-container">
-                  <button class="cancel-button">취소</button>
+                  <button type="button" class="cancel-button">취소</button>
                   <button class="submit-button">완료</button>
                 </div>
-              </form>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
     </div>
     <!-- 계정 탈퇴 -->
     <div class="info-container">

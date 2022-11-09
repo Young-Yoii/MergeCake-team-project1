@@ -47,6 +47,12 @@ h2 {
   border: none;
 }
 
+.info-list .form > .input-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 caption {
   text-align: left;
   padding: 8px 0 6px 15px;
