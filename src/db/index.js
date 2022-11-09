@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+// import autoIncrement from "mongoose-auto-increment";
+// import { CategorySchema } from "./schemas/category-schema";
 
 const DB_URL =
   process.env.MONGODB_URL || 
@@ -23,3 +25,13 @@ export * from "./models/category-model";
 export * from "./models/order-model";
 export * from "./models/cart-model";
 export * from "./models/shipping-model";
+
+/*
+autoIncrement.initialize(db);
+
+CategorySchema.plugin(autoIncrement.plugin, {
+  model: 'Category',
+  field: 'CATEGORY_NO',
+  startAt: 1,
+  increment: 1
+}); */

@@ -2,21 +2,13 @@ import { Schema } from "mongoose";
 
 const CategorySchema = new Schema(
   {
-    CATEGORY_BIG: { // 대분류
-      type: String,
+    CATEGORY_NO: {
+      type: Number,
       required: true,
     },
-    CATEGORY_SMALL: { // 소분류
+    CATEGORY_NAME: {
       type: String,
       required: true,
-    },
-    PRODUCT: {
-      type: String,
-      required: true,
-    },
-    DETAIL: {
-      type: Object,
-      required: true
     }
   },
   {
