@@ -33,7 +33,7 @@ async function insertOrders() {
     let optionValue = "";
     
     for (const [key, value] of Object.entries(optionObj)) {
-      optionValue += `${key}: ${value} <br>`;
+      optionValue += `- ${key}: ${value} <br>`;
     }
 
     $ordersContainer.insertAdjacentHTML(
@@ -43,28 +43,27 @@ async function insertOrders() {
         <td>${obj}</td>
         <td>${email}</td>
         <td class="product-info">
-          <img src="#" alt="주문 케이크 이미지">
-          <p>${optionValue}</p>
+          <p> ${optionValue}</p>
         </td>
 	      <td>${total_price !== undefined ? `${total_price}` : `0`}</td>
 		    <td><span id="state-${order_no}">${state}</span>
           <div id="number">
-            <input type="text" placeholder="운송장 번호" id="billingNumber-${order_no}">
+            <input type="text" placeholder="운송장 번호" class="waybill-input" id="billingNumber-${order_no}">
           </div>
-          <select name = "배송상태 수정" id="statusSelectBox-${order_no}">
+          <select name = "배송상태 수정" class="state" id="statusSelectBox-${order_no}">
           <option value="none">배송상태 수정</option>
           <option 
-            class="has-background-danger-light has-text-danger"
+            class=""
             ${state === "상품 준비중" ? "selected" : ""} 
             value="상품 준비중">
             상품 준비중
           </option>
-			    <option class="has-background-primary-light has-text-primary"
+			    <option class=""
             ${state === "배송중" ? "selected" : ""} 
             value="배송중">
             배송중
             </option>
-			      <option class="has-background-grey-light"
+			      <option class=""
             ${state === "배송완료" ? "selected" : ""} 
             value="배송완료">
             배송완료
@@ -72,7 +71,7 @@ async function insertOrders() {
 		    </select>
       </td>
       <td>
-        <button class="button" id="deleteButton-${order_no}">주문 취소</button>
+        <button class="cancle-button" id="deleteButton-${order_no}">주문 취소</button>
       </td>
 	  </tr>
      `

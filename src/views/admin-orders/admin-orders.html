@@ -2,104 +2,69 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<title>주문 관리</title>
-	<link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
-	<link rel="stylesheet" type="text/css" href="../../reset.css">
-	<link rel="stylesheet" type="text/css" href="./admin-orders.css">
-
+  <meta charset="UTF-8">
+  <title>주문 관리</title>
+  <!--bulma css-->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+  />
+	<!--local css-->
+  <link rel="stylesheet" type="text/css" href="../../reset.css">
+  <link rel="stylesheet" type="text/css" href="./admin-orders.css">
 </head>
 
 <body>
-	<header>
-		<section class="upper-menu">
-			<nav>
-				<div class="logo">
-					<a href="#"><img src="../../resources/merge cake.png" alt="merge cake image"></a>
-				</div>
-				<div class="menu">
-					<a href="#">로그인</a>
-					<a href="#">마이페이지</a>
-					<a href="#">장바구니</a>
-				</div>
-			</nav>
-		</section>
-		<section class="page-name">
-			<h1>관리자 페이지</h1>
-		</section>
-		<section class="main-menu">
-			<nav>
-				<div class="admin">
-					관리자님
-				</div>
-				<div class="menu">
-					<a href="#">주문관리</a>
-					<a href="#">회원관리</a>
-					<a href="#">카테고리관리</a>
-					<a href="#">상품관리</a>
-				</div>
-			</nav>
-		</section>
-	</header>
-	
-	<main>
-		<section class="title-area">
-			<h1>주문 관리</h1>
-		</section>
-		<section class="search-area">
-			<table class="search">
-				<tr>
-					<thead>
-						<td>상품 검색</td>
-						<td class="right">
-							<input class="search-input" placeholder="상품명을 검색하세요.">
-							<input type = "submit" class="submit" value="검색">
-						</td>
-					</thead>
-				</tr>
-				<tr>
-					<td>주문상태 조회</td>
-					<td class="right">
-						<select name = 주문상태>
-							<option value="none">선택</option>
-							<option value="상품준비중">상품준비중</option>
-							<option value="배송중">배송중</option>
-							<option value="배송완료">배송완료</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>주문일자별 조회</td>
-					<td class="right"><input class="calendar" type="date"></td>
-			</table>
-		</section>
-		<section class="title-area">
-			<h1>주문 내역</h1>
-		</section>
-		<section class="history-area">
-			<table class="history" id="ordersContainer">
-				<tr class="header-cell">
-					<th><input type="checkbox"></th>
-					<th>주문일자</th>
-					<th>주문번호</th>
-					<th>상품정보</th>
-					<th>주문금액</th>
-					<th>배송상태</th>
-				</tr>
-			</table>
-		</section>
-		<!-- 주문을 정말 취소할 지 묻는 Modal 창 -->
-		<div id="modal" class="modal">
-			<div class="modal-background" id="modalBackground"></div>
-			<div class="modal-content">
+  <header>
+	<section class="upper-menu">
+		<div class="logo">
+		  <a href="#"><img src="../resources/merge_cake_logo.png" alt="merge cake image"></a>
+		</div>
+		<nav>
+			<div class="menu">
+			<a href="#">로그인</a>
+			<a href="#">마이페이지</a>
+			<a href="#">장바구니</a>
+			</div>
+	  	</nav>
+	</section>
+  </header>
+  <main>
+	<section class="main-menu">
+	  <nav>
+		<div class="admin">관리자님</div>
+		<div class="menu">
+		  <a href="#">주문관리</a>
+		  <a href="#">회원관리</a>
+		  <a href="#">카테고리관리</a>
+		  <a href="#">상품관리</a>
+		</div>
+	  </nav>
+	</section>
+	<section class="title-area">
+	  <h1>주문 관리</h1>
+	</section>
+	<section class="history-area">
+	  <table class="history" id="ordersContainer">
+	    <tr class="header-cell">
+		  <th>주문일자</th>
+		  <th>주문자</th>
+		  <th>상품정보</th>
+		  <th>주문금액</th>
+		  <th>배송상태</th>
+		  <th>주문관리</th>
+		</tr>
+	  </table>
+	</section>
+
+	<!-- 주문을 정말 취소할 지 묻는 Modal 창 -->
+	  <div id="modal" class="modal">
+	    <div class="modal-background" id="modalBackground"></div>
+		  <div class="modal-content">
 			  <div class="box">
-				<p class="mb-3">
+			    <p class="mb-3">
 				  주문 취소 시 복구할 수 없습니다. 정말로 취소하시겠습니까?
 				</p>
-	  
 				<div class="buttons">
 				  <button
 					class="button mt-5"
@@ -118,16 +83,13 @@
 				</div>
 			  </div>
 			</div>
-	  
 			<button
 			  class="modal-close is-large"
 			  id="modalCloseButton"
 			  aria-label="close"
 			></button>
-		  </div>
-	  
+		</div>
 	</main>
-
 	<footer>
 		<article>
 			<address>

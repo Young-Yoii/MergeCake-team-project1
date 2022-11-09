@@ -79,6 +79,13 @@ export class CategoryModel {
     return deletedCategory;
   }
 
+    // 4-1-2. 카테고리들 삭제
+    async deleteCategorys(categoryNo) {
+      const deletedCategory = await Category.deleteMany(categoryNo);
+  
+      return deletedCategory;
+    }
+
   // 4-2. 상품 삭제
   async deleteProduct(deleteInfo) {
     const deleteInfos = {
@@ -91,6 +98,8 @@ export class CategoryModel {
     return deletedCategory;
   }
 }
+
+
 
 const categoryModel = new CategoryModel();
 

@@ -1,66 +1,92 @@
-import e from "express";
-import * as Api from "/api.js";
-import { validateEmail } from "/useful-functions.js";
+import * as Api from "../api.js";
+import { validateEmail, validatePassword } from "../useful-functions.js";
 
 // 요소(element), input 혹은 상수
-const fullNameInput = document.querySelector("#fullNameInput");
-const emailInput = document.querySelector("#emailInput");
-const passwordInput = document.querySelector("#passwordInput");
-const passwordConfirmInput = document.querySelector("#passwordConfirmInput");
-const submitButton = document.querySelector("#submitButton");
-const kakaoButton = document.querySelector("#kakaoButton");
+const $emailInput = document.querySelector("#emailInput");
+const $passwordInput = document.querySelector("#passwordInput");
+const $passwordConfirmInput = document.querySelector("#passwordConfirmInput");
 
-addAllElements();
-addAllEvents();
+const $emailError = document.querySelector("#email-error");
+const $passwordError = document.querySelector("#password-error");
+const $passwordConfirmError = document.querySelector("#passwordConfirm-error");
 
-// html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
-async function addAllElements() {}
+const $submitButton = document.querySelector(".submitButton");
 
-// 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
-function addAllEvents() {
-  submitButton.addEventListener("click", handleSubmit);
-  submitButton.addEventListener("click", kakao);
-}
+// 잘 입력했는지 확인
+const isEmailValid = (email) => validateEmail(email);
+const isPasswordValid = (password) => validatePassword(password);
+const isPasswordSame = (password, passwordConfirm) =>
+  password === passwordConfirm;
 
-async function kakao(e) {
-e.preventDefault();
-try {
-  window.location.href = "/kakao";
-} catch (err) {
-  console.error(err.stack);
-  alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
-}
-}
+// 이메일 확인
+$emailInput.addEventListener("keyup", () => {
+  const email = $emailInput.value;
+  if (!email) {
+    $emailError.classList.remove("correct-input");
+    $emailError.innerHTML = "이메일은 필수정보 입니다.";
+  } else if (!isEmailValid(email)) {
+    $emailError.classList.remove("correct-input");
+    $emailError.innerHTML = "이메일 주소가 올바르지 않습니다.";
+  } else {
+    $emailError.classList.add("correct-input");
+    $emailError.innerHTML = "사용 가능한 이메일입니다.";
+  }
+});
+
+// 비밀번호 확인
+$passwordInput.addEventListener("keyup", () => {
+  const password = $passwordInput.value;
+  if (!password) {
+    $passwordError.classList.remove("correct-input");
+    $passwordError.innerHTML = "비밀번호는 필수정보 입니다.";
+  } else if (!isPasswordValid(password)) {
+    $passwordError.classList.remove("correct-input");
+    $passwordError.innerHTML =
+      "8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.";
+  } else {
+    $passwordError.classList.add("correct-input");
+    $passwordError.innerHTML = "사용 가능한 비밀번호입니다.";
+  }
+});
+
+// 비밀번호 재확인
+$passwordConfirmInput.addEventListener("keyup", () => {
+  const password = $passwordInput.value;
+  const passwordConfirm = $passwordConfirmInput.value;
+  if (!isPasswordSame(password, passwordConfirm)) {
+    $passwordConfirmError.classList.remove("correct-input");
+    $passwordConfirmError.innerHTML = "비밀번호가 일치하지 않습니다.";
+  } else {
+    $passwordConfirmError.classList.add("correct-input");
+    $passwordConfirmError.innerHTML = "비밀번호가 일치합니다.";
+  }
+});
+
 // 회원가입 진행
-async function handleSubmit(e) {
+$submitButton.addEventListener("click", async (e) => {
   e.preventDefault();
 
-  const fullName = fullNameInput.value;
-  const email = emailInput.value;
-  const password = passwordInput.value;
-  const passwordConfirm = passwordConfirmInput.value;
+  const email = $emailInput.value;
+  const password = $passwordInput.value;
+  const passwordConfirm = $passwordConfirmInput.value;
 
   // 잘 입력했는지 확인
-  const isFullNameValid = fullName.length >= 2;
-  const isEmailValid = validateEmail(email);
-  const isPasswordValid = password.length >= 4;
-  const isPasswordSame = password === passwordConfirm;
-
-  if (!isFullNameValid || !isPasswordValid) {
-    return alert("이름은 2글자 이상, 비밀번호는 4글자 이상이어야 합니다.");
-  }
-
-  if (!isEmailValid) {
+  if (!isEmailValid(email)) {
     return alert("이메일 형식이 맞지 않습니다.");
   }
 
-  if (!isPasswordSame) {
+  if (!isPasswordValid(password)) {
+    return alert("비밀번호 형식이 맞지 않습니다.");
+  }
+
+  if (!isPasswordSame(password, passwordConfirm)) {
     return alert("비밀번호가 일치하지 않습니다.");
   }
 
   // 회원가입 api 요청
   try {
-    const data = { fullName, email, password };
+    // const data = { email, password };
+    const data = { EMAIL: email, PASSWORD: password };
 
     await Api.post("/api/register", data);
 
@@ -72,6 +98,4 @@ async function handleSubmit(e) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
-}
-
-
+});
