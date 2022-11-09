@@ -1,0 +1,108 @@
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: #888;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+header {
+  height: 300px;
+}
+
+h2 {
+  text-align: center;
+}
+
+/* form-container */
+.form-container {
+  width: 460px;
+  background-color: hsl(271, 74%, 85%);
+  border-radius: 5px;
+
+  padding: 20px;
+  margin: 50px auto 10px auto;
+}
+
+/* input-style */
+.input {
+  font-size: 18px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+
+  font-weight: 400;
+  line-height: 30px;
+  padding: 10px 10px;
+}
+
+.findPostcode {
+  font-size: 18px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 150px;
+
+  font-weight: 400;
+  line-height: 30px;
+  padding: 10px 10px;
+}
+
+input:focus {
+  border: solid 1px hsl(272, 99%, 36%);
+  outline: none;
+}
+
+.input-error {
+  color: red;
+  font-size: 13px;
+}
+
+.correct-input {
+  color: rgb(103, 15, 255);
+}
+
+label {
+  display: block;
+  margin: 16px 0 8px;
+}
+
+.checkbox-label {
+  display: inline;
+}
+
+/* button-container */
+.button-container {
+  margin-left: 270px;
+}
+
+.button {
+  width: 70px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  background-color: #000000;
+  color: #ffffff;
+  margin-top: 10px;
+  padding: 15px 0;
+}
+
+.cancelButton {
+  background-color: #efefef;
+  color: #000000;
+}
+
+.cancelButton:hover {
+  background-color: #d0d0d0;
+}
+.submitButton:hover {
+  background-color: hsl(272, 50%, 34%);
+}

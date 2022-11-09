@@ -1,0 +1,187 @@
+@import "../reset.css";
+@import "../header.css";
+@import "../footer.css";
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+header {
+  height: 300px;
+}
+
+h2 {
+  text-align: center;
+}
+
+/* user-container */
+.user-container {
+  height: 180px;
+  background-color: #f4f6f7b1;
+  padding: 0 60px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-name {
+  flex-grow: 1;
+  font-size: 30px;
+}
+
+.user-info {
+  font-size: 15px;
+}
+
+/* product-table */
+.product-container {
+  margin: 100px 200px;
+  font-size: 15px;
+}
+
+.product-list {
+  width: 100%;
+  margin-top: 50px;
+  border: none;
+}
+
+caption {
+  text-align: left;
+  padding: 8px 0 6px 15px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr {
+  border-bottom: 1px solid #f4f6f7;
+}
+
+th {
+  padding: 25px 0;
+  background-color: #f6f9fa;
+}
+
+td {
+  padding: 25px 0;
+  text-align: center;
+}
+
+/* 선택삭제 btn */
+.delete-btn {
+  display: inline-block;
+  padding: 0 10px;
+  border: 1px solid #d7dbdc;
+  background-color: #fff;
+  line-height: 24px;
+  font-size: 11px;
+  color: #646465;
+  cursor: pointer;
+
+  margin-top: 10px;
+  margin-left: 8px;
+}
+
+/* 총 금액, 주문하기 btn */
+.order-container {
+  margin: 100px auto;
+  text-align: center;
+}
+
+.order-btn {
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  background-color: #000000;
+  color: #ffffff;
+  margin-top: 10px;
+  padding: 30px 100px;
+}
+
+.order-btn:hover {
+  background-color: #0078ff;
+}
+
+/* 모달창 */
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: none;
+
+  background-color: rgba(0, 0, 0, 0.4);
+
+  z-index: 3;
+}
+
+.show {
+  display: block;
+}
+
+.modal-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 400px;
+  height: 300px;
+
+  text-align: center;
+  font-size: 25px;
+
+  background-color: #ffffff;
+  border-radius: 10px;
+
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.modal-content {
+  padding-top: 120px;
+}
+
+.btn {
+  margin-top: 90px;
+  margin-left: 250px;
+}
+
+.close-btn {
+  width: 50px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  background-color: #9d9d9d;
+  color: #ffffff;
+  padding: 10px 0;
+}
+
+.ok-btn {
+  width: 50px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 10px 0;
+}
+
+.ok-btn:hover {
+  background-color: hsl(272, 50%, 34%);
+}
+
+.order-count {
+  text-align: center;
+  width : 100px;
+}
