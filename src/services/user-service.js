@@ -18,7 +18,7 @@ class UserService {
     const user = await this.userModel.findByEmail(EMAIL);
     if (user) {
       throw new Error(
-        user , 
+        user,
         "이 이메일은 현재 사용중입니다. 다른 이메일을 입력해 주세요."
       );
     }
@@ -28,7 +28,7 @@ class UserService {
     // 우선 비밀번호 해쉬화(암호화)
     const hashedPassword = await bcrypt.hash(PASSWORD, 10);
 
-    const newUserInfo = {  EMAIL, FULL_NAME, PASSWORD: hashedPassword };
+    const newUserInfo = { EMAIL, FULL_NAME, PASSWORD: hashedPassword };
 
     // db에 저장
     const createdNewUser = await this.userModel.create(newUserInfo);
@@ -40,7 +40,7 @@ class UserService {
   async getUserToken(loginInfo) {
     // 객체 destructuring
     const { EMAIL, PASSWORD } = loginInfo;
-    console.log(EMAIL, PASSWORD)
+    console.log(EMAIL, PASSWORD);
 
     // 우선 해당 이메일의 사용자 정보가  db에 존재하는지 확인
     const user = await this.userModel.findByEmail(EMAIL);
@@ -61,7 +61,7 @@ class UserService {
       correctPasswordHash
     );
 
-    console.log(isPasswordCorrect)
+    console.log(isPasswordCorrect);
     if (!isPasswordCorrect) {
       throw new Error(
         "비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요."
@@ -86,9 +86,10 @@ class UserService {
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
   async setUser(userInfoRequired, toUpdate) {
     // 객체 destructuring
-    const { userId, currentPassword } = userInfoRequired;
+    const { userId } = userInfoRequired;
+    // const { userId, currentPassword } = userInfoRequired;
 
-    console.log(userInfoRequired)
+    console.log(userInfoRequired);
     // 우선 해당 id의 유저가 db에 있는지 확인
     let user = await this.userModel.findById(userId);
 
@@ -100,21 +101,21 @@ class UserService {
     // 이제, 정보 수정을 위해 사용자가 입력한 비밀번호가 올바른 값인지 확인해야 함
 
     // 비밀번호 일치 여부 확인
-    const correctPasswordHash = user.PASSWORD;
-    console.log(user)
-    console.log(user.PASSWORD)
-    console.log(currentPassword)
-    const isPasswordCorrect = await bcrypt.compare(
-      currentPassword,
-      correctPasswordHash
-      );
-    console.log(isPasswordCorrect)
-      
-    if (!isPasswordCorrect) {
-      throw new Error(
-        "현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요."
-      );
-    }
+    // const correctPasswordHash = user.PASSWORD;
+    // console.log(user)
+    // console.log(user.PASSWORD)
+    // // console.log(currentPassword)
+    // const isPasswordCorrect = await bcrypt.compare(
+    //   currentPassword,
+    //   correctPasswordHash
+    //   );
+    // console.log(isPasswordCorrect)
+
+    // if (!isPasswordCorrect) {
+    //   throw new Error(
+    //     "현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요."
+    //   );
+    // }
 
     // 이제 드디어 업데이트 시작
 
@@ -135,15 +136,11 @@ class UserService {
     return user;
   }
 
-
   // 사용자 목록을 받음.
   async getUser(userId) {
     const user = await this.userModel.findById(userId);
     return user;
   }
-
-
-
 }
 
 const userService = new UserService(userModel);
