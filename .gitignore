@@ -6,4 +6,3 @@ package-lock.json
 passport
 api-router.js
 mail-router.js
-admin-router.js

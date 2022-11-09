@@ -64,7 +64,9 @@ userRouter.post("/login", async function (req, res, next) {
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
 //jwt 구현하고 loginRequired 넣어주기
 
-userRouter.get("/userlist", /* loginRequired, */async function (req, res, next) {
+userRouter.get("/userlist", 
+//loginRequired,
+async function (req, res, next) {
   try {
     // 전체 사용자 목록을 얻음
     const users = await userService.getUsers();
@@ -81,7 +83,7 @@ userRouter.get("/userlist", /* loginRequired, */async function (req, res, next) 
 //jwt 구현하고 loginRequired 넣어주기
 userRouter.patch(
   "/users/:userId",
- // loginRequired,
+  //loginRequired,
   async function (req, res, next) {
     try {
       // content-type 을 application/json 로 프론트에서
@@ -138,7 +140,7 @@ userRouter.patch(
 //유저를 가져옴 
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
 userRouter.get("/user/:userId", 
-// loginRequired,
+//loginRequired,
 async function (req, res, next) {
   const {userId} = req.params;
   console.log(userId)
@@ -154,18 +156,30 @@ async function (req, res, next) {
 });
 
 //메일 보내서 임시비밀번호로 비밀번호 변경
-userRouter.post("/mail", async (req, res, next) => {
+userRouter.post("/mail", //loginRequired, 
+ async (req, res, next) => {
+
   // 인증번호 생성
   let authNum = Math.random().toString().substr(2, 10);
   // nodeMailer 옵션
   const mailOptions = {
-    from: process.env.NODEMAILER_USER,
+    from: "Mergecake@gmail.com", 
+    //process.env.NODEMAILER_USER,
     to: req.body.EMAIL,
     subject: "임시 비밀번호 발급.",
     text: "임시 비밀번호입니다. " + authNum ,
-  };
-
-
+    html: `
+      <div style="text-align: center; background-color: #FEF7FF;" >
+        <div style="background-color: #2C7CB7"; width: 200px;>
+        <p style="color: #B975D9; font-size: 50px; font-width: bold;" >MergeCake</p>
+        </div>
+        <h1 style="color: #B975D9">임시 비밀번호 발급</h1>
+        <br />
+        <p>임시비밀번호가 발급되었습니다.</p>
+        <p>${authNum}</p>
+        <p>임시 비밀번호로 로그인 후 비밀번호를 변경해주세요</p>
+      </div>
+    `};
   try {
     const { EMAIL } = req.body;
     const users = await userService.setPassword(EMAIL, authNum);
