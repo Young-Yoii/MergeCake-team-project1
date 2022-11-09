@@ -31,6 +31,16 @@ export class UserModel {
     const updatedUser = await User.findOneAndUpdate(filter, update, option);
     return updatedUser;
   }
+
+  async passwordUpdate({ EMAIL, update }) {
+    console.log("passwordUpdate", EMAIL, update )
+    const filter = { EMAIL : EMAIL };
+    const option = { returnOriginal: false };
+    const upd = { PASSWORD : update }
+
+    const updatedUser = await User.findOneAndUpdate(filter, upd , option);
+    return updatedUser;
+  }
 }
 
 const userModel = new UserModel();

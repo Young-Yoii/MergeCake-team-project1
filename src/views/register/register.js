@@ -1,10 +1,14 @@
-import * as Api from "../api.js";
-import { validateEmail, validatePassword } from "../useful-functions.js";
+import e from "express";
+import * as Api from "/api.js";
+import { validateEmail } from "/useful-functions.js";
 
 // 요소(element), input 혹은 상수
-const $emailInput = document.querySelector("#emailInput");
-const $passwordInput = document.querySelector("#passwordInput");
-const $passwordConfirmInput = document.querySelector("#passwordConfirmInput");
+const fullNameInput = document.querySelector("#fullNameInput");
+const emailInput = document.querySelector("#emailInput");
+const passwordInput = document.querySelector("#passwordInput");
+const passwordConfirmInput = document.querySelector("#passwordConfirmInput");
+const submitButton = document.querySelector("#submitButton");
+const kakaoButton = document.querySelector("#kakaoButton");
 
 const $emailError = document.querySelector("#email-error");
 const $passwordError = document.querySelector("#password-error");
@@ -62,6 +66,15 @@ $passwordConfirmInput.addEventListener("keyup", () => {
   }
 });
 
+async function kakao(e) {
+e.preventDefault();
+try {
+  window.location.href = "/kakao";
+} catch (err) {
+  console.error(err.stack);
+  alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+}
+}
 // 회원가입 진행
 $submitButton.addEventListener("click", async (e) => {
   e.preventDefault();

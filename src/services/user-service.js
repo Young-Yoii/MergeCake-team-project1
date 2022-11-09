@@ -141,6 +141,35 @@ class UserService {
     const user = await this.userModel.findById(userId);
     return user;
   }
+
+
+
+  // 비번재발급?
+  async setPassword(EMAIL, authNum) {
+    // 객체 destructuring
+    console.log(EMAIL)
+    // 우선 해당 id의 유저가 db에 있는지 확인
+    let user = await this.userModel.findByEmail(EMAIL);
+
+    // db에서 찾지 못한 경우, 에러 메시지 반환
+    if (!user) {
+      throw new Error("가입 내역이 없습니다. 다시 한 번 확인해 주세요.");
+    }
+    // 비밀번호도 변경하는 경우에는, 회원가입 때처럼 해쉬화 해주어야 함.
+    if (authNum) {
+      const newPasswordHash = await bcrypt.hash(authNum, 10);
+      authNum = newPasswordHash;
+    }
+
+    // 업데이트 진행
+    user = await this.userModel.passwordUpdate({
+      EMAIL,
+      update: authNum,
+    });
+
+    return user;
+  }
+
 }
 
 const userService = new UserService(userModel);
