@@ -263,25 +263,17 @@ adminRouter.patch("/category/:categoryNo", async (req, res, next) => {
 // 4-1. 카테고리 삭제
 adminRouter.delete("/category", async (req, res, next) => {
   try {
-    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
-    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
-    /*
-    if (is.emptyObject(req.body)) {
-      throw new Error(
-        "headers의 Content-Type을 application/json으로 설정해주세요"
-      );
-    } */
-
     const categoryNo = req.body;
 
     const deletedCategory = await categoryService.deleteCategory(categoryNo);
-
+    /*
     if(deletedCategory === false) {
       res.status(201).json("상품이 존재합니다. 확인 후 다시 시도해주세요.");
     } else {
       // 추가된 데이터를 프론트에 다시 보내줌
       res.status(201).json(deletedCategory);
-    }
+    } */
+    res.status(201).json(deletedCategory);
   } catch (error) {
     next(error);
   }

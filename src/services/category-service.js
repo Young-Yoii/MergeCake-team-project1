@@ -85,15 +85,19 @@ class CategoryService {
 
   // 4-1. 카테고리 삭제
   async deleteCategory(categoryNo) {
-    const productExist = await this.categoryModel.findProduct(categoryNo);
+    // const productExist = await this.categoryModel.findProduct(categoryNo);
 
+    /*
     if(productExist.length === 0) {
       const deletedCategory = await this.categoryModel.deleteCategory(categoryNo);
 
       return deletedCategory;
     } else {
       return false;
-    }
+    } */
+    const deletedCategory = await this.categoryModel.deleteCategorys(categoryNo);
+
+    return deletedCategory;
   }
 
   // 4-2. 상품 삭제

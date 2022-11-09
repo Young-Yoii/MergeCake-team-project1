@@ -62,15 +62,6 @@ $passwordConfirmInput.addEventListener("keyup", () => {
   }
 });
 
-async function kakao(e) {
-e.preventDefault();
-try {
-  window.location.href = "/kakao";
-} catch (err) {
-  console.error(err.stack);
-  alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
-}
-}
 // 회원가입 진행
 $submitButton.addEventListener("click", async (e) => {
   e.preventDefault();
