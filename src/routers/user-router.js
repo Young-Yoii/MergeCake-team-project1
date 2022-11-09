@@ -5,7 +5,6 @@ import { loginRequired } from "../middlewares";
 import { userService } from "../services";
 import { transPort } from "../config/email";
 
-
 const userRouter = Router();
 
 // 회원가입 api (아래는 /register이지만, 실제로는 /api/register로 요청해야 함.)
@@ -164,7 +163,7 @@ userRouter.get(
       next(error);
     }
   }
-});
+);
 
 //메일 보내서 임시비밀번호로 비밀번호 변경
 userRouter.post("/mail", async (req, res, next) => {
@@ -175,9 +174,8 @@ userRouter.post("/mail", async (req, res, next) => {
     from: process.env.NODEMAILER_USER,
     to: req.body.EMAIL,
     subject: "임시 비밀번호 발급.",
-    text: "임시 비밀번호입니다. " + authNum ,
+    text: "임시 비밀번호입니다. " + authNum,
   };
-
 
   try {
     const { EMAIL } = req.body;
@@ -190,19 +188,18 @@ userRouter.post("/mail", async (req, res, next) => {
   }
 
   // 메일 전송
-  try{
-  await transPort.sendMail(mailOptions, function (error, info) {
-    console.log(mailOptions);
-    if (error) {
-      console.log(error);
-    }
-    res.status(200).json(authNum);
-    transPort.close();
-  });
-  }catch(e){
+  try {
+    await transPort.sendMail(mailOptions, function (error, info) {
+      console.log(mailOptions);
+      if (error) {
+        console.log(error);
+      }
+      res.status(200).json(authNum);
+      transPort.close();
+    });
+  } catch (e) {
     next(e);
   }
 });
-
 
 export { userRouter };
