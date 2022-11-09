@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link rel="stylesheet" href="./cart.css" />
+
+    <title>장바구니</title>
+  </head>
+  <body>
+    <header>
+      <section class="upper-menu">
+        <nav>
+          <div class="logo">
+            <a href="#"><img src="../../resources/merge cake.png" alt="merge cake image"></a>
+          </div>
+          <div class="menu">
+            <a href="#">로그인</a>
+            <a href="#">마이페이지</a>
+            <a href="../cart/cart.html">장바구니</a>
+          </div>
+        </nav>
+      </section>
+      <section class="page-name">
+        <h1>그림 넣을 것</h1>
+      </section>
+      <section class="main-menu">
+        <nav>
+          <div class="admin">
+            관리자님
+          </div>
+          <div class="menu">
+            <a href="#">주문확인</a>
+            <a href="#">회원관리</a>
+            <a href="#">카테고리관리</a>
+            <a href="#">상품관리</a>
+          </div>
+        </nav>
+      </section>
+    </header>
+
+    <h2>장바구니</h2>
+
+    <div class="user-container">
+      <p class="user-name">홍길동님</p>
+      <div class="user-info">
+        <a href="#" class="user-order">주문조회</a>
+        <a href="#" class="user-edit">정보수정</a>
+      </div>
+    </div>
+
+    <div class="product-container">
+      <table class="product-list">
+        <caption>
+          장바구니
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col" style="cursor: pointer">
+              <input
+                type="checkbox"
+                class="check-all"
+                title="전체 상품 선택"
+              />
+            </th>
+            <th scope="col" colspan="2">상품정보</th>
+            <!-- <th scope="col">수량</th> -->
+            <th scope="col">주문금액</th>
+            <th scope="col">배송비</th>
+          </tr>
+        </thead>
+        <tbody id = "basket-contents">
+
+        </tbody>
+      </table>
+      <button class="delete-btn">선택삭제</button>
+    </div>
+
+    <div class="order-container">
+      <div></div>
+      <button class="order-btn">주문하기</button>
+    </div>
+
+    <!-- 모달창 -->
+    <section class="modal-container">
+      <div class="modal-wrap">
+        <div class="modal-content">주문이 완료되었습니다!</div>
+        <div class="btn">
+          <button class="close-btn">닫기</button>
+          <button class="ok-btn">
+            <a href="/mypage/orederlist">확인</a>
+          </button>
+        </div>
+      </div>
+    </section>
+  </body>
+  <script type="module" defer src="cart.js"></script>
+</html>
