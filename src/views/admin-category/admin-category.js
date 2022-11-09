@@ -67,7 +67,7 @@ async function render() {
     //카테고리 삭제 카테고리 넘버를 보내줘야함 만약에 카테고리에 상품이 있다면 삭제가 불가능
     //근데 카테고리 넘버가 안받아와짐...ㅎR...
     async function deleteCategory(e) {
-        e.preventDefault();
+        e.stopPropagation();
 
         const isDelete = confirm('정말 삭제하시겠습니까?')
         if(isDelete){
@@ -76,9 +76,9 @@ async function render() {
             const categoryName = textName.textContent;
 
             const categoryEl = categories.findIndex(category => category.CATEGORY_NAME === categoryName)
-            const categoryNo = categories[categoryEl]
+            const categoryNo = categories[categoryEl];
 
-            await Api.delete("/admin/category", categoryNo.CATEGORY_NO);
+            await Api.delete("/admin/category", '', {CATEGORY_NO: categoryNo.CATEGORY_NO});
        
            // 삭제 성공
            alert("삭제되었습니다.");
@@ -96,7 +96,7 @@ async function render() {
 
      //카테고리 수정 시 카테고리 이름, 넘버 보내줘야하는데 여기도 넘버가 안받아와짐
     async function updateCategory(e) {
-       e.preventDefault();
+       e.stopPropagation();
       
        const updateCategoryName = prompt('변경할 카테고리명을 입력해주세요.');
         if (!updateCategoryName.trim()) {
@@ -106,16 +106,14 @@ async function render() {
         const textName = e.target.closest('li').children[0];
         const text = textName.textContent;
 
-        const categoryObj = categories.filter((i) => i.CATEGORY_NAME === text);
-        console.log(categoryObj)
-        const categoryNo = categoryObj.CATEGORY_NO;
+        const categoryNo = e.target.dataset.no;
         
         const data = {
-          CATEGORY_NO:categoryNo,
+          CATEGORY_NO:Number(categoryNo),
           CATEGORY_NAME:updateCategoryName,
-        }
+        };
    
-        await Api.patch('/admin/category', data);
+        await Api.patch('/admin/category', '', data);
         
         textName.textContent = updateCategoryName;
     }
