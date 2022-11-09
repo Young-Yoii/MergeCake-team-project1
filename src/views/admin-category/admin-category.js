@@ -7,27 +7,32 @@ const $cateCreateBtn = document.getElementById('cateCreate');
 // 대분류 추가
 let flag = true;
 let selectedCategoryId = null;
+let selectedCategoryNumber = null;
 let beforeSelectedCategoryEl = null;
 if ($categoryTreeEl) {
     $categoryTreeEl.addEventListener('click', function (e) {
-        const {id} = e.target.dataset
+        const {id, no} = e.target.dataset
         if (selectedCategoryId !== null && id === selectedCategoryId) {
             selectedCategoryId = null;
+            selectedCategoryNumber = null;
             beforeSelectedCategoryEl.style.color = 'black';
             beforeSelectedCategoryEl = null;
             e.target.style.color = 'black';
         } else {
             selectedCategoryId = id;
+            selectedCategoryNumber = no;
             e.target.style.color = 'red';
             if (beforeSelectedCategoryEl) {
                 beforeSelectedCategoryEl.style.color = 'black';
             }
             beforeSelectedCategoryEl = e.target;
+            getOptions(selectedCategoryNumber);
         }
     });
 }
 
-render()
+render();
+
 
 
 //카테고리 불러오기
@@ -36,19 +41,20 @@ async function render() {
 
     const categories = await Api.get('/admin/category');
     categories.forEach((category) => {
+        console.log(category);
       $categoryTreeEl.insertAdjacentHTML('beforeend', 
         `
         <li id="categoryWrap">
-          <span data-id=${category.CATEGORY_NAME}>${category.CATEGORY_NAME}</span>
-          <button class="updateBtn-${category.CATEGORY_NAME}">수정</button>
-          <button class="deleteBtn-${category.CATEGORY_NAME}">삭제</button>
+          <span data-no=${category.CATEGORY_NO} data-id=${category._id}>${category.CATEGORY_NAME ?? '이름 없음'}</span>
+          <button class="updateBtn" data-no=${category.CATEGORY_NO}>수정</button>
+          <button class="deleteBtn" data-no=${category.CATEGORY_NO}>삭제</button>
        </li>
         `
-      )
+      );
     });
     //렌더링 해온 것들... 버튼 작동안함,, 새로추가한 요소들만 작동됨...
-    const $updateButton = document.getElementsByClassName(".updateBtn");
-    const $deleteButton = document.getElementsByClassName(".deleteBtn");
+    const $updateButton = document.getElementsByClassName("updateBtn");
+    const $deleteButton = document.getElementsByClassName("deleteBtn");
     Array.from($updateButton).forEach((updateButton) => {
       updateButton.addEventListener('click', updateCategory);
     });
@@ -122,13 +128,18 @@ async function render() {
         if (result.trim() !== '') {
           const data = {
             CATEGORY_NAME : result,
-          }
-          await Api.post('/admin/category', data);
+          };
+          const resultApi = await Api.post('/admin/category', data);
+          console.log(resultApi);
            
             const liEl = document.createElement('li');
             const spanEl = document.createElement('span');
             const updateBtn = document.createElement('button');
+            updateBtn.dataset.id = resultApi._id;
+            updateBtn.dataset.no = resultApi.CATEGORY_NO;
             const deleteBtn = document.createElement('button');
+            deleteBtn.dataset.id = resultApi._id;
+            deleteBtn.dataset.no = resultApi.CATEGORY_NO;
 
             if (flag) {
                 spanEl.dataset.id = result;
@@ -226,19 +237,21 @@ async function render() {
     //대분류 카테고리 선택하면 실행하는 함수
     //카테고리에 속한 옵션 렌더링
     //그럼 대분류 카테고리를 선택했을 때 아이디를 기억해야겠네?...?>..?아모르겠다 ㅠ
-    async function getOptions(id) {
-    // const options = await Api.get('admin/category')
-   
-    const $optContentEl = document.getElementById('optContent');
-      
-    options.forEach((data) => {
-      const optionName = data.products[0].PRODUCT_NAME;
-      const kcal = data.products[0].DETAIL.KCAL;
-      const gram = data.products[0].DETAIL.GRAM;
-      const price = data.products[0].DETAIL.PRICE;
+  }
+}
 
-      $optContentEl.insertAdjacentHTML('beforeend',
-        `<li>
+async function getOptions(categoryNumber) {
+    const options = await Api.get(`/admin/category/${categoryNumber}`);
+
+    const $optContentEl = document.getElementById('optContent');
+    options.products.forEach((data) => {
+        const optionName = data.products[0].PRODUCT_NAME;
+        const kcal = data.products[0].DETAIL.KCAL;
+        const gram = data.products[0].DETAIL.GRAM;
+        const price = data.products[0].DETAIL.PRICE;
+
+        $optContentEl.insertAdjacentHTML('beforeend',
+            `<li>
           <span>${optionName}</span>
           <span>${price}</span>
           <span>${kcal}</span>
@@ -253,10 +266,8 @@ async function render() {
     const $optionUpdateButton = document.querySelector("#optionUpdateButton");
     const $optionDeleteButton = document.querySelector("#optionDeleteButton");
 
-    $optionUpdateButton('click', optionUpdate);
-    $optionDeleteButton('click', optionDelete);
-    }
-  }
+    // $optionUpdateButton('click', optionUpdate);
+    // $optionDeleteButton('click', optionDelete);
 }
 
 // function makeCategoryBoxHTML(newCategoryName) {
