@@ -9,7 +9,6 @@ const $deleteCompleteButton = document.getElementById("deleteCompleteButton");
 const $deleteCancelButton = document.getElementById("deleteCancelButton");
 const email = sessionStorage.getItem("email");
 let orderIdToDelete;
-let orderSelectNo;
 
 insertOrders()
 addAllEvents();
@@ -31,7 +30,6 @@ const userInfo = await getUsers(email);
 let user = document.getElementById('userName');
 
 const setUserName = (userName) => {
-    console.log(userName.FULL_NAME)
     user.innerHTML = `${userName.FULL_NAME !== undefined ? userName.FULL_NAME : "머지회원님"}`
 }
 
@@ -39,6 +37,10 @@ setUserName(userInfo)
 
 async function insertOrders() {
   const orders = await Api.get(`/mypage/orderlist/${email}`);
+  if(email === null){
+    alert('로그인이 필요합니다');
+    window.location.href="/login"
+  }
 
   orders.forEach(data => {
     const order_no = data.order_no;
@@ -46,6 +48,7 @@ async function insertOrders() {
     const state = data.state;
     const obj = data.orderData[0].selectData[0].createdAt.split("T")[0];
     const total_price = parseInt(data.orderData[0].selectData[0].OPTIONS.price)+18000;
+    const local = total_price.toLocaleString();
     const optionObj = data.orderData[0].selectData[0].OPTIONS;
     let optionValue = "";
 
@@ -61,7 +64,7 @@ async function insertOrders() {
         <td class="product-info" data-no=${order_no} data-id=${select_no}>
            ${optionValue}
         </td>
-	      <td>${total_price !== undefined ? `${total_price}` : `0`}</td>
+	      <td>${local !== undefined ? `${local}` : `0`}</td>
 		  <td><span class="state" id="state-${order_no}">${state}</span>
       </td>
       <td>
