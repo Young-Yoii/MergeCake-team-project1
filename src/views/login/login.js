@@ -7,6 +7,10 @@ const $passwordInput = document.querySelector("#passwordInput");
 
 const $submitButton = document.querySelector(".submitButton");
 
+const $findPassword = document.querySelector(".find-password");
+const $userEmail = document.querySelector("#user-email");
+const $sendButton = document.querySelector(".send-button");
+
 // 잘 입력했는지 확인
 const isEmailValid = (email) => validateEmail(email);
 const isPasswordValid = (password) => validatePassword(password);
@@ -52,5 +56,29 @@ $submitButton.addEventListener("click", async (e) => {
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  }
+});
+
+// 비밀번호 찾기
+$findPassword.addEventListener("click", async () => {
+  $userEmail.style.display = "block";
+  $sendButton.style.display = "block";
+});
+
+$sendButton.addEventListener("click", async (e) => {
+  e.preventDefault();
+
+  const userEmail = $userEmail.value;
+  console.log(userEmail);
+
+  const data = { EMAIL: userEmail };
+
+  try {
+    await Api.post("/api/mail", data);
+
+    alert(`정상적으로 메일이 발송되었습니다.`);
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
   }
 });

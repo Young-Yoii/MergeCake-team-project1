@@ -6,6 +6,10 @@ a {
   text-decoration: none;
 }
 
+input:read-only {
+  border: 0 solid black;
+}
+
 /* header */
 header {
   height: 300px;
@@ -164,12 +168,21 @@ td {
 }
 
 /* 취소, 확인 버튼 */
-#name,
+/* #name,
 #phone-number {
-  /* background-color: red; */
   display: none;
-}
+} */
 .button-container {
   /* background-color: red; */
   display: none;
+}
+
+/* validate */
+.input-error {
+  color: red;
+  font-size: 13px;
+}
+
+.correct-input {
+  color: rgb(103, 15, 255);
 }

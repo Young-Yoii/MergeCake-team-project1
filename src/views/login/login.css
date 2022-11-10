@@ -80,7 +80,8 @@ li + li::before {
   margin: 0 8px;
 }
 
-/* 쿠폰 정보 */
-.coupon-info {
-  text-align: center;
+/* 비밀번호 찾기 */
+#user-email,
+.send-button {
+  display: none;
 }
