@@ -165,8 +165,7 @@ td {
 
 /* 취소, 확인 버튼 */
 #name,
-#phone-number,
-#address {
+#phone-number {
   /* background-color: red; */
   display: none;
 }

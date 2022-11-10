@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./edit.css" />
     <script defer src="./edit.js" type="module"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
     <title>마이페이지-정보수정</title>
   </head>
@@ -78,7 +79,12 @@
               <td class="form">
                 <div class="input-field">
                   <label for="phone-number" class="phone-number"></label>
-                  <input type="text" id="phone-number" name="PHONE_NUMBER" />
+                  <input
+                    type="text"
+                    id="phone-number"
+                    name="PHONE_NUMBER"
+                    placeholder="010-1234-5678"
+                  />
                   <button type="button" class="edit-btn number-change-btn">
                     수정하기
                   </button>
@@ -92,23 +98,41 @@
             <tr>
               <th scope="row">주소</th>
               <td class="form">
-                <div class="input-field">
-                  <label for="address" class="address"></label>
-                  <input
-                    type="text"
-                    id="address"
-                    name="ADDRESS1"
-                    readonly
-                    value="ㅁㄴㅇㅁㄴㅇ"
-                  />
-                  <button type="button" class="edit-btn address-change-btn">
-                    수정하기
-                  </button>
-                </div>
-                <div class="button-container">
-                  <button type="button" class="cancel-button">취소</button>
-                  <button class="submit-button">완료</button>
-                </div>
+                <input
+                  type="text"
+                  id="postcode"
+                  class="findPostcode"
+                  placeholder="우편번호"
+                  readonly
+                />
+                <input
+                  type="button"
+                  id="searchAddressButton"
+                  class="findPostcode"
+                  value="우편번호 찾기"
+                />
+                <br />
+                <input
+                  type="text"
+                  id="address"
+                  placeholder="주소"
+                  class="input"
+                  readonly
+                /><br />
+                <input
+                  type="text"
+                  id="detailAddress"
+                  placeholder="상세주소"
+                  class="input"
+                  readonly
+                />
+                <input
+                  type="text"
+                  id="extraAddress"
+                  placeholder="참고항목"
+                  class="input"
+                  readonly
+                />
               </td>
             </tr>
           </tbody>

@@ -140,8 +140,9 @@ $submitButton.addEventListener("click", async (e) => {
         FULL_NAME: fullName,
         PHONE_NUMBER: phoneNumber,
         ZIP_CODE: postcode,
-        ADDRESS1: address + extraAddress,
+        ADDRESS1: address,
         ADDRESS2: detailAddress,
+        ADDRESS1_REF: extraAddress,
       };
 
       await Api.patch(`/api/users/${targetUserId}`, data);
