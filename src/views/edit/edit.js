@@ -1,6 +1,7 @@
 import * as Api from "../api.js";
 import { validatePhoneNumber, validatePassword } from "../useful-functions.js";
 
+// 요소(element), input 혹은 상수
 const $userName = document.querySelector(".user-name");
 const $email = document.querySelector("#email");
 const $passwordInput = document.querySelector("#password");
@@ -10,30 +11,17 @@ const $phoneNumberInput = document.querySelector("#phone-number");
 
 const $moreInformationForm = document.querySelector("#more-information-form");
 
-// 에러 관련 부분
+const $withdrawButton = document.querySelector(".withdraw-btn");
+
+// 에러 관련 요소(element), input 혹은 상수
 const $passwordError = document.querySelector("#password-error");
 const $passwordConfirmError = document.querySelector("#passwordConfirm-error");
 const $phoneNumberError = document.querySelector("#phoneNumber-error");
 
-// 비밀번호 확인
+// // 잘 입력했는지 확인 (비밀번호)
 const isPasswordValid = (password) => validatePassword(password);
 const isPasswordSame = (password, passwordConfirm) =>
   password === passwordConfirm;
-
-// 휴대전화 번호 확인
-$phoneNumberInput.addEventListener("keyup", () => {
-  const phoneNumber = $phoneNumberInput.value;
-  if (!phoneNumber) {
-    $phoneNumberError.classList.remove("correct-input");
-    $phoneNumberError.innerHTML = "휴대전화 번호는 필수정보 입니다.";
-  } else if (!validatePhoneNumber(phoneNumber)) {
-    $phoneNumberError.classList.remove("correct-input");
-    $phoneNumberError.innerHTML = "올바른 휴대전화 번호 형식이 아닙니다.";
-  } else {
-    $phoneNumberError.classList.add("correct-input");
-    $phoneNumberError.innerHTML = "올바른 휴대전화 번호 형식입니다.";
-  }
-});
 
 // 비밀번호 확인
 $passwordInput.addEventListener("keyup", () => {
@@ -64,15 +52,29 @@ $passwordConfirmInput.addEventListener("keyup", () => {
   }
 });
 
+// 휴대전화 번호 확인
+$phoneNumberInput.addEventListener("keyup", () => {
+  const phoneNumber = $phoneNumberInput.value;
+  if (!phoneNumber) {
+    $phoneNumberError.classList.remove("correct-input");
+    $phoneNumberError.innerHTML = "휴대전화 번호는 필수정보 입니다.";
+  } else if (!validatePhoneNumber(phoneNumber)) {
+    $phoneNumberError.classList.remove("correct-input");
+    $phoneNumberError.innerHTML = "올바른 휴대전화 번호 형식이 아닙니다.";
+  } else {
+    $phoneNumberError.classList.add("correct-input");
+    $phoneNumberError.innerHTML = "올바른 휴대전화 번호 형식입니다.";
+  }
+});
+
+// 주소 관련 요소(element), input 혹은 상수
 const $postcodInput = document.querySelector("#postcode");
 const $addressInput = document.querySelector("#address");
 const $detailAddressInput = document.querySelector("#detailAddress");
 const $extraAddressInput = document.querySelector("#extraAddress");
-
 const $searchAddressButton = document.querySelector("#searchAddressButton");
-const $withdrawButton = document.querySelector(".withdraw-btn");
 
-// DB 가져오기
+// user 정보 가져오기
 const email = sessionStorage.getItem("email");
 
 const getUsers = async (email) => {
@@ -82,12 +84,9 @@ const getUsers = async (email) => {
 
 const userInfo = await getUsers(email);
 const setUserInfo = (targetUserInfo) => {
-  // console.log(userInfo._id);
-  // 이름 없으면 회원님....
-
   const name = targetUserInfo.FULL_NAME ?? "";
-  const password = "******";
-  const passwordConfirm = "******";
+  const password = targetUserInfo.PASSWORD ?? "";
+  const passwordConfirm = targetUserInfo.PASSWORD ?? "";
   const phoneNumber = targetUserInfo.PHONE_NUMBER ?? "";
   const postcode = targetUserInfo.ZIP_CODE ?? "";
   const address = targetUserInfo.ADDRESS1 ?? "";
@@ -95,9 +94,7 @@ const setUserInfo = (targetUserInfo) => {
   const extraAddress = targetUserInfo.ADDRESS1_REF ?? "";
 
   $userName.innerText = (name ? name : "회원") + "님";
-
   $email.innerText = email;
-
   $nameInput.value = name;
   $passwordInput.value = password;
   $passwordConfirmInput.value = passwordConfirm;
@@ -109,19 +106,21 @@ const setUserInfo = (targetUserInfo) => {
 };
 setUserInfo(userInfo);
 
-$moreInformationForm.addEventListener("click", function (e) {
-  // 추가정보 - 수정하기
+$moreInformationForm.addEventListener("click", async (e) => {
+  // 수정하기
   if (e.target.classList.contains("edit-btn")) {
     const targetEl = e.target;
-    const inputEl = targetEl.parentElement.querySelector(".input");
-    inputEl.readOnly = false;
+    const inputEl = targetEl.parentElement.querySelector("input");
+
+    inputEl.readOnly = e.target.classList.contains("findPostcode")
+      ? true
+      : false;
 
     // 비밀번호 변경
     if (e.target.classList.contains("change-password-btn")) {
       $passwordInput.value = "";
       $passwordConfirmInput.value = "";
 
-      $passwordInput.readOnly = false;
       $passwordConfirmInput.readOnly = false;
     }
 
@@ -131,19 +130,46 @@ $moreInformationForm.addEventListener("click", function (e) {
     targetEl.style.display = "none";
   }
 
-  // 추가정보 - 취소
+  // 취소
   if (e.target.classList.contains("cancel-button")) {
     const targetEl = e.target;
     const inputEl = targetEl.parentElement.parentElement.querySelector(
-      ".input-field > .input"
+      ".input-field > input"
     );
+
     inputEl.readOnly = true;
 
-    // 비밀번호 변경 - 취소
+    // 비밀번호 변경 취소
     if (e.target.classList.contains("cancel-password-btn")) {
-      $passwordInput.value = "******";
-      $passwordConfirmInput.value = "******";
+      $passwordInput.readOnly = true;
+      $passwordConfirmInput.readOnly = true;
+    }
 
+    const containerEl = targetEl.parentElement;
+    containerEl.style.display = "none";
+    const editBtnEl = targetEl.parentElement.parentElement.querySelector(
+      ".input-field > .edit-btn"
+    );
+    editBtnEl.style.display = "block";
+
+    $passwordError.innerHTML = "";
+    $passwordConfirmError.innerHTML = "";
+    $phoneNumberError.innerHTML = "";
+
+    const userInfo = await getUsers(email);
+    setUserInfo(userInfo);
+  }
+
+  // 확인
+  if (e.target.classList.contains("submit-button")) {
+    const targetEl = e.target;
+    const inputEl = targetEl.parentElement.parentElement.querySelector(
+      ".input-field > input"
+    );
+    $phoneNumberError.innerHTML = "";
+    inputEl.readOnly = true;
+
+    if (e.target.parentElement.querySelector(".cancel-password-btn")) {
       $passwordInput.readOnly = true;
       $passwordConfirmInput.readOnly = true;
     }
@@ -157,10 +183,8 @@ $moreInformationForm.addEventListener("click", function (e) {
   }
 });
 
-// 주소 수정하기
-// 우편번호 찾기
+// 주소 수정
 $searchAddressButton.addEventListener("click", () => {
-  console.log("clc");
   new daum.Postcode({
     oncomplete: function (data) {
       // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -212,55 +236,70 @@ $searchAddressButton.addEventListener("click", () => {
   }).open();
 });
 
+// 확인
 $moreInformationForm.addEventListener("submit", async function (e) {
   e.preventDefault();
 
-  // if (!isPasswordValid(password)) {
-  //   return alert("비밀번호 형식이 맞지 않습니다.");
-  // }
+  const password = e.target.PASSWORD.value.trim();
+  const fullName = e.target.FULL_NAME.value.trim();
+  const phoneNumber = e.target.PHONE_NUMBER.value.trim();
+  const postcode = e.target.ZIP_CODE.value.trim();
+  const address = e.target.ADDRESS1.value.trim();
+  const detailAddress = e.target.ADDRESS2.value.trim();
+  const extraAddress = e.target.ADDRESS1_REF.value.trim();
 
-  // if (!isPasswordSame(password, passwordConfirm)) {
-  //   return alert("비밀번호가 일치하지 않습니다.");
-  // }
+  if (
+    !$passwordError.classList.contains("correct-input") &&
+    $passwordError.innerHTML
+  ) {
+    const userInfo = await getUsers(email);
+    setUserInfo(userInfo);
+
+    $passwordError.innerHTML = "";
+    $passwordConfirmError.innerHTML = "";
+
+    return alert("비밀번호 형식이 맞지 않습니다.");
+  }
+
+  if (
+    !$passwordConfirmError.classList.contains("correct-input") &&
+    $passwordConfirmError.innerHTML
+  ) {
+    const userInfo = await getUsers(email);
+    setUserInfo(userInfo);
+
+    $passwordError.innerHTML = "";
+    $passwordConfirmError.innerHTML = "";
+
+    return alert("비밀번호가 일치하지 않습니다.");
+  }
+
+  if (!validatePhoneNumber(phoneNumber) && phoneNumber) {
+    const userInfo = await getUsers(email);
+    setUserInfo(userInfo);
+
+    $phoneNumberError.innerHTML = "";
+
+    return alert("올바른 휴대전화 번호 형식이 아닙니다.");
+  }
 
   const targetUserId = userInfo._id;
-
   const data = {
-    PASSWORD:
-      e.target.PASSWORD.value.trim() === ""
-        ? null
-        : e.target.PASSWORD.value.trim(),
-    FULL_NAME:
-      e.target.FULL_NAME.value.trim() === ""
-        ? null
-        : e.target.FULL_NAME.value.trim(),
-    PHONE_NUMBER:
-      e.target.PHONE_NUMBER.value.trim() === ""
-        ? null
-        : e.target.PHONE_NUMBER.value.trim(),
-    ZIP_CODE:
-      e.target.ZIP_CODE.value.trim() === ""
-        ? null
-        : e.target.ZIP_CODE.value.trim(),
-    ADDRESS1:
-      e.target.ADDRESS1.value.trim() === ""
-        ? null
-        : e.target.ADDRESS1.value.trim(),
-    ADDRESS2:
-      e.target.ADDRESS2.value.trim() === ""
-        ? null
-        : e.target.ADDRESS2.value.trim(),
-    ADDRESS1_REF:
-      e.target.ADDRESS1_REF.value.trim() === ""
-        ? null
-        : e.target.ADDRESS1_REF.value.trim(),
+    PASSWORD: password === "" ? null : password,
+    FULL_NAME: fullName === "" ? null : fullName,
+    PHONE_NUMBER: phoneNumber === "" ? null : phoneNumber,
+    ZIP_CODE: postcode === "" ? null : postcode,
+    ADDRESS1: address === "" ? null : address,
+    ADDRESS2: detailAddress === "" ? null : detailAddress,
+    ADDRESS1_REF: extraAddress === "" ? null : extraAddress,
   };
 
   try {
-    const result = await Api.patch(`/api/users/${targetUserId}`, data);
-    e.target.parentElement.querySelector(".cancel-button").click();
-    // console.log(result);
-    setUserInfo(result);
+    await Api.patch(`/api/users/${targetUserId}`, data);
+    $userName.innerText = fullName;
+
+    const userInfo = await getUsers(email);
+    setUserInfo(userInfo);
   } catch (err) {
     console.error(err);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
@@ -272,7 +311,7 @@ $withdrawButton.addEventListener("click", async () => {
   try {
     await Api.delete(`/mypage/useredit/${email}`);
 
-    alert(`정상적으로 탈퇴되었습니다.`);
+    alert("정상적으로 탈퇴되었습니다.");
   } catch (err) {
     console.error(err);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);

@@ -63,7 +63,7 @@ label {
 }
 
 /* submitButton */
-.submitButton {
+.submit-button {
   width: 100%;
   border: none;
   border-radius: 5px;
@@ -75,6 +75,6 @@ label {
   padding: 15px 0;
 }
 
-.submitButton:hover {
+.submit-button:hover {
   background-color: hsl(272, 50%, 34%);
 }

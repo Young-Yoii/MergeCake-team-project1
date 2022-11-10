@@ -18,13 +18,13 @@
     <div class="user-container">
       <p class="user-name"></p>
       <div class="user-info">
-        <a href="#" class="user-order">주문조회</a>
-        <a href="#" class="user-edit">정보수정</a>
+        <a href="/orderlist">주문조회</a>
+        <a href="/edit">정보수정</a>
       </div>
     </div>
 
-    <!-- 기본정보 -->
     <form id="more-information-form">
+      <!-- 기본정보 -->
       <div class="info-container">
         <table class="info-list">
           <caption>
@@ -42,15 +42,12 @@
                   <input
                     type="password"
                     id="password"
-                    class="input"
                     name="PASSWORD"
                     placeholder="영문, 숫자, 특수문자 조합 최소 8자"
                     readonly
                   />
                   <span id="password-error" class="input-error"></span>
-                  <button type="button" class="edit-btn change-password-btn">
-                    비밀번호 변경
-                  </button>
+                  <button type="button" class="edit-btn">비밀번호 변경</button>
                 </div>
                 <div class="button-container">
                   <button
@@ -69,7 +66,7 @@
                 <input
                   type="password"
                   id="password-confirm"
-                  class="input"
+                  name="PASSWORD_CONFIRM"
                   placeholder="비밀번호 재입력"
                   readonly
                 />
@@ -81,7 +78,6 @@
       </div>
       <!-- 추가정보 -->
       <div class="info-container">
-        <!-- <form id="more-information-form"> -->
         <table class="info-list">
           <caption>
             추가정보
@@ -91,16 +87,8 @@
               <th scope="row">이름</th>
               <td class="form">
                 <div class="input-field">
-                  <input
-                    type="text"
-                    id="name"
-                    class="input"
-                    name="FULL_NAME"
-                    readonly
-                  />
-                  <button type="button" class="edit-btn number-change-btn">
-                    수정하기
-                  </button>
+                  <input type="text" id="name" name="FULL_NAME" readonly />
+                  <button type="button" class="edit-btn">수정하기</button>
                 </div>
                 <div class="button-container">
                   <button type="button" class="cancel-button">취소</button>
@@ -115,15 +103,12 @@
                   <input
                     type="text"
                     id="phone-number"
-                    class="input"
                     name="PHONE_NUMBER"
                     placeholder="010-1234-5678"
                     readonly
                   />
                   <span id="phoneNumber-error" class="input-error"></span>
-                  <button type="button" class="edit-btn number-change-btn">
-                    수정하기
-                  </button>
+                  <button type="button" class="edit-btn">수정하기</button>
                 </div>
                 <div class="button-container">
                   <button type="button" class="cancel-button">취소</button>
@@ -134,20 +119,22 @@
             <tr>
               <th scope="row">주소</th>
               <td class="form">
-                <input
-                  type="text"
-                  id="postcode"
-                  class="findPostcode input"
-                  placeholder="우편번호"
-                  name="ZIP_CODE"
-                  readonly
-                />
-                <input
-                  type="button"
-                  id="searchAddressButton"
-                  class="edit-btn findPostcode input"
-                  value="우편번호 찾기"
-                />
+                <div class="input-field">
+                  <input
+                    type="text"
+                    id="postcode"
+                    class="findPostcode input"
+                    placeholder="우편번호"
+                    name="ZIP_CODE"
+                    readonly
+                  />
+                  <input
+                    type="button"
+                    id="searchAddressButton"
+                    class="edit-btn findPostcode"
+                    value="우편번호 찾기"
+                  />
+                </div>
                 <div class="button-container">
                   <button type="button" class="cancel-button">취소</button>
                   <button class="submit-button">완료</button>
@@ -157,7 +144,6 @@
                   type="text"
                   id="address"
                   placeholder="주소"
-                  class="input"
                   name="ADDRESS1"
                   readonly
                 /><br />
@@ -165,7 +151,6 @@
                   type="text"
                   id="detailAddress"
                   placeholder="상세주소"
-                  class="input"
                   name="ADDRESS2"
                   readonly
                 />
@@ -173,7 +158,6 @@
                   type="text"
                   id="extraAddress"
                   placeholder="참고항목"
-                  class="input"
                   name="ADDRESS1_REF"
                   readonly
                 />
@@ -181,7 +165,6 @@
             </tr>
           </tbody>
         </table>
-        <!-- </form> -->
       </div>
       <!-- 계정 탈퇴 -->
       <div class="info-container">

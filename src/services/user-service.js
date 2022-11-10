@@ -18,7 +18,6 @@ class UserService {
     const user = await this.userModel.findByEmail(EMAIL);
     if (user) {
       throw new Error(
-        user,
         "이 이메일은 현재 사용중입니다. 다른 이메일을 입력해 주세요."
       );
     }
@@ -152,7 +151,7 @@ class UserService {
   // 비번재발급?
   async setPassword(EMAIL, authNum) {
     // 객체 destructuring
-    console.log(EMAIL)
+    console.log(EMAIL);
     // 우선 해당 id의 유저가 db에 있는지 확인
     let user = await this.userModel.findByEmail(EMAIL);
 
@@ -174,7 +173,6 @@ class UserService {
 
     return user;
   }
-
 }
 
 const userService = new UserService(userModel);

@@ -2,10 +2,10 @@ import * as Api from "../api.js";
 import { validateEmail, validatePassword } from "../useful-functions.js";
 
 // 요소(element), input 혹은 상수
-const $emailInput = document.querySelector("#emailInput");
-const $passwordInput = document.querySelector("#passwordInput");
+const $emailInput = document.querySelector("#email-input");
+const $passwordInput = document.querySelector("#password-input");
 
-const $submitButton = document.querySelector(".submitButton");
+const $submitButton = document.querySelector(".submit-button");
 
 const $findPassword = document.querySelector(".find-password");
 const $userEmail = document.querySelector("#user-email");
@@ -14,8 +14,6 @@ const $sendButton = document.querySelector(".send-button");
 // 잘 입력했는지 확인
 const isEmailValid = (email) => validateEmail(email);
 const isPasswordValid = (password) => validatePassword(password);
-const isPasswordSame = (password, passwordConfirm) =>
-  password === passwordConfirm;
 
 // 로그인 진행
 $submitButton.addEventListener("click", async (e) => {
@@ -55,7 +53,7 @@ $submitButton.addEventListener("click", async (e) => {
     window.location.href = "/";
   } catch (err) {
     console.error(err.stack);
-    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+    alert(err.message);
   }
 });
 

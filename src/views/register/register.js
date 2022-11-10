@@ -2,15 +2,15 @@ import * as Api from "../api.js";
 import { validateEmail, validatePassword } from "../useful-functions.js";
 
 // 요소(element), input 혹은 상수
-const $emailInput = document.querySelector("#emailInput");
-const $passwordInput = document.querySelector("#passwordInput");
-const $passwordConfirmInput = document.querySelector("#passwordConfirmInput");
+const $emailInput = document.querySelector("#email-input");
+const $passwordInput = document.querySelector("#password-input");
+const $passwordConfirmInput = document.querySelector("#password-confirm-input");
 
 const $emailError = document.querySelector("#email-error");
 const $passwordError = document.querySelector("#password-error");
-const $passwordConfirmError = document.querySelector("#passwordConfirm-error");
+const $passwordConfirmError = document.querySelector("#password-confirm-error");
 
-const $submitButton = document.querySelector(".submitButton");
+const $submitButton = document.querySelector(".submit-button");
 
 // 잘 입력했는지 확인
 const isEmailValid = (email) => validateEmail(email);
