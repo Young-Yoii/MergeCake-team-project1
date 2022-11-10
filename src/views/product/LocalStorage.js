@@ -1,25 +1,37 @@
-// 가격 계산 해야됨
-
 const $basketSubmit = document.querySelector("#basketSubmit");
-
-// 클릭 했을 때 로컬 스토리지에 담기
 
 const local = localStorage;
 const data = {};
 
-let number = (Object.keys(local) ?? []).length; 
+let number = 0;
 
 $basketSubmit.addEventListener('click', function(e) {
-    const btns = document.querySelectorAll('input[type="radio"]:checked+div>img,input[type="radio"]:checked+div>span');
 
-    const lettering = document.querySelector('input[type="text"]').value;
+    if (local.length === 0) number = 0;
+
+    const $options = document.querySelectorAll('input[type="radio"]:checked');
+
+    if ($options.length === 0) {
+        alert('옵션을 선택해주세요.');
+        return;
+    }
+
+    const btns = document.querySelectorAll('input[type="radio"]:checked+div>span');
+    console.log(btns);
+
+    // const lettering = document.querySelector('input[type="text"]').value;
+    let total = 0; // 기본값
     const options = btns.forEach(x=>{
-       const [key, value] = (x.alt || x.className).split(',').slice(1,3);
-       console.log(key, value);
-       data[key] = value;
+        const [key, value] = (x.className).split(',').slice(0,2);
+        const [KCAL, G, PRICE] = (x.className).split(',').slice(2,5);
+        console.log((x.className).split(',').slice(2,5));
+        total += Number(PRICE);
+        console.log(key, value);
+        data[key] = value;
     });
-    data["문구"] = lettering;
-    data["price"] = 1000;
+    data['price'] = total;
+    // data["문구"] = lettering;
+
 
     console.log(data);
 

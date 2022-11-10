@@ -117,9 +117,14 @@ $submitButton.addEventListener("click", async (e) => {
   }
 
   // 🚨 장바구니 정보 DB 저장
-  /**
-   * 지훈님 코드
-   */
+  const data = {};
+  Object.keys(localStorage).forEach((x,i)=>{
+    data[i] = {};
+    data[i].OPTIONS = JSON.parse(localStorage.getItem(x));
+  })  
+  // 서버에 post 요청하기
+  const postData = await Api.post('/cart', data);
+  localStorage.clear();
 
   // isChecked = true 일 경우
   // user 배송지 정보 DB 저장, 페이지 이동
@@ -151,7 +156,7 @@ $submitButton.addEventListener("click", async (e) => {
 
       // 🚨 마이페이지 이동
       // 페이지 이름 맞춰서 경로 수정하기
-      window.location.href = "/mypage";
+      window.location.href = "/orderlist";
     } catch (err) {
       console.error(err.stack);
       alert(
@@ -161,6 +166,6 @@ $submitButton.addEventListener("click", async (e) => {
   }
   // isChecked = true 일 경우, 페이지만 이동
   else {
-    window.location.href = "/mypage";
+    window.location.href = "/orderlist";
   }
 });

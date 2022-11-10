@@ -3,7 +3,7 @@
 @import "../footer.css";
 
 input[type="radio"] {
-    opacity: 100;
+    opacity: 0;
     display:visible;
 }
 
@@ -121,7 +121,7 @@ input[type="radio"] {
     display:none;
 } */
 
-#opt-0, #opt-1, #opt-2, #opt-3, #opt-4, #opt-5 {
+#select {
     display : none;
 }
 
@@ -310,4 +310,8 @@ div[class="option"] {
 
 .button-container {
     margin : 0 90px 10px 0;
+}
+
+.select {
+    display : none;
 }
