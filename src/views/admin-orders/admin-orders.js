@@ -1,13 +1,38 @@
 import * as Api from "../api.js";
 
 // 요소(element), input 혹은 상수
-const $ordersContainer = document.querySelector("#ordersContainer");
-const $modal = document.querySelector("#modal");
-const $modalBackground = document.querySelector("#modalBackground");
-const $modalCloseButton = document.querySelector("#modalCloseButton");
-const $deleteCompleteButton = document.querySelector("#deleteCompleteButton");
-const $deleteCancelButton = document.querySelector("#deleteCancelButton");
+const $ordersContainer = document.getElementById("ordersContainer");
+const $modal = document.getElementById("modal");
+const $modalBackground = document.getElementById("modalBackground");
+const $modalCloseButton = document.getElementById("modalCloseButton");
+const $deleteCompleteButton = document.getElementById("deleteCompleteButton");
+const $deleteCancelButton = document.getElementById("deleteCancelButton");
 let orderIdToDelete;
+
+
+//어드민 확인
+const email = sessionStorage.getItem("email");
+
+const getUsers = async (email) => {
+  const userList = await Api.get("/api/userlist");
+  return userList.find((user) => user.EMAIL === email);
+};
+
+const userInfo = await getUsers(email);
+
+function confirmAdmin() {
+    if(userInfo.ROLE === 'user'){
+      alert('권한이 없습니다.');
+      window.location.href = '/';
+    }
+    else if(userInfo.ROLE === undefined){
+      alert('로그인을 해주세요');
+      window.location.href = '/login';
+    }
+  return;
+}
+confirmAdmin(userInfo);
+
 
 insertOrders()
 addAllEvents();
@@ -31,7 +56,7 @@ async function insertOrders() {
     const total_price = parseInt(data.orderData[0].selectData[0].OPTIONS.price)+18000;
     const optionObj = data.orderData[0].selectData[0].OPTIONS;
     let optionValue = "";
-    
+
     for (const [key, value] of Object.entries(optionObj)) {
       optionValue += `- ${key}: ${value} <br>`;
     }
@@ -85,18 +110,18 @@ async function insertOrders() {
       // 이벤트 - 상태관리 박스 수정 시 바로 db 반영 (상태, 운송장정보)
     $statusSelectBox.addEventListener("change", async () => {
       const newStatus = $statusSelectBox.value;
-      const waybill = $billingNumber.value;
+      let waybill = $billingNumber.value;
 
       if(!waybill){
         alert('운송장 번호를 입력해 주세요.');
         newStatus = `${state}`
       }else if(waybill){
         // api 요청
-      const data = {
-        waybill : waybill,
-        STATE : newStatus,
-      }
-      await Api.patch("/admin/ordercheck", order_no, data);
+      // const data = {
+      //   waybill : waybill,
+      //   STATE : newStatus,
+      // }
+      await Api.patch(`/admin/ordercheck/${order_no}/${waybill}`, { STATE :newStatus });
       $state.innerHTML = newStatus;
       $billingNumber.value = waybill;
       }
@@ -115,7 +140,7 @@ async function deleteOrderData(e) {
     e.preventDefault();
   
     try {
-      await Api.delete("/admin/ordercheck", orderIdToDelete);
+      await Api.delete(`/admin/ordercheck/${orderIdToDelete}`);
   
       // 삭제 성공
       alert("주문 정보가 삭제되었습니다.");
