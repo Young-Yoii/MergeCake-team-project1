@@ -128,7 +128,20 @@ mypageRouter.patch("/useredit/:userId", /* loginRequired, */ async function (req
     } catch (error) {
       next(error);
     }
+  });
+
+// 회원 탈퇴
+mypageRouter.delete("/useredit/:userId", /* loginRequired, */ async function (req, res, next) {
+  try {
+    // userId = email
+    const userId = req.params.userId;
+
+    const deleteUser = await userService.deleteUser(userId);
+
+    res.status(200).json(deleteUser);
+  } catch (error) {
+    next(error);
   }
-);
+});
 
 export { mypageRouter };

@@ -142,7 +142,12 @@ class UserService {
     return user;
   }
 
+  // delete
+  async deleteUser(userInfo) {
+    const deletedeUser = await this.userModel.deleteUser(userInfo);
 
+    return deletedeUser;
+  }
 
   // 비번재발급?
   async setPassword(EMAIL, authNum) {
