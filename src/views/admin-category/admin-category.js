@@ -1,10 +1,33 @@
 import * as Api from "../api.js";
 
 
-const $categoryTreeEl = document.getElementById('categoryTree');
-const $cateCreateBtn = document.getElementById('cateCreate');
-const $optContentEl = document.getElementById('optContent');
-const $addOptBtn = document.querySelector("#addOptBtn")
+const $categoryListEl = document.getElementById('categoryList');
+const $categoryCreateButton = document.getElementById('categroryCreateBtn');
+const $optionContentEl = document.getElementById('optionContent');
+const $optionAddButton = document.getElementById('optionAddButton');
+
+//어드민 확인
+const email = sessionStorage.getItem("email");
+
+const getUsers = async (email) => {
+  const userList = await Api.get("/api/userlist");
+  return userList.find((user) => user.EMAIL === email);
+};
+
+const userInfo = await getUsers(email);
+
+function confirmAdmin() {
+    if(userInfo.ROLE === 'user'){
+      alert('권한이 없습니다.');
+      window.location.href = '/';
+    }
+    else if(userInfo.ROLE === undefined){
+      alert('로그인을 해주세요');
+      window.location.href = '/login';
+    }
+  return;
+}
+confirmAdmin(userInfo);
 
 // 대분류 추가시 색 토글
 let flag = true;
@@ -12,8 +35,8 @@ let selectedCategoryId = null;
 let selectedCategoryNumber = null;
 let selectedCategoryName = null;
 let beforeSelectedCategoryEl = null;
-if ($categoryTreeEl) {
-  $categoryTreeEl.addEventListener('click', function (e) {
+if ($categoryListEl) {
+  $categoryListEl.addEventListener('click', function (e) {
     const {id, no , name} = e.target.dataset
     if (selectedCategoryId !== null && id === selectedCategoryId) {
       selectedCategoryId = null;
@@ -42,12 +65,14 @@ render();
 async function render() {
   const categories = await Api.get('/admin/category');
   categories.forEach((category) => {
-    $categoryTreeEl.insertAdjacentHTML('beforeend', 
+    $categoryListEl.insertAdjacentHTML('beforeend', 
       `
-      <li id="categoryWrap">
+      <li class="category-wrap">
         <span data-no=${category.CATEGORY_NO} data-id=${category._id} data-name=${category.CATEGORY_NAME}>${category.CATEGORY_NAME ?? '이름 없음'}</span>
-        <button class="updateBtn" data-no=${category.CATEGORY_NO} data-name=${category.CATEGORY_NAME}>수정</button>
-        <button class="deleteBtn" data-no=${category.CATEGORY_NO} data-name=${category.CATEGORY_NAME}>삭제</button>
+        <div class="button-wrap">
+          <button class="updateBtn" data-no=${category.CATEGORY_NO} data-name=${category.CATEGORY_NAME}>수정</button>
+          <button class="deleteBtn" data-no=${category.CATEGORY_NO} data-name=${category.CATEGORY_NAME}>삭제</button>
+        </button>
       </li>
       `
     );
@@ -61,7 +86,7 @@ async function render() {
     deleteButton.addEventListener('click', deleteCategory);
   });
 
-  $cateCreateBtn.addEventListener('click', addCategory);
+  $categoryCreateButton.addEventListener('click', addCategory);
 
   //카테고리 삭제
   async function deleteCategory(e) {
@@ -116,7 +141,12 @@ async function render() {
         const resultApi = await Api.post('/admin/category', data);
 
         const liEl = document.createElement('li');
+          liEl.setAttribute('class' ,'category-wrap');
+        const iEl = document.createElement('i');
+          iEl.setAttribute('class' ,'fa-thin fa-square-list');
         const spanEl = document.createElement('span');
+        const divEl = document.createElement('div');
+          divEl.setAttribute('class' ,'button-wrap');
         const updateBtn = document.createElement('button');
           updateBtn.dataset.id = resultApi._id;
           updateBtn.dataset.no = resultApi.CATEGORY_NO;
@@ -136,10 +166,12 @@ async function render() {
       deleteBtn.innerText = "삭제"
       updateBtn.innerText = "수정"
 
+      liEl.appendChild(iEl);
       liEl.appendChild(spanEl);
-      liEl.appendChild(updateBtn);
-      liEl.appendChild(deleteBtn);
-      $categoryTreeEl.appendChild(liEl);
+      liEl.appendChild(divEl);
+      divEl.appendChild(updateBtn);
+      divEl.appendChild(deleteBtn);
+      $categoryListEl.appendChild(liEl);
 
       updateBtn.setAttribute("class", "updateBtn");
       deleteBtn.setAttribute("class", "deleteBtn");
@@ -154,6 +186,15 @@ async function render() {
 //상품관련
 async function getOptions(categoryNumber) {
   const options = await Api.get(`/admin/category/${categoryNumber}`);
+     $optionContentEl.innerHTML =`
+     <tr>
+      <th>옵션이름</th>
+      <th>추가금액</th>
+      <th>칼로리</th>
+      <th>중량(g)</th>
+      <th>관리</th>
+    </tr>
+     `
 
   options.products.forEach((data) => {
     const optionName = data.PRODUCT_NAME;
@@ -162,15 +203,17 @@ async function getOptions(categoryNumber) {
     const price = data.DETAIL.PRICE;
     const categoryNumber = data.CATEGORY_NO;
 
-    $optContentEl.insertAdjacentHTML('beforeend',
-      `<li>
-        <span>${optionName}</span>
-        <span>${price}</span>
-        <span>${kcal}</span>
-        <span>${gram}</span>
+    $optionContentEl.insertAdjacentHTML('beforeend',
+      `<tr id="optionList">
+        <td>${optionName}</td>
+        <td>${price}</span>
+        <td>${kcal}</td>
+        <td>${gram}</td>
+        <td>
         <button class="optionUpdateButton" data-no=${categoryNumber} data-name=${optionName}>수정</button>
         <button class="optionDeleteButton" data-no=${categoryNumber} data-name=${optionName}>삭제</button>
-      </li>`
+        </td>
+      </tr>`
     )
   })
   const $optionUpdateButton = document.getElementsByClassName("optionUpdateButton");
@@ -249,8 +292,8 @@ async function optionUpdate(e) {
 
 
 //옵션추가
-if ($addOptBtn) {
-  $addOptBtn.addEventListener('click', async function (e) {
+if ( $optionAddButton) {
+   $optionAddButton.addEventListener('click', async function (e) {
     if (selectedCategoryId !== null) {
       let $optionKcal = document.querySelector("#optionKcal").value;
       let $optionName = document.querySelector("#optionName").value;
@@ -266,7 +309,7 @@ if ($addOptBtn) {
         }
 
       await Api.post(`/admin/category/${categoryNo}`, { PRODUCT_NAME, DETAIL })
-      $optContentEl.insertAdjacentHTML('beforeend',
+      $optionContentEl.insertAdjacentHTML('beforeend',
         `<li>
           <span>${$optionName}</span>
           <span>${$optionPrice}</span>

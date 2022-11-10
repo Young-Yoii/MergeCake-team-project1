@@ -1,46 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
-    <link rel="stylesheet" href="admin-category.css" />
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../reset.css">
+  <link rel="stylesheet" href="admin-category.css" />
+  
+  <title>mergycake</title>
 </head>
 <body>
   <header>
 		<section class="upper-menu">
 			<nav>
 				<div class="logo">
-					?
+          <a href="#"><img src="../resources/merge_cake_logo.png" alt="merge cake image"></a>
 				</div>
 				<div class="menu">
-					<a href="#">로그인</a>
-					<a href="#">마이페이지</a>
-					<a href="#">장바구니</a>
+					<a href="/login">로그인</a>
+					<a href="/mypage/orderlist">마이페이지</a>
+					<a href="/cart">장바구니</a>
 				</div>
 			</nav>
 		</section>
 	</header>
 
-  <!-- <section class="page-name">
-    <h1>관리자 페이지</h1>
-  </section>
-   -->
+ 
   <section class="main-menu">
     <nav>
       <div class="admin">
         관리자님
       </div>
       <div class="menu">
-        <a href="#">주문관리</a>
-        <a href="#">회원관리</a>
-        <a href="#">카테고리관리</a>
-        <a href="#">상품관리</a>
+        <a href="/admin-orders">주문관리</a>
+        <a href="/admin-user">회원관리</a>
+        <a href="/admin-category">카테고리 / 상품관리</a>
       </div>
     </nav>
   </section>
@@ -48,58 +46,78 @@
   <section class="admin-category container">
     <div class="admin-category-inner">
       <div class="admin-cate-tit">
-        <h2>카테고리 설정(대분류)</h2>
+        <h2>카테고리 설정</h2>
+        <div class="edit-button">
+          <button class="cate-create" id="categroryCreateBtn">카테고리 추가</button>
+        </div>
       </div>
       <div class="admin-cate-list-wrap">
-        <div class="edit-button">
-          <button class="cate-create" id="cateCreate">카테고리 추가</button>
-        </div>
-          <ul id="categoryTree"></ul>
+          <ul id="categoryList" class="category-list"></ul>
       </div>
     </div>
     <div class="cate opt-val" >
-      <p>옵션 설정</p>
-      <table>
+      <div class="admin-cate-tit">
+        <h2>옵션 설정</h2>
+          <div class="edit-button">
+            <button type="button" id="addOptBtn" class="option-add-button">옵션 추가</button>
+          </div>
+      </div>
+      <div style="display: flex; flex-direction: column" class="input-wrap">
+        <span class="option-input">
+          <span>옵션 이름</span>
+            <input type="text" id="optionName"/>
+          </span>
+          <span class="option-input">
+            <span>추가 금액</span>
+              <input type="number" min="0" step="100"  id="optionPrice"/>
+            </span>
+          <span class="option-input">
+            <span>kcal</span>
+              <input type="number" min="0" step="100"  id="optionKcal"/>
+          </span>
+          <span class="option-input">
+            <span>중량(g)</span>
+              <input type="number" min="0" step="100"  id="optionGram"/>
+            </span>
+        </div>
+    </div>
+  </section>
+  <section class="option">
+    <h2 class="option-tit">옵션정보</h2>
+    <div class="opt-list">
+      <table id="optionContent">
         <tr>
-          <td>
-            <div style="display: flex; flex-direction: column">
-              <input type="text" id="optionName"/>
-                <!-- <fieldset>
-                  <legend>상태 설정</legend>
-                    <div>
-                      <input type="radio" id="use" name="status" value="use" checked>
-                        <label for="use">사용</label>
-                    </div>
-                    <div>
-                      <input type="radio" id="unuse" name="status" value="unuse">
-                        <label for="unuse">미사용</label>
-                    </div>
-                </fieldset> -->
-                <input type="number" min="0" step="100" placeholder="추가금액" id="optionPrice"/>
-                <input type="number" min="0" step="100" placeholder="kcal" id="optionKcal"/>
-                <input type="number" min="0" step="100" placeholder="g(중량)" id="optionGram"/>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td><button type="button" id="addOptBtn">옵션 추가</button></td>
+          <th>옵션이름</th>
+          <th>추가금액</th>
+          <th>칼로리</th>
+          <th>중량(g)</th>
+          <th>관리</th>
         </tr>
       </table>
     </div>
   </section>
-  <section>
-    <div class="opt-list">
-      <ul id="optContent">
-        <li>
-          <span>옵션이름</span>
-          <span>추가금액</span>
-          <span>칼로리</span>
-          <span>중량(g)</span>
-        </li>
-      </ul>
-    </div>
-  </section>
-  <footer></footer>
+
+<footer>
+    <address>
+      <div>
+        <ul class="area">
+          <li>브랜드 소개</li>
+          <li>창업 안내</li>
+          <li>채용</li>
+          <li>개인정보 처리방침</li>
+        </ul>
+        <ul class="area second">
+          <li>Contact Us</li>
+          <li>고객센터 000-1234-5678</li>
+          <li>서울특별시 성동구 성수동2가 280</li>
+        </ul>
+      </div>
+      <div class="logo">
+        <img src="../../resources/merge cake logo.png" alt="Merge cake 로고">
+      </div>
+    </address>
+  </footer>
+
   <script type="module" src="admin-category.js"></script>
 </body>
 </html>
