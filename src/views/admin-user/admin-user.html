@@ -4,6 +4,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>회원 관리</title>
+	<!--bulma css-->
+	<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+  />
 	<link rel="stylesheet" type="text/css" href="../../reset.css">
 	<link rel="stylesheet" type="text/css" href="./admin-user.css">
 </head>
@@ -51,9 +56,42 @@
 					<th>이메일</th>
 					<th>이름</th>
 					<th>권한</th>
+					<th>유저삭제</th>
 				</tr>
 			</table>
 		</section>
+		<!-- 회원을 정말 삭제할 지 묻는 Modal 창 -->
+		<div id="modal" class="modal">
+			<div class="modal-background" id="modalBackground"></div>
+			  <div class="modal-content">
+				  <div class="box">
+					<p class="mb-3">
+					  회원 삭제 시 복구할 수 없습니다. 정말로 삭제하시겠습니까?
+					</p>
+					<div class="buttons">
+					  <button
+						class="button mt-5"
+						id="deleteCompleteButton"
+						aria-label="close"
+					  >
+						네
+					  </button>
+					  <button
+						class="button is-primary mt-5"
+						id="deleteCancelButton"
+						aria-label="close"
+					  >
+						아니오
+					  </button>
+					</div>
+				  </div>
+				</div>
+				<button
+				  class="modal-close is-large"
+				  id="modalCloseButton"
+				  aria-label="close"
+				></button>
+			</div>
 	</main>
 
 	<footer>
