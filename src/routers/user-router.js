@@ -104,6 +104,7 @@ userRouter.patch(
         PASSWORD,
         ZIP_CODE,
         ADDRESS1,
+        ADDRESS1_REF,
         ADDRESS2,
         PHONE_NUMBER,
         ROLE,
@@ -127,6 +128,7 @@ userRouter.patch(
         ...(PASSWORD && { PASSWORD }),
         ...(ZIP_CODE && { ZIP_CODE }),
         ...(ADDRESS1 && { ADDRESS1 }),
+        ...(ADDRESS1_REF && { ADDRESS1_REF }),
         ...(ADDRESS2 && { ADDRESS2 }),
         ...(PHONE_NUMBER && { PHONE_NUMBER }),
         ...(ROLE && { ROLE }),
@@ -163,8 +165,7 @@ userRouter.get(
     } catch (error) {
       next(error);
     }
-  }
-});
+  })
 
 //메일 보내서 임시비밀번호로 비밀번호 변경
 userRouter.post("/mail", async (req, res, next) => {
