@@ -26,6 +26,10 @@ const UserSchema = new Schema(
       type: String,
       required: false,
     },
+    ADDRESS1_REF: {
+      type: String,
+      required: false,
+    },
     ADDRESS2: {
       type: String,
       required: false,

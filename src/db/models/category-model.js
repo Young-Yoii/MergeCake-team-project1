@@ -72,19 +72,19 @@ export class CategoryModel {
     return updatedCategory;
   }
 
-  // 4-1. 카테고리 삭제
+  // 4-1. 카테고리 삭제 (하위 상품이 없어야 카테고리 삭제)
   async deleteCategory(categoryNo) {
     const deletedCategory = await Category.deleteOne(categoryNo);
 
     return deletedCategory;
   }
 
-    // 4-1-2. 카테고리들 삭제
-    async deleteCategorys(categoryNo) {
-      const deletedCategory = await Category.deleteMany(categoryNo);
-  
-      return deletedCategory;
-    }
+  // 4-1-2. 카테고리 삭제 (하위 상품 존재여부 상관 안씀)
+  async deleteCategorys(categoryNo) {
+    const deletedCategory = await Category.deleteMany(categoryNo);
+
+    return deletedCategory;
+  }
 
   // 4-2. 상품 삭제
   async deleteProduct(deleteInfo) {
@@ -98,8 +98,6 @@ export class CategoryModel {
     return deletedCategory;
   }
 }
-
-
 
 const categoryModel = new CategoryModel();
 
