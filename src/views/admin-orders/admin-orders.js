@@ -1,4 +1,17 @@
 import * as Api from "../api.js";
+import { header } from "../components/header.js";
+import { footer } from "../components/footer.js";
+
+insertHeader()
+insertFooter()
+
+async function insertHeader() {
+  document.body.insertAdjacentElement("afterBegin" , header)
+}
+
+async function insertFooter() {
+  document.body.insertAdjacentElement("beforeend" , footer)
+}
 
 // 요소(element), input 혹은 상수
 const $ordersContainer = document.getElementById("ordersContainer");
@@ -19,6 +32,7 @@ const getUsers = async (email) => {
 };
 
 const userInfo = await getUsers(email);
+console.log(email)
 
 function confirmAdmin() {
     if(userInfo.ROLE === 'user'){
@@ -53,7 +67,7 @@ async function insertOrders() {
     const email = data.email;
     const state = data.state;
     const obj = data.orderData[0].selectData[0].createdAt.split("T")[0];
-    const total_price = parseInt(data.orderData[0].selectData[0].OPTIONS.price)+18000;
+    const total_price = (parseInt(data.orderData[0].selectData[0].OPTIONS.price)+18000).toLocaleString();
     const optionObj = data.orderData[0].selectData[0].OPTIONS;
     let optionValue = "";
 

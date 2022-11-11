@@ -1,63 +1,20 @@
-/* header */
-html {
-    height : 100%;
-}
+@import "../components/header.css";
+@import "../components/footer.css";
 
-header {
-    height : 400px;
-    display : flex;
-    flex-direction: column;
-    align-items: center;
-}
-/* upper menu */
 
-.upper-menu {
-    width : 100%;
-    height : 100px;
-    display: flex;
-    align-items: center;
-}
-
-.upper-menu > nav {
-    width : 100%;
-    height : 100%;
-    display : flex;
-    justify-content: space-between;
-}
-
-.upper-menu > nav > .logo {
-    height : 100%;
-}
-
-.upper-menu nav a {
-    color : black;
-    text-decoration: none;
-    margin : 0 20px;
-}
-
-.upper-menu .logo img {
-    height : 100%;
-}
-
-.upper-menu .menu{
-    display : flex;
-    align-items: center;
-}
-
-/* page name */
-.page-name h1 {
-    font-size : 30px;
-    margin : 70px;
-}
 
 /* main menu */
 .main-menu {
-    width: 100%;
-    background : pink;
-    height : 100%;
+    width: 95%;
+    background : hsl(175deg 32% 43%);
     display : flex;
     align-items: center;
+    padding: 70px 50px 40px 50px;
+    margin: 0 auto;
+    border-radius: 20px;
+    color:#fff
 }
+
 
 .main-menu > nav {
     width : 100%;
@@ -66,9 +23,8 @@ header {
 }
 
 .main-menu nav a {
-    color : black;
-    text-decoration: none;
-    margin : 0 20px;
+    margin-left : 20px;
+    color:#fff;
 }
 
 .main-menu .menu{
@@ -77,20 +33,14 @@ header {
 }
 
 .admin {
-    margin-left : 50px;
     font-size : 30px;
 }
 
-/* main */
-main {
-    height : 100%;
-    width : 100%;
-    background-color: blanchedalmond;
-}
 
 .title-area h1 {
     font-size: 20px;
     padding : 70px;
+    text-align: center;
 }
 
 /* table */
@@ -127,7 +77,6 @@ main {
 }
 
 .search .submit {
-    border : 0;
     width : 10%;
 }
 
@@ -151,10 +100,11 @@ main {
     margin : 10px;
 }
 
+
 .member-area {
     display : flex;
     justify-content: center;
-    padding-bottom: 100%;
+    padding-bottom: 150px;
 }
 
 .member {
@@ -163,72 +113,55 @@ main {
     vertical-align: center;
 }
 
-.member th {
-    border-style: solid;
-    border-color: black;
-    border-top-width : 3px;
-    border-bottom-width: 1px ;
+.header-cell{
+    background: #f3f3f3;
     padding : 15px;
 }
 
+.member th {
+    padding : 15px;
+    font-weight: 600;
+}
+
 .member tr {
-    border-style: solid;
-    border-color: black;
-    border-bottom-width: 1px;
+    border-bottom: 1px solid #f3f3f3;
 }
 
 .member td {
     vertical-align: middle;
-    padding : 10px;
+    padding:20px 0px;
 }
+
+.cancle-button {
+    padding: 5px 10px;
+    background-color: hsl(271, 74%, 85%);
+    color: #000;
+    border:none;
+    border-radius: 5px;
+}
+
+.cancle-button:hover {
+    background-color: #000;
+    color:#fff;
+    transition: all 1s;
+}
+
+/* modal */
 
 .modal .box {
     text-align: center;
-  }
-  .modal .buttons {
-    justify-content: center;
-  }
-  
-
-/* footer */
-footer {
-    background-color: aquamarine;
-    width : 100%;
-    height : 100%;
-    border-top : 3px solid black;
 }
-
-address {
-    height:100%;
-    text-align: center;
-    display : flex;
+.modal .buttons {
     justify-content: center;
 }
-
-footer > article, address {
-    height : 100%;
+.cancle {
+    background-color: hsl(271, 74%, 85%);
 }
 
-footer address {
-    height: 100px;
-    display : flex;
+footer address .area li::after {
+    top: 3px;
 }
 
-address div {
-    height : 100%;
-}
-
-footer address h1 {
-    font-weight: bold;
-    font-size : 20px;
-}
-
-footer address .area{
-    display : flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-footer .logo img{
-    height : 100%;
+.area.second li::after {
+    top: 1px;
 }

@@ -1,17 +1,13 @@
-const $login = document.querySelector("#login");
+import { header } from "../components/header.js";
+import { footer } from "../components/footer.js";
 
-// 토큰 정보 가져오기
-const email = sessionStorage.getItem("token");
+insertHeader()
+insertFooter()
 
-$login.innerText = email ? "로그아웃" : "로그인";
+async function insertHeader() {
+  document.body.insertAdjacentElement("afterBegin" , header)
+}
 
-$login.addEventListener("click", () => {
-  if (!email) {
-    // 로그아웃 상태
-    window.location.href = "/login";
-  } else {
-    // 로그인 상태
-    sessionStorage.clear();
-    window.location.href = "/";
-  }
-});
+async function insertFooter() {
+  document.body.insertAdjacentElement("beforeend" , footer)
+}

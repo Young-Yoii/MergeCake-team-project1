@@ -30,7 +30,7 @@ const userInfo = await getUsers(email);
 let user = document.getElementById('userName');
 
 const setUserName = (userName) => {
-    user.innerHTML = `${userName.FULL_NAME !== undefined ? userName.FULL_NAME : "머지회원님"}`
+    user.innerHTML = (!userName ? userName : "mergy회원") + "님";
 }
 
 setUserName(userInfo)
