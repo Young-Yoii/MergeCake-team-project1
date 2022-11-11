@@ -35,6 +35,16 @@ const makeContent = (i, name) => {
     </div>`;
 };
 
+const makeLettering = (i, name) => {
+    return `<div id="opt-${i}" class="select">
+        <h2 class="title">${name}</h2>
+        <div id=${i} class="content">
+          <p class="optionName">문구 입력</p>
+          <input type="text" class="문구입력" name="cake-lettering" placeholder="문구를 입력 해 주세요" id="sl" value="" >
+        </div>
+      </div>`;
+}
+
 const makeList = (name, productName, KCAL, G, PRICE) =>{
  return `<li>
     <label class="label" for="${name} : ${productName}">
@@ -46,20 +56,25 @@ const makeList = (name, productName, KCAL, G, PRICE) =>{
 };
 
 const catArr = (await getItems());
+console.log(catArr);
 
 for (let i=0;i<catArr.length;i++){ // 카테고리 개수 만큼 만들기
     const $container = document.querySelector('.product-opt-wrap');
 
     console.log(i);
     const catName = catArr[i].CATEGORY_NAME; // 카테고리 이름
-    
-    $container.innerHTML += makeContent(i, catName); // 컨텐츠 출력
 
+    if (catName === "레터링"){
+        $container.innerHTML += makeLettering(i, catName);
+    }else{
+        $container.innerHTML += makeContent(i, catName); // 컨텐츠 출력
+    
     const $ul = document.querySelector(`div[id="opt-${i}"] ul`);
 
     const products = (await getData(catArr[i].CATEGORY_NO)).products; // 상품 배열
 
     let listContents = "";
+
 
     for (let i=0;i<products.length;i++){
 
@@ -70,9 +85,8 @@ for (let i=0;i<catArr.length;i++){ // 카테고리 개수 만큼 만들기
 
         listContents += makeList(catName, item.PRODUCT_NAME, KCAL, G, PRICE);
     }
-
-    $ul.innerHTML = listContents;
-    
+        $ul.innerHTML += listContents;
+    }
 }
 
 

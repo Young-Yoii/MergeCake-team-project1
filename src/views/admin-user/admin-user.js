@@ -1,4 +1,17 @@
 import * as Api from "../api.js";
+import { header } from "../components/header.js";
+import { footer } from "../components/footer.js";
+
+insertHeader()
+insertFooter()
+
+async function insertHeader() {
+  document.body.insertAdjacentElement("afterBegin" , header)
+}
+
+async function insertFooter() {
+  document.body.insertAdjacentElement("beforeend" , footer)
+}
 
 const $usersContainer = document.getElementById("userList");
 const $modal = document.getElementById("modal");
@@ -74,7 +87,7 @@ async function insertUsers() {
         <td>${email}</td>
         <td>${name !== undefined ? `${name}` : '머지회원'}</td>
         <td>${roleName}</td>
-        <td><button id="userDleteButton-${email}"}>유저 삭제</button></td>
+        <td><button class="cancle-button" id="userDleteButton-${email}"}>유저 삭제</button></td>
       </tr>
       `
     );

@@ -1,5 +1,17 @@
 import * as Api from "../api.js";
+import { header } from "../components/header.js";
+import { footer } from "../components/footer.js";
 
+insertHeader()
+insertFooter()
+
+async function insertHeader() {
+  document.body.insertAdjacentElement("afterBegin" , header)
+}
+
+async function insertFooter() {
+  document.body.insertAdjacentElement("beforeend" , footer)
+}
 
 const $categoryListEl = document.getElementById('categoryList');
 const $categoryCreateButton = document.getElementById('categroryCreateBtn');
@@ -142,8 +154,6 @@ async function render() {
 
         const liEl = document.createElement('li');
           liEl.setAttribute('class' ,'category-wrap');
-        const iEl = document.createElement('i');
-          iEl.setAttribute('class' ,'fa-thin fa-square-list');
         const spanEl = document.createElement('span');
         const divEl = document.createElement('div');
           divEl.setAttribute('class' ,'button-wrap');
@@ -166,7 +176,6 @@ async function render() {
       deleteBtn.innerText = "삭제"
       updateBtn.innerText = "수정"
 
-      liEl.appendChild(iEl);
       liEl.appendChild(spanEl);
       liEl.appendChild(divEl);
       divEl.appendChild(updateBtn);
@@ -200,7 +209,7 @@ async function getOptions(categoryNumber) {
     const optionName = data.PRODUCT_NAME;
     const kcal = data.DETAIL.KCAL;
     const gram = data.DETAIL.G;
-    const price = data.DETAIL.PRICE;
+    const price = (data.DETAIL.PRICE).toLocaleString();
     const categoryNumber = data.CATEGORY_NO;
 
     $optionContentEl.insertAdjacentHTML('beforeend',

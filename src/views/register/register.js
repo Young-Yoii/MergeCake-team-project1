@@ -12,6 +12,25 @@ const $passwordConfirmError = document.querySelector("#password-confirm-error");
 
 const $submitButton = document.querySelector(".submit-button");
 
+// user 정보 가져오기
+const email = sessionStorage.getItem("email");
+
+const getUsers = async (email) => {
+  const userList = await Api.get("/api/userlist");
+  return userList.find((user) => user.EMAIL === email);
+};
+
+const userInfo = await getUsers(email);
+//회원인지 확인
+checkUser()
+async function checkUser() {
+  await Api.get(`/mypage/orderlist/${email}`);
+  if(email){
+    alert('로그아웃 후 이용해주세요');
+    window.location.href="/"
+    }
+}
+
 // 잘 입력했는지 확인
 const isEmailValid = (email) => validateEmail(email);
 const isPasswordValid = (password) => validatePassword(password);

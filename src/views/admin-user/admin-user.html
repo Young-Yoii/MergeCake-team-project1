@@ -14,38 +14,20 @@
 </head>
 
 <body>
-	<header>
-		<section class="upper-menu">
-			<nav>
-				<div class="logo">
-					<a href="#"><img src="../../resources/merge cake.png" alt="merge cake image"></a>
-				</div>
-				<div class="menu">
-					<a href="#">로그인</a>
-					<a href="#">마이페이지</a>
-					<a href="#">장바구니</a>
-				</div>
-			</nav>
-		</section>
-		<section class="page-name">
-			<h1>관리자 페이지</h1>
-		</section>
-		<section class="main-menu">
-			<nav>
-				<div class="admin">
-					관리자님
-				</div>
-				<div class="menu">
-					<a href="#">주문관리</a>
-					<a href="#">회원관리</a>
-					<a href="#">카테고리관리</a>
-					<a href="#">상품관리</a>
-				</div>
-			</nav>
-		</section>
-	</header>
+	<header></header>
 	
-	<main>
+	<section class="main-menu">
+		<nav>
+		  <div class="admin">
+			mergy Manager
+		  </div>
+		  <div class="menu">
+			<a href="/admin-orders">주문관리</a>
+			<a href="/admin-user">회원관리</a>
+			<a href="/admin-category">카테고리 / 상품관리</a>
+		  </div>
+		</nav>
+	  </section>
 		<section class="title-area">
 			<h1>회원 관리</h1>
 		</section>
@@ -77,7 +59,7 @@
 						네
 					  </button>
 					  <button
-						class="button is-primary mt-5"
+						class="button cancle mt-5"
 						id="deleteCancelButton"
 						aria-label="close"
 					  >
@@ -92,33 +74,7 @@
 				  aria-label="close"
 				></button>
 			</div>
-	</main>
-
-	<footer>
-		<article>
-			<address>
-				<div>
-					<div class="area">
-						<h1>Info</h1>
-						<p>브랜드 소개</p>
-						<p>창업 안내</p>
-						<p>채용</p>
-					</div>
-				</div>
-				<div>
-					<div class="area">
-						<h1>Contact Us</h1>
-						<p>고객센터</p>
-						<p>000-1234-5678</p>
-						<p>서울특별시 성동구 성수동2가 280</p>
-					</div>
-				</div>
-				<div class="logo">
-					<img src="../../resources/merge cake logo.png" alt="Merge cake 로고">
-				</div>
-			</address>
-		</article>
-	</footer>
+	<footer></footer>
 
 	<script type="module" src="./admin-user.js"></script>
 

@@ -1,6 +1,18 @@
 import * as Api from "../api.js";
 import { validatePhoneNumber, validatePassword } from "../useful-functions.js";
+import { header } from "../components/header.js";
+import { footer } from "../components/footer.js";
 
+insertHeader()
+insertFooter()
+
+async function insertHeader() {
+  document.body.insertAdjacentElement("afterBegin" , header)
+}
+
+async function insertFooter() {
+  document.body.insertAdjacentElement("beforeend" , footer)
+}
 // 요소(element), input 혹은 상수
 const $userName = document.querySelector(".user-name");
 const $email = document.querySelector("#email");
@@ -83,6 +95,16 @@ const getUsers = async (email) => {
 };
 
 const userInfo = await getUsers(email);
+//회원인지 확인
+checkUser()
+async function checkUser() {
+  await Api.get(`/mypage/orderlist/${email}`);
+  if(email === null){
+    alert('로그인이 필요합니다');
+    window.location.href="/login"
+    }
+}
+
 const setUserInfo = (targetUserInfo) => {
   const name = targetUserInfo.FULL_NAME ?? "";
   const password = targetUserInfo.PASSWORD ?? "";
@@ -93,7 +115,7 @@ const setUserInfo = (targetUserInfo) => {
   const detailAddress = targetUserInfo.ADDRESS2 ?? "";
   const extraAddress = targetUserInfo.ADDRESS1_REF ?? "";
 
-  $userName.innerText = (name ? name : "회원") + "님";
+  $userName.innerText = (name ? name : "mergy 회원") + "님";
   $email.innerText = email;
   $nameInput.value = name;
   $passwordInput.value = password;

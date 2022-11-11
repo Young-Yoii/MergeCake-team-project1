@@ -5,7 +5,7 @@ let user = document.querySelector('.user-name');
 const email = sessionStorage.getItem("email");
 if (!email){
   user.innerHTML = '비회원님';
-}
+}else{
 
 const getUsers = async (email) => {
   const userList = await APi.get("/api/userlist");
@@ -14,12 +14,14 @@ const getUsers = async (email) => {
 
 const userInfo = await getUsers(email);
 
+console.log(userInfo);
+
 const setUserName = (userName) => {
     user.innerHTML = `${userName.FULL_NAME !== undefined ? userName.FULL_NAME + '님' : "머지회원님"}`
 }
 
 setUserName(userInfo);
-
+}
 let num = 0;
 
 const $checkAll = document.querySelector(".check-all");
@@ -131,13 +133,14 @@ $deleteBtn.addEventListener('click', ()=>{
 // 수량 증감에 따라 주문 금액 변함
 // }
 
-
 function totalPrice() {
-
   const $totalPrice = document.querySelector('.order-container > div');
   let price = 0;
   const $items = document.querySelectorAll('td[class="price"]');
-  $items.forEach(x=>price = price + parseInt(x.innerText));
+  $items.forEach((x,i)=>{
+    price = price + parseInt(x.innerText);
+  });
+  
   $totalPrice.innerText = '총 금액 ' + (Number(price) + 3000*($items.length));
 }
 
