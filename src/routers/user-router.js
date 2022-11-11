@@ -147,14 +147,14 @@ userRouter.get(
 userRouter.post("/mail", async (req, res, next) => {
   // 인증번호 생성
   const generateRandomString = () => {
-    const charList = ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz', '?!@'];
+    const charList = ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz', '?!@', '0123456789'];
 
     let result = '';
     let selectedChar = '';
 
-    for (let i = 0; i < 7; i++) {
-      if (i < 3) selectedChar = charList[i];
-      else selectedChar = charList[Math.floor(Math.random() * 3)];
+    for (let i = 0; i < 8; i++) {
+      if (i < 4) selectedChar = charList[i];
+      else selectedChar = charList[Math.floor(Math.random() * 4)];
 
       result += selectedChar.charAt(Math.floor(Math.random() * selectedChar.length));
     }
