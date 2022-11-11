@@ -157,7 +157,7 @@ async function deleteOrderData(e) {
       await Api.delete(`/admin/ordercheck/${orderIdToDelete}`);
   
       // 삭제 성공
-      alert("주문 정보가 삭제되었습니다.");
+      alert("주문이 취소 되었습니다.");
   
       // 삭제한 아이템 화면에서 지우기
       const deletedItem = document.querySelector(`#order-${orderIdToDelete}`);

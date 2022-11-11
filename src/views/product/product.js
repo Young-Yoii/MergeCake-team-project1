@@ -1,3 +1,19 @@
+
+import { header } from "../components/header.js";
+import { footer } from "../components/footer.js";
+
+insertHeader()
+insertFooter()
+
+async function insertHeader() {
+  document.body.insertAdjacentElement("afterBegin" , header)
+}
+
+async function insertFooter() {
+  document.body.insertAdjacentElement("beforeend" , footer)
+}
+
+
 // 이전 버튼
 // const $prevBtn = document.querySelector('.prev');
 // const $nextBtn = document.querySelector('.next');

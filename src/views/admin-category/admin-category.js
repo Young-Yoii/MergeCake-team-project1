@@ -113,12 +113,11 @@ async function render() {
         alert("삭제되었습니다.");
         // 삭제한 아이템 화면에서 지우기
         e.target.closest('li').remove();
-        window.location.href = "/admin-category"
         } catch (err) {
           alert(`삭제 과정에서 오류가 발생하였습니다: ${err}`);
         }
       }else{
-        window.location.href = "/admin-category"
+        return;
       }
   }
 
@@ -158,18 +157,19 @@ async function render() {
         const divEl = document.createElement('div');
           divEl.setAttribute('class' ,'button-wrap');
         const updateBtn = document.createElement('button');
-          updateBtn.dataset.id = resultApi._id;
+          updateBtn.dataset.name = resultApi.CATEGORY_NAME;
           updateBtn.dataset.no = resultApi.CATEGORY_NO;
         const deleteBtn = document.createElement('button');
-          deleteBtn.dataset.id = resultApi._id;
+          deleteBtn.dataset.name = resultApi.CATEGORY_NAME;
           deleteBtn.dataset.no = resultApi.CATEGORY_NO;
       if (flag) {
         spanEl.dataset.id = resultApi._id;
         spanEl.dataset.no = resultApi.CATEGORY_NO;
-        flag = false
+        spanEl.dataset.name = resultApi.CATEGORY_NAME;
       } else {
         spanEl.dataset.id = resultApi._id;
         spanEl.dataset.no = resultApi.CATEGORY_NO;
+        spanEl.dataset.name = resultApi.CATEGORY_NAME;
       }
 
       spanEl.textContent = result;
@@ -246,7 +246,7 @@ async function optionDelete(e) {
       alert("삭제되었습니다.");
       
       // 삭제한 아이템 화면에서 지우기
-      e.target.closest('li').remove();
+      e.target.closest('tr').remove();
   
     } catch (err) {
       alert(`삭제 과정에서 오류가 발생하였습니다: ${err}`);
@@ -288,10 +288,10 @@ async function optionUpdate(e) {
 
   await Api.patch(`/admin/category/${categoryNo}`, { PRODUCT_NAME, DETAIL });
 
-  const ProductName = e.target.closest('li').children[0];
-  const Kcal = e.target.closest('li').children[1];
-  const Gram = e.target.closest('li').children[2];
-  const Price = e.target.closest('li').children[3];
+  const ProductName = e.target.closest('tr').children[0];
+  const Kcal = e.target.closest('tr').children[1];
+  const Gram = e.target.closest('tr').children[2];
+  const Price = e.target.closest('tr').children[3];
 
   ProductName.textContent = newProductName;
   Kcal.textContent = newKcal;
@@ -301,7 +301,7 @@ async function optionUpdate(e) {
 
 
 //옵션추가
-if ( $optionAddButton) {
+if ($optionAddButton) {
    $optionAddButton.addEventListener('click', async function (e) {
     if (selectedCategoryId !== null) {
       let $optionKcal = document.querySelector("#optionKcal").value;
@@ -319,18 +319,20 @@ if ( $optionAddButton) {
 
       await Api.post(`/admin/category/${categoryNo}`, { PRODUCT_NAME, DETAIL })
       $optionContentEl.insertAdjacentHTML('beforeend',
-        `<li>
-          <span>${$optionName}</span>
-          <span>${$optionPrice}</span>
-          <span>${$optionKcal}</span>
-          <span>${$optionGram}</span>
-          <button id="optionUpdateButton" data-no=${categoryNo} data-name=${$optionName}>수정</button>
-          <button id="optionDeleteButton" data-no=${categoryNo} data-name=${$optionName}>삭제</button>
-        </li>`
+        `<tr>
+          <td>${$optionName}</td>
+          <td>${$optionPrice}</td>
+          <td>${$optionKcal}</td>
+          <td>${$optionGram}</td>
+          <td>
+          <button class="optionUpdateButton" data-no=${categoryNo} data-name=${$optionName}>수정</button>
+          <button class="optionDeleteButton" data-no=${categoryNo} data-name=${$optionName}>삭제</button>
+          </td>
+        </tr>`
       )
 
-      const $optionUpdateButton = document.querySelector("#optionUpdateButton");
-      const $optionDeleteButton = document.querySelector("#optionDeleteButton");
+      const $optionUpdateButton = document.querySelector(".optionUpdateButton");
+      const $optionDeleteButton = document.querySelector(".optionDeleteButton");
       $optionUpdateButton.addEventListener('click', optionUpdate);
       $optionDeleteButton.addEventListener('click', optionDelete); 
     } else {

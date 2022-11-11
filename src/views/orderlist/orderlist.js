@@ -43,7 +43,7 @@ const userInfo = await getUsers(email);
 let user = document.getElementById('userName');
 
 const setUserName = (userName) => {
-    user.innerHTML = (!userName ? userName : "merge") + "님";
+    user.innerHTML = (userName.FULL_NAME ? userName.FULL_NAME : "merge") + "님";
 }
 
 setUserName(userInfo)

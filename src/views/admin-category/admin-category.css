@@ -116,13 +116,17 @@ h2 {
     content: "·";
 }
 
+.button-wrap {
+    display: flex;
+}
+
 .updateBtn , .deleteBtn, .optionUpdateButton, .optionDeleteButton  {
     padding: 2px;
     border: 1px solid hsl(271, 74%, 85%);
     color: #000;
-    /* border:none; */
     border-radius: 5px; 
     background: none;
+    margin: 0px 1px;
 }
 
 .updateBtn:hover , .deleteBtn:hover, .optionUpdateButton:hover, .optionDeleteButton:hover {
@@ -146,6 +150,7 @@ span.option-input {
     border-radius: 10px;
     background-color: #f3f3f3;
     border: none;
+    padding: 8px;
 }
 
 .opt-list {
