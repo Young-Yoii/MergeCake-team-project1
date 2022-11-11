@@ -54,13 +54,14 @@ const getUsers = async (role) => {
 
 const userInfo = await getUsers(role);
 
+if(role){
 function confirmAdmin() {
   if(userInfo.ROLE === 'admin'){
     $admin.style.display = "block";
     $cart.style.display = "none";
     $mypage.style.display = "none";
   }
-  else if(userInfo.ROLE === undefined || userInfo.ROLE === 'user'){
+  else {
     $admin.style.display = "none";
     $cart.style.display = "block";
     $mypage.style.display = "block";
@@ -68,5 +69,10 @@ function confirmAdmin() {
   return;
 }
 confirmAdmin(userInfo);
+} else {
+  $admin.style.display = "none";
+  $cart.style.display = "block";
+  $mypage.style.display = "block";
+}
 
 export { header }
