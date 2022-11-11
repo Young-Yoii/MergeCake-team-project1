@@ -1,5 +1,25 @@
 import * as APi from "../api.js";
 
+let user = document.querySelector('.user-name');
+
+const email = sessionStorage.getItem("email");
+if (!email){
+  user.innerHTML = '비회원님';
+}
+
+const getUsers = async (email) => {
+  const userList = await APi.get("/api/userlist");
+  return userList.find((user) => user.EMAIL === email);
+};
+
+const userInfo = await getUsers(email);
+
+const setUserName = (userName) => {
+    user.innerHTML = `${userName.FULL_NAME !== undefined ? userName.FULL_NAME + '님' : "머지회원님"}`
+}
+
+setUserName(userInfo);
+
 let num = 0;
 
 const $checkAll = document.querySelector(".check-all");
