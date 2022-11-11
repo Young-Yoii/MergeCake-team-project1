@@ -146,14 +146,31 @@ userRouter.get(
 //메일 보내서 임시비밀번호로 비밀번호 변경
 userRouter.post("/mail", async (req, res, next) => {
   // 인증번호 생성
-  let authNum = Math.random().toString().substr(2, 10);
+  const generateRandomString = () => {
+    const charList = ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz', '?!@', '0123456789'];
+
+    let result = '';
+    let selectedChar = '';
+
+    for (let i = 0; i < 8; i++) {
+      if (i < 4) selectedChar = charList[i];
+      else selectedChar = charList[Math.floor(Math.random() * 4)];
+
+      result += selectedChar.charAt(Math.floor(Math.random() * selectedChar.length));
+    }
+
+    return result;
+  }
+
+  let randomStr = generateRandomString();
+
   // nodeMailer 옵션
   const mailOptions = {
     from: "Mergecake@gmail.com",
     //process.env.NODEMAILER_USER,
     to: req.body.EMAIL,
     subject: "임시 비밀번호 발급.",
-    text: "임시 비밀번호입니다. " + authNum,
+    text: "임시 비밀번호입니다. " + randomStr,
     html: `
       <div style="text-align: center; background-color: #FEF7FF;" >
         <div style="background-color: #2C7CB7"; width: 200px;>
@@ -162,7 +179,7 @@ userRouter.post("/mail", async (req, res, next) => {
         <h1 style="color: #B975D9">임시 비밀번호 발급</h1>
         <br />
         <p>임시비밀번호가 발급되었습니다.</p>
-        <p>${authNum}</p>
+        <p>${randomStr}</p>
         <p>임시 비밀번호로 로그인 후 비밀번호를 변경해주세요</p>
       </div>
     `,
@@ -170,7 +187,7 @@ userRouter.post("/mail", async (req, res, next) => {
 
   try {
     const { EMAIL } = req.body;
-    const users = await userService.setPassword(EMAIL, authNum);
+    const users = await userService.setPassword(EMAIL, randomStr);
 
     //   // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
     //   res.status(200).json(users);
@@ -185,7 +202,7 @@ userRouter.post("/mail", async (req, res, next) => {
       if (error) {
         console.log(error);
       }
-      res.status(200).json(authNum);
+      res.status(200).json(randomStr);
       transPort.close();
     });
   } catch (e) {

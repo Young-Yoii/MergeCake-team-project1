@@ -1,5 +1,5 @@
 import * as Api from "../api.js";
-import { validateEmail } from "../useful-functions.js";
+import { validateEmail, validatePassword } from "../useful-functions.js";
 
 // 요소(element), input 혹은 상수
 const $emailInput = document.querySelector("#email-input");
@@ -13,7 +13,7 @@ const $sendButton = document.querySelector(".send-button");
 
 // 잘 입력했는지 확인
 const isEmailValid = (email) => validateEmail(email);
-// const isPasswordValid = (password) => validatePassword(password);
+const isPasswordValid = (password) => validatePassword(password);
 
 // 로그인 진행
 $submitButton.addEventListener("click", async (e) => {
@@ -27,13 +27,13 @@ $submitButton.addEventListener("click", async (e) => {
     return alert("이메일 형식이 맞지 않습니다.");
   }
 
-  // if (!isPasswordValid(password)) {
-  //   return alert("비밀번호 형식이 맞지 않습니다.");
-  // }
+  if (!isPasswordValid(password)) {
+    return alert("비밀번호 형식이 맞지 않습니다.");
+  }
 
-  // if (!isEmailValid(email) && !isPasswordValid(password)) {
-  //   return alert("이메일, 비밀번호 형식이 맞지 않습니다.");
-  // }
+  if (!isEmailValid(email) && !isPasswordValid(password)) {
+    return alert("이메일, 비밀번호 형식이 맞지 않습니다.");
+  }
 
   // 로그인 api 요청
   try {
