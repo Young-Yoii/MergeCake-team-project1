@@ -1,9 +1,5 @@
-@import "../header.css";
-@import "../footer.css";
-
-input:read-only {
-    border: 0 solid black;
-  }
+@import "../components/header.css";
+@import "../components/footer.css";
   
 /* upper menu */
 

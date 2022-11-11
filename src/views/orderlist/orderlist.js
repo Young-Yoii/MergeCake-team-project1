@@ -1,4 +1,17 @@
 import * as Api from "../api.js";
+import { header } from "../components/header.js";
+import { footer } from "../components/footer.js";
+
+insertHeader()
+insertFooter()
+
+async function insertHeader() {
+  document.body.insertAdjacentElement("afterBegin" , header)
+}
+
+async function insertFooter() {
+  document.body.insertAdjacentElement("beforeend" , footer)
+}
 
 // 요소(element), input 혹은 상수
 const $ordersContainer = document.getElementById("ordersContainer");
@@ -34,7 +47,7 @@ const setUserName = (userName) => {
 }
 
 setUserName(userInfo)
-
+//회원확인
 async function insertOrders() {
   const orders = await Api.get(`/mypage/orderlist/${email}`);
   if(email === null){

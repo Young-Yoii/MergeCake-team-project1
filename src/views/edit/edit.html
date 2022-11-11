@@ -8,20 +8,21 @@
     <script defer src="./edit.js" type="module"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
-    <title>마이페이지-정보수정</title>
+    <title>mergy cake</title>
   </head>
   <body>
     <header></header>
 
-    <h2>마이페이지</h2>
-
-    <div class="user-container">
-      <p class="user-name"></p>
-      <div class="user-info">
-        <a href="/orderlist">주문조회</a>
-        <a href="/edit">정보수정</a>
-      </div>
-    </div>
+    <section class="main-menu user-container">
+      <nav>
+          <div class="user-name" id="userName">
+          </div>
+          <div class="menu">
+              <a href="/orderlist" class="user-order">주문조회</a>
+              <a href="/edit" class="user-edit">정보수정</a>
+          </div>
+      </nav>
+    </section>
 
     <form id="more-information-form">
       <!-- 기본정보 -->
@@ -47,9 +48,7 @@
                     readonly
                   />
                   <span id="password-error" class="input-error"></span>
-                  <button type="button" class="edit-btn change-password-btn">
-                    비밀번호 변경
-                  </button>
+                  <button type="button" class="edit-btn">비밀번호 변경</button>
                 </div>
                 <div class="button-container">
                   <button
@@ -186,5 +185,6 @@
         </table>
       </div>
     </form>
+    <footer></footer>
   </body>
 </html>

@@ -157,11 +157,3 @@
 .cancle {
     background-color: hsl(271, 74%, 85%);
 }
-
-footer address .area li::after {
-    top: 3px;
-}
-
-.area.second li::after {
-    top: 1px;
-}
