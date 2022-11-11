@@ -60,7 +60,7 @@ function confirmAdmin() {
     $cart.style.display = "none";
     $mypage.style.display = "none";
   }
-  else {
+  else if(userInfo.ROLE === undefined || userInfo.ROLE === 'user'){
     $admin.style.display = "none";
     $cart.style.display = "block";
     $mypage.style.display = "block";
