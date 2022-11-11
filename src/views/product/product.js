@@ -1,4 +1,18 @@
 import * as APi from "../api.js";
+import { header } from "../components/header.js";
+import { footer } from "../components/footer.js";
+
+insertHeader()
+insertFooter()
+
+async function insertHeader() {
+  document.body.insertAdjacentElement("afterBegin" , header)
+}
+
+async function insertFooter() {
+  document.body.insertAdjacentElement("beforeend" , footer)
+}
+
 // DB에서 항목들을 가져와서 렌더링 진행
 
 const getItems = async () => {
@@ -126,16 +140,42 @@ const $orderSubmit = document.querySelector('#orderSubmit');
 $orderSubmit.addEventListener('click', ()=>{
     const $options = document.querySelectorAll('input[type="radio"]:checked');
 
+    console.log($options);
+
     if ($options.length === 0) {
         alert('옵션을 선택해주세요.');
         return;
     }
 
-    const token = JSON.parse(sessionStorage.getItem('token')); // 토큰 가져오기
+    const token = sessionStorage.getItem('token'); // 토큰 가져오기
     console.log(token);
     if (!token){
         window.location.href = '/login';
     }else{
+        // 여기에 추가
+        const data = {};
+
+        const $options = document.querySelectorAll('input[type="radio"]:checked');
+
+        const btns = document.querySelectorAll('input[type="radio"]:checked+div>span');
+
+        const lettering = document.querySelector('input[type="text"]').value;
+        
+        let total = 0; // 기본값
+        if (lettering) total = 5000;
+        const options = btns.forEach(x=>{
+            const [key, value] = (x.className).split(',').slice(0,2);
+            const [KCAL, G, PRICE] = (x.className).split(',').slice(2,5);
+            console.log((x.className).split(',').slice(2,5));
+            total += Number(PRICE);
+            console.log(key, value);
+            data[key] = value;
+        });
+        data["문구"] = lettering;
+        data['price'] = total;
+
+        localStorage.setItem(1000, JSON.stringify(data));
+    
         window.location.href = '/shipping';
     }
 })
