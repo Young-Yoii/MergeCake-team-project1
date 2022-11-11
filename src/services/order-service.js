@@ -33,10 +33,9 @@ class OrderService {
   }
 
   // 1-2. 주문 추가
-  async addShipping(maxOrderNo, sumprice) {
-    // hyun - email 가져오기
+  async addShipping(userEmail, maxOrderNo, sumprice) {
     const shippingInfo = {
-      EMAIL: "test@naver.com",
+      EMAIL: userEmail,
       ORDER_NO: maxOrderNo,
       TOTAL_PRICE: sumprice
     };

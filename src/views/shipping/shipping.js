@@ -123,7 +123,8 @@ $submitButton.addEventListener("click", async (e) => {
     data[i].OPTIONS = JSON.parse(localStorage.getItem(x));
   })  
   // 서버에 post 요청하기
-  const postData = await Api.post('/cart', data);
+  const email = sessionStorage.getItem("email");
+  const postData = await Api.post(`/cart/${email}`, data);
   localStorage.clear();
 
   // isChecked = true 일 경우
@@ -131,7 +132,7 @@ $submitButton.addEventListener("click", async (e) => {
   if (isChecked) {
     try {
       // DB 가져오기
-      const email = sessionStorage.getItem("email");
+      // const email = sessionStorage.getItem("email");
 
       const getUsers = async (email) => {
         const userList = await Api.get("/api/userlist");
