@@ -110,7 +110,7 @@ async function insertOrders() {
 		    </select>
       </td>
       <td>
-        <button class="cancle-button" id="deleteButton-${order_no}">주문 취소</button>
+        <button class="cancle-button" id="deleteButton-${order_no}">주문 삭제</button>
       </td>
 	  </tr>
      `
@@ -157,7 +157,7 @@ async function deleteOrderData(e) {
       await Api.delete(`/admin/ordercheck/${orderIdToDelete}`);
   
       // 삭제 성공
-      alert("주문이 취소 되었습니다.");
+      alert("주문이 삭제 되었습니다.");
   
       // 삭제한 아이템 화면에서 지우기
       const deletedItem = document.querySelector(`#order-${orderIdToDelete}`);
@@ -168,7 +168,7 @@ async function deleteOrderData(e) {
       closeModal();
 
     } catch (err) {
-      alert(`주문정보 삭제 과정에서 오류가 발생하였습니다: ${err}`);
+      alert(`주문 삭제 과정에서 오류가 발생하였습니다: ${err}`);
     }
   }
   
