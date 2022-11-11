@@ -1,0 +1,9 @@
+# Dependencies
+node_modules
+yarn.lock
+package-lock.json
+.env
+passport
+api-router.js
+mail-router.js
+admin-router.js

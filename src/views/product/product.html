@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+  <!--파비콘-->
+  <link rel="icon" type="image/png" sizes="16x16" href="../resources/pavicon.png"/>
+  <!--폰트-->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  <!--구글폰트:아이콘-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <!-- 커스텀 css, js -->
+  <link rel="stylesheet" type="text/css" href="product.css" />
+
+  <title>케이크 만들기 | $merge cake</title>
+</head>
+<body>
+  <header></header>
+
+  <section class="product-container">
+    <div class ="product-info-wrap">
+      <div class="product-img">
+         <img src="./assets/logo.png"  width="90%" />
+      </div>
+      <p class="product-price">가격 </p>
+      <p class="product-price" id="productPrice">0 원</p>
+      <div class="product-info">
+        <div class="info-tit">
+          <p class="detailInfo">상세정보</p>
+          <div class="info-arrow-wrap">
+            <span class="info-arrow-top">↑</span>
+            <span class="info-arrow-bottom">↓</span>
+          </div><!--이후 svg로 대체-->
+        </div>
+        <div class="info-text">
+          <p class="kcal">칼로리 0</p>
+          <p class="g">중량(g) 0</p>
+        </div>
+      </div>
+    </div>
+
+    <!--케이크 상세-->
+
+    <div id="opt-container" class="product-opt-wrap">
+      
+ 
+      <div class="product-opt-button">
+        <button class="prev">이전</button>
+        <button class="next">다음</button>    
+      </div>
+    </div>  
+  </section>
+
+  <section class="submit-area">
+    <div class="button-container">
+      <button id="basketSubmit" class="basket-submit">장바구니 담기</button>
+      <button id="orderSubmit" class="order-submit">바로 결제하기</button>
+    </div>
+  </section>
+
+	<footer></footer>
+
+  <script defer type="module" src="product.js"></script>
+  <script defer type="module" src="LocalStorage.js"></script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+@import "../components/header.css";
+@import "../components/footer.css";
+
+/* main menu */
+.main-menu {
+    width: 95%;
+    background : hsl(175deg 32% 43%);
+    display : flex;
+    align-items: center;
+    padding: 70px 50px 40px 50px;
+    margin: 0 auto;
+    border-radius: 20px;
+    margin-bottom: 150px;
+    box-sizing: border-box;
+    color:#fff;
+}
+
+
+.main-menu > nav {
+    width : 100%;
+    display : flex;
+    justify-content : space-between;
+}
+
+.main-menu nav a {
+    margin-left : 20px;
+    color:#fff;
+}
+
+.main-menu .menu{
+    display : flex;
+    align-items: center;
+}
+
+.admin {
+    font-size : 30px;
+}
+
+/* main */
+main {
+    height : 800px;
+    width : 100%;
+}
+
+h2 {
+    font-size: 1.08rem;
+    font-weight: 600;
+    padding-bottom: 5px;
+
+}
+
+
+.admin-category {
+    display:flex;
+    justify-content: space-evenly;
+    height: auto;
+    margin-bottom: 100px;
+    align-items: center;
+}
+
+/* category list show */
+.admin-category-inner {
+    width:20%;
+}
+
+.admin-cate-tit {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.admin_cate_edit{
+    width:50%;
+}
+
+.admin-cate-list-wrap{
+    width:100%;
+    margin: 6px 0px;
+    overflow: auto;
+    height: 100%;
+    background-color: #f3f3f3;
+    border-radius: 20px;
+}
+
+
+.edit-button button , .option-add-button{
+    padding: 5px 10px;
+    background-color: hsl(271, 74%, 85%);
+    color: #000;
+    border:none;
+    border-radius: 5px; 
+}
+
+.edit-button button:hover, .option-add-button:hover {
+    background-color: #000;
+    color:#fff;
+    transition: all 1s;
+}
+
+.admin-cate-list{
+    padding: 25px
+}
+
+.category-list {
+    padding:10px;
+}
+
+.category-wrap {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0px;
+}
+
+.category-wrap span::before{
+    content: "·";
+}
+
+.button-wrap {
+    display: flex;
+}
+
+.updateBtn , .deleteBtn, .optionUpdateButton, .optionDeleteButton  {
+    padding: 2px;
+    border: 1px solid hsl(271, 74%, 85%);
+    color: #000;
+    border-radius: 5px; 
+    background: none;
+    margin: 0px 1px;
+}
+
+.updateBtn:hover , .deleteBtn:hover, .optionUpdateButton:hover, .optionDeleteButton:hover {
+    background-color: #000;
+    color:#fff;
+    transition: all 1s;
+    border: 1px solid #000;
+}
+
+span.option-input {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
+    align-items: center;
+}
+
+.input-wrap input {
+    width: 500px;
+    height:30px;
+    margin: 0px 10px;
+    border-radius: 10px;
+    background-color: #f3f3f3;
+    border: none;
+    padding: 8px;
+}
+
+.opt-list {
+    text-align: center;
+}
+.opt-list ul li span{
+    padding: 0 20px;
+}
+
+.option-tit{
+    padding-left: 10%;
+}
+
+/* category setting */
+/* table default */
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 0 auto;
+}
+  
+tr {
+    border-bottom: 1px solid #f4f6f7;
+}
+  
+th {
+    background-color: #f3f3f3;
+    text-align: center;
+    padding: 10px;
+    width:20%;
+}
+  
+td {
+    padding: 8px 0 6px 15px;
+}
+
+/*-- table default --*/
+
+
+.cate {
+    margin-top:20px;
+}
+
+.cate-update-button{
+    text-align: center;
+}
+
+.option {
+    margin-bottom: 150px;
+}
+
+.modal .box {
+    text-align: center;
+  }
+.modal .buttons {
+    justify-content: center;
+}
+
+footer address .area li::after {
+    top: 3px;
+}
+
+.area.second li::after {
+    top: 1px;
+}
+  

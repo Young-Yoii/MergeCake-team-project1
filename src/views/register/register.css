@@ -1,0 +1,77 @@
+@import "../components/header.css";
+
+.title{
+  text-align: center;
+  margin-top: 150px;
+}
+.logo img {
+  width: 15%;
+}
+
+h2 {
+  text-align: center;
+}
+
+/* form-container */
+.form-container {
+  width: 460px;
+  background-color: hsl(271, 74%, 85%);
+  border-radius: 5px;
+
+  padding: 20px;
+  margin: 50px auto 10px auto;
+}
+
+/* input-style */
+.input {
+  font-size: 18px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+
+  font-weight: 400;
+  line-height: 30px;
+  padding: 10px 10px;
+}
+
+input:focus {
+  border: solid 1px hsl(272, 99%, 36%);
+  outline: none;
+}
+
+.input-error {
+  color: red;
+  font-size: 13px;
+}
+
+.correct-input {
+  color: rgb(103, 15, 255);
+}
+
+label {
+  display: inline-block;
+  margin: 16px 0 8px;
+}
+
+label::after {
+  content: '*';
+  color: red;
+}
+
+/* submitButton */
+.submit-button {
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  background-color: #000000;
+  color: #ffffff;
+  margin-top: 10px;
+  padding: 15px 0;
+}
+
+.submit-button:hover {
+  background-color: hsl(272, 50%, 34%);
+}

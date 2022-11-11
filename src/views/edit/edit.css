@@ -1,0 +1,135 @@
+@import "../components/header.css";
+@import "../components/footer.css";
+
+input:read-only {
+  border: 0 solid black;
+}
+
+h2 {
+  font-size: 20px;
+  padding : 70px;
+  text-align: center;
+}
+
+/* page name */
+.title-area h1 {
+  font-size: 20px;
+  padding : 70px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* user-container */
+.user-container {
+  width: 95%;
+  background : hsl(271, 74%, 85%);
+  display : flex;
+  align-items: center;
+  padding: 70px 50px 40px 50px;
+  margin: 0 auto;
+  border-radius: 20px;
+  color:#000;
+}
+
+.main-menu > nav {
+  width : 100%;
+  display : flex;
+  justify-content : space-between;
+}
+
+.main-menu nav a {
+  margin-left : 20px;
+}
+
+.main-menu .menu{
+  display : flex;
+  align-items: center;
+}
+
+.user-name {
+  flex-grow: 1;
+  font-size: 30px;
+}
+
+.user-info {
+  font-size: 15px;
+}
+
+/* info-table */
+.info-container {
+  font-size: 15px;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 150px;
+}
+
+.info-list {
+  width: 100%;
+  margin-top: 50px;
+  border: none;
+}
+
+.info-list .form > .input-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+caption {
+  text-align: left;
+  font-size: 1.08rem;
+  font-weight: bold;
+  padding-bottom: 5px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr {
+  border-bottom: 1px solid #f4f6f7;
+}
+
+th {
+  background-color: #f3f3f3;
+  text-align: left;
+
+  padding: 12px 0 10px 14px;
+}
+
+td {
+  padding: 8px 0 6px 15px;
+}
+
+/* edit button */
+.edit-btn {
+  height: 30px;
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  padding: 0 10px;
+  background-color: hsl(271, 74%, 85%);;
+  line-height: 24px;
+  font-size: 11px;
+  margin-left: 8px;
+}
+
+.edit-btn:hover {
+  background-color: hsl(272, 50%, 34%);
+  color: #efefef;
+}
+
+.button-container {
+  display: none;
+}
+
+/* validate */
+.input-error {
+  color: red;
+  font-size: 13px;
+}
+
+.correct-input {
+  color: rgb(103, 15, 255);
+}

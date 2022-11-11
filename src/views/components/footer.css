@@ -1,0 +1,73 @@
+  /* footer */
+  footer {
+    width : 100%;
+    height : 100%;
+    border-top : 1px solid hsl(271, 74%, 85%);
+    width: 90%;
+    margin: 0 auto;
+  }
+  
+  address {
+    height:100%;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-style: normal;
+  }
+  
+  
+  address div {
+    height : 100%;
+  }
+  
+  footer address h1 {
+    font-weight: bold;
+    font-size : 20px;
+  }
+  
+  footer address .area{
+    display : flex;
+    padding: 20px 10px;
+  }
+  
+  footer address .area li {
+    padding: 0px 10px;
+    position: relative;
+  }
+  
+  footer address .area li::after {
+    content:"";
+    width: 1px;
+    height: 12px;
+    background-color: #000;
+    display: block;
+    position: absolute;
+    top: 7px;
+    left: 0px;
+  }
+
+  .area.second li::after {
+    content:"";
+    width: 1px;
+    height: 12px;
+    background-color: gray;
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 0px;
+  }
+  
+  .area li:first-child::after {
+    display: none;
+  }
+  
+  .area.second li{
+    font-size: 0.8rem;
+    color: gray;
+  }
+  
+  footer .logo img{
+    width: 40%;
+  }
+  

@@ -1,0 +1,235 @@
+@import "../components/header.css";
+@import "../components/footer.css";
+  
+/* upper menu */
+
+.upper-menu {
+    width : 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.logo {
+    width:15%;
+}
+
+.upper-menu > nav {
+    width : 100%;
+    height : 100%;
+    display : flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.upper-menu > nav > .logo {
+    width : 200px;
+}
+
+.upper-menu nav a {
+    margin-right : 20px;
+}
+
+.upper-menu .logo img {
+   width : 100%;
+}
+
+.upper-menu .menu{
+    display : flex;
+    align-items: center;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+
+/* page name */
+.title-area h1 {
+    font-size: 20px;
+    padding : 70px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* main menu */
+.main-menu {
+    width: 95%;
+    background : hsl(271, 74%, 85%);
+    display : flex;
+    align-items: center;
+    padding: 70px 50px 40px 50px;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+.main-menu > nav {
+    width : 100%;
+    display : flex;
+    justify-content : space-between;
+}
+
+.main-menu nav a {
+    margin-left : 20px;
+}
+
+.main-menu .menu{
+    display : flex;
+    align-items: center;
+}
+
+.admin {
+    font-size : 30px;
+}
+
+/* main */
+main {
+    height : 100%;
+    width : 100%;
+}
+
+/* table */
+
+.search-area {
+    height : auto;
+    display : flex;
+    justify-content: center;
+}
+
+.search {
+    width : 80%;
+    height : 100px;
+    text-align: center;
+}
+
+.search .search-input {
+    border : 0;
+    text-align: center;
+    margin : 0;
+    width : 80%;
+}
+
+.search .right {
+    display : flex;
+}
+
+.search .search-input, .submit {
+    padding : 0;
+}
+
+.search .search-input {
+    width : 90%;
+}
+
+.search .submit {
+    width : 10%;
+}
+
+.search select {
+    border : 0;
+    text-align : center;
+    width:100%;
+}
+
+.search .calendar {
+    border : 0;
+    text-align : center;
+    width : 100%;
+}
+
+.search td {
+    height : 40px;
+}
+
+.search td {
+    margin : 10px;
+}
+
+.history-area {
+    display : flex;
+    justify-content: center;
+    margin-bottom: 150px;
+}
+
+.history {
+    width : 80%;
+    text-align: center;
+    vertical-align: center;
+}
+
+.header-cell{
+    background: #f3f3f3;
+    padding : 15px;
+    border-radius: 10px;
+}
+
+.history tr {
+    border-bottom: 1px solid #f3f3f3;
+}
+
+.history th {
+    padding : 15px;
+    font-weight: 600;
+}
+
+.history td {
+    vertical-align: middle;
+    padding:20px 0px;
+}
+
+.history .product-info {
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cancle-button, .edit-btn {
+    padding: 5px 10px;
+    color: #000;
+    border-radius: 5px;
+}
+.cancle-button {
+    background-color: hsl(271, 74%, 85%);
+    border:none;
+}
+
+.edit-btn {
+    border: 1px solid hsl(271, 74%, 85%);
+    background: none;
+}
+
+
+.cancle-button:hover, .edit-btn:hover {
+    background-color: #000;
+    color:#fff;
+    transition: all 1s;
+}
+
+.waybill-input {
+    border-radius: 5px;
+    border: 1px solid #f3f3f3;
+}
+
+.state {
+    border-bottom: 1px solid #f3f3f3;
+    border-radius: 5px;
+    width: 155px;
+}
+
+.button-container {
+    /* background-color: red; */
+    display: none;
+  }
+
+
+/* 모달 */
+.modal .box {
+    text-align: center;
+}
+.modal .buttons {
+    justify-content: center;
+}
+.cancle {
+    background-color: hsl(271, 74%, 85%);
+}
