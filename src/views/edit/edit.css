@@ -31,7 +31,6 @@ h2 {
 
 .main-menu nav a {
   margin-left : 20px;
-  color:#000;
 }
 
 .main-menu .menu{
@@ -68,7 +67,8 @@ h2 {
 
 caption {
   text-align: left;
-  padding: 8px 0 6px 15px;
+  font-size: 1.08rem;
+  font-weight: bold;
 }
 
 table {

@@ -1,4 +1,17 @@
 import * as APi from "../api.js";
+import { header } from "../components/header.js";
+import { footer } from "../components/footer.js";
+
+insertHeader()
+insertFooter()
+
+async function insertHeader() {
+  document.body.insertAdjacentElement("afterBegin" , header)
+}
+
+async function insertFooter() {
+  document.body.insertAdjacentElement("beforeend" , footer)
+}
 
 let user = document.querySelector('.user-name');
 
@@ -17,7 +30,7 @@ const userInfo = await getUsers(email);
 console.log(userInfo);
 
 const setUserName = (userName) => {
-    user.innerHTML = `${userName.FULL_NAME !== undefined ? userName.FULL_NAME + '님' : "머지회원님"}`
+    user.innerHTML = `${userName.FULL_NAME !== undefined ? userName.FULL_NAME + '님' : "merge님"}`
 }
 
 setUserName(userInfo);
@@ -75,19 +88,6 @@ Object.keys(localStorage).forEach((x,i)=>{
       price = JSON.parse(localStorage.getItem(x))[keys[keys.length-1]];
     }
 
-  //   if (j===3){
-  //   const $div = document.createElement('div'); // div 만들기
-  //   const $input = document.createElement('input');
-
-  //   $input.setAttribute('type', 'number');
-  //   $input.setAttribute('value', 1);
-  //   $input.setAttribute('class', 'order-count');
-  //   $input.setAttribute('min', 0);
-
-  //   $div.appendChild($input);
-  //   $td.appendChild($div);
-  // }
-
   if (j===3){
     $td.setAttribute('class', 'price');
     $td.innerText = `${price}`;
@@ -140,8 +140,11 @@ function totalPrice() {
   $items.forEach((x,i)=>{
     price = price + parseInt(x.innerText);
   });
+
+  const totalPrice = (price + (3000*($items.length))).toLocaleString();
+  console.log(totalPrice )
   
-  $totalPrice.innerText = '총 금액 ' + (Number(price) + 3000*($items.length));
+  $totalPrice.innerHTML = `총 금액 <span class="total">${totalPrice}</span>`;
 }
 
 totalPrice();

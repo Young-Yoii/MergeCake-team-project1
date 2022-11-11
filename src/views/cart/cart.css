@@ -1,32 +1,37 @@
-@import "../reset.css";
-@import "../header.css";
-@import "../footer.css";
-
-* {
-  box-sizing: border-box;
-}
-
-a {
-  text-decoration: none;
-  color: #ffffff;
-}
-
-header {
-  height: 300px;
-}
+@import "../components/header.css";
+@import "../components/footer.css";
 
 h2 {
+  font-size: 20px;
+  padding : 70px;
   text-align: center;
 }
 
+
 /* user-container */
 .user-container {
-  height: 180px;
-  background-color: #f4f6f7b1;
-  padding: 0 60px;
+  width: 95%;
+  background : hsl(271, 74%, 85%);
+  display : flex;
+  align-items: center;
+  padding: 70px 50px 40px 50px;
+  margin: 0 auto;
+  border-radius: 20px;
+  color:#000;
+}
 
-  display: flex;
-  justify-content: center;
+.main-menu > nav {
+  width : 100%;
+  display : flex;
+  justify-content : space-between;
+}
+
+.main-menu nav a {
+  margin-left : 20px;
+}
+
+.main-menu .menu{
+  display : flex;
   align-items: center;
 }
 
@@ -38,6 +43,7 @@ h2 {
 .user-info {
   font-size: 15px;
 }
+
 
 /* product-table */
 .product-container {
@@ -65,8 +71,8 @@ tr {
 }
 
 th {
-  padding: 25px 0;
-  background-color: #f6f9fa;
+  padding: 12px 0 10px 0;
+  background-color: #f3f3f3;;
 }
 
 td {
@@ -76,17 +82,22 @@ td {
 
 /* 선택삭제 btn */
 .delete-btn {
+  height: 30px;
   display: inline-block;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
   padding: 0 10px;
-  border: 1px solid #d7dbdc;
-  background-color: #fff;
+  background-color: hsl(271, 74%, 85%);;
   line-height: 24px;
   font-size: 11px;
-  color: #646465;
-  cursor: pointer;
-
-  margin-top: 10px;
   margin-left: 8px;
+  margin-top: 5px;
+}
+
+.delete-btn:hover {
+  background-color: hsl(272, 50%, 34%);
+  color: #efefef;
 }
 
 /* 총 금액, 주문하기 btn */
@@ -101,12 +112,18 @@ td {
   font-size: 20px;
   background-color: #000000;
   color: #ffffff;
-  margin-top: 10px;
-  padding: 30px 100px;
+  margin-top: 15px;
+  padding: 20px 100px;
+  border-radius: 20px;
 }
 
 .order-btn:hover {
-  background-color: #0078ff;
+  background-color: hsl(272, 50%, 34%);
+}
+
+.total {
+  font-size: 2rem;
+  margin-top: 20px;
 }
 
 /* 모달창 */
@@ -184,4 +201,12 @@ td {
 .order-count {
   text-align: center;
   width : 100px;
+}
+
+footer address .area li::after {
+  top: 7px;
+}
+
+.area.second li::after {
+  top: 3px;
 }

@@ -115,7 +115,7 @@ const setUserInfo = (targetUserInfo) => {
   const detailAddress = targetUserInfo.ADDRESS2 ?? "";
   const extraAddress = targetUserInfo.ADDRESS1_REF ?? "";
 
-  $userName.innerText = (name ? name : "mergy 회원") + "님";
+  $userName.innerText = (name ? name : "merge") + "님";
   $email.innerText = email;
   $nameInput.value = name;
   $passwordInput.value = password;

@@ -1,24 +1,17 @@
-* {
-  box-sizing: border-box;
-}
+@import "../components/header.css";
 
-a {
-  text-decoration: none;
-  color: #888;
+.title{
+  text-align: center;
+  margin-top: 70px;
 }
-
-ol,
-ul {
-  list-style: none;
-}
-
-header {
-  height: 300px;
+.logo img {
+  width: 15%;
 }
 
 h2 {
   text-align: center;
 }
+
 
 /* form-container */
 .form-container {
@@ -27,7 +20,7 @@ h2 {
   border-radius: 5px;
 
   padding: 20px;
-  margin: 50px auto 10px auto;
+  margin: 50px auto;
 }
 
 /* input-style */
@@ -73,6 +66,16 @@ label {
   display: block;
   margin: 16px 0 8px;
 }
+
+label::after {
+  content: '*';
+  color: red;
+}
+
+.checkbox-label::after{
+  content: '';
+}
+
 
 .checkbox-label {
   display: inline;
