@@ -16,7 +16,7 @@ footer.innerHTML = `
       </ul>
     </div>
     <div class="logo">
-      <img src="../../resources/merge cake logo.png" alt="Merge cake 로고">
+      <img src="../../resources/mergy_qr.png" alt="Merge cake 큐알코드">
     </div>
   </address>
 `
