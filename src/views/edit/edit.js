@@ -312,8 +312,11 @@ $withdrawButton.addEventListener("click", async () => {
     await Api.delete(`/mypage/useredit/${email}`);
 
     alert("정상적으로 탈퇴되었습니다.");
+
+    sessionStorage.clear();
+    window.location.href = "/";
   } catch (err) {
     console.error(err);
-    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+    // alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
 });
