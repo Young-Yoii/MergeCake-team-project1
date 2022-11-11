@@ -19,8 +19,9 @@ $basketSubmit.addEventListener('click', function(e) {
     const btns = document.querySelectorAll('input[type="radio"]:checked+div>span');
     console.log(btns);
 
-    // const lettering = document.querySelector('input[type="text"]').value;
+    const lettering = document.querySelector('input[type="text"]').value;
     let total = 0; // 기본값
+    if (lettering) total = 5000;
     const options = btns.forEach(x=>{
         const [key, value] = (x.className).split(',').slice(0,2);
         const [KCAL, G, PRICE] = (x.className).split(',').slice(2,5);
@@ -29,8 +30,8 @@ $basketSubmit.addEventListener('click', function(e) {
         console.log(key, value);
         data[key] = value;
     });
+    data["문구"] = lettering;
     data['price'] = total;
-    // data["문구"] = lettering;
 
 
     console.log(data);
