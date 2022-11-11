@@ -35,11 +35,13 @@
     font-size : 30px;
 }
 
+/* page name */
 .title-area h1 {
     font-size: 20px;
     padding : 70px;
+    font-weight: 600;
     text-align: center;
-}
+  }
 
 /* table */
 

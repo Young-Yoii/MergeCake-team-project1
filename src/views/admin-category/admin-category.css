@@ -1,12 +1,6 @@
 @import "../components/header.css";
 @import "../components/footer.css";
 
-/* page name */
-.title-area h1 {
-    font-size : 30px;
-    text-align: center;
-}
-
 /* main menu */
 .main-menu {
     width: 95%;

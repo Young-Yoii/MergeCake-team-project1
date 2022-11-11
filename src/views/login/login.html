@@ -42,11 +42,13 @@
           >회원가입</a>
         <label style="float: right" for="user-email" class="find-password"
           >비밀번호 찾기</label>
-        <input type="text" id="user-email" />
-        <button class="send-button">이메일 전송</button>
+        <div class ="find-password-wrap">
+          <input type="text" id="user-email" class="find-password-input" placeholder="비밀번호를 전송받을 이메일"/>
+          <button class="send-button">이메일 전송</button>
+        </div>
       </div>
     </form>
 
-    <script src="./login.js" type="module"></script>>
+    <script src="./login.js" type="module"></script>
   </body>
 </html>

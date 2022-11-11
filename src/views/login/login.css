@@ -81,3 +81,25 @@ li + li::before {
 .send-button {
   display: none;
 }
+
+.find-password-wrap {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.find-password-input {
+  width: 70%;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  background-color: #edecec;
+  padding: 10px;
+}
+
+.send-button {
+  background-color: #000000;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #ffffff;
+}

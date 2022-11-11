@@ -10,9 +10,15 @@ header.innerHTML = `
     </div>
     <div class="menu">
       <a href="#" id="login"></a>
-      <a href="/orderlist" id="mypage">마이페이지</a>
-      <a href="/cart" id="cart">장바구니</a>
-      <a href="/admin-orders" id="admin">관리자페이지</a>
+      <a href="/orderlist" id="mypage">
+        <span class="material-symbols-outlined">person</span>
+      </a>
+      <a href="/cart" id="cart">
+        <span class="material-symbols-outlined">shopping_bag</span>
+      </a>
+      <a href="/admin-orders" id="admin">
+       <span class="material-symbols-outlined">person</span>
+      </a>
     </div>
   </nav>
 </section>
@@ -26,9 +32,7 @@ const $mypage = document.querySelector("#mypage");
 // 토큰 정보 가져오기
 const email = sessionStorage.getItem("token");
 
-$login.innerText = email ? "로그아웃" : "로그인";
-
-$login.innerText = email ? "로그아웃" : "로그인";
+$login.innerHTML = email ? `<span class="material-symbols-outlined">logout</span>` : `<span class="material-symbols-outlined">login</span>`;
 
 $login.addEventListener("click", () => {
   if (!email) {
