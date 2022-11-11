@@ -17,7 +17,7 @@ $basketSubmit.addEventListener('click', function(e) {
     }
 
     const btns = document.querySelectorAll('input[type="radio"]:checked+div>span');
-    console.log(btns);
+    // console.log(btns);
 
     const lettering = document.querySelector('input[type="text"]').value;
     let total = 0; // 기본값
@@ -38,3 +38,7 @@ $basketSubmit.addEventListener('click', function(e) {
 
     local.setItem(number++, JSON.stringify(data));
 });
+
+
+const btns = document.querySelectorAll('input[type="radio"]:checked+div>span');
+// console.log(btns);

@@ -21,3 +21,19 @@
 //     const $nextOpt = document.querySelector(`#opt-${active}`);
 //     $nextOpt.setAttribute('style', 'display:flex;');                 
 // })
+
+// const $itemPrice = document.querySelector('.product-price');
+
+// const $b = document.querySelectorAll('input[type="radio"]');
+
+// console.log($b);
+// for (let i=0;i<$b.length;i++){
+//     $b[i].addEventListener('click', ()=>{
+
+//         const $selectedBtns = document.querySelectorAll('input[type="radio"]:checked+div>span');
+        
+//         for (let i=0;i<$selectedBtns.length;i++){
+//             console.log($selectedBtns[i].className.split(',')[4]);
+//         }
+//     })
+// }

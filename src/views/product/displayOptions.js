@@ -56,12 +56,12 @@ const makeList = (name, productName, KCAL, G, PRICE) =>{
 };
 
 const catArr = (await getItems());
-console.log(catArr);
+// console.log(catArr);
 
 for (let i=0;i<catArr.length;i++){ // 카테고리 개수 만큼 만들기
     const $container = document.querySelector('.product-opt-wrap');
 
-    console.log(i);
+    // console.log(i);
     const catName = catArr[i].CATEGORY_NAME; // 카테고리 이름
 
     if (catName === "레터링"){
@@ -97,12 +97,18 @@ const optNumber = $optContainter.children.length-1 < 0 ? 0 : $optContainter.chil
 
 let active = 0;
 
+$prevBtn.setAttribute('style', 'opacity:0');
+
+console.log(optNumber);
+
 $prevBtn.addEventListener('click', ()=>{
     const $prevOpt = document.querySelector(`#opt-${active}`);
     $prevOpt.setAttribute('style', 'display:none;');
     if (active !==0) active--;
     const $nextOpt = document.querySelector(`#opt-${active}`);
     $nextOpt.setAttribute('style', 'display:flex;');
+    $nextBtn.setAttribute('style', 'display:visible');
+    if (active === 1) $prevBtn.setAttribute('style', 'opacity:0;');
 })
 
 $nextBtn.addEventListener('click', ()=>{
@@ -110,7 +116,9 @@ $nextBtn.addEventListener('click', ()=>{
     $prevOpt.setAttribute('style', 'display:none;');
     if (active !==optNumber-1) active++;
     const $nextOpt = document.querySelector(`#opt-${active}`);
-    $nextOpt.setAttribute('style', 'display:flex;');                 
+    $nextOpt.setAttribute('style', 'display:flex;');
+    $prevBtn.setAttribute('style', 'display:visible');
+    if (active === optNumber-1) $nextBtn.setAttribute('style', 'opacity:0;');             
 })
 
 const $orderSubmit = document.querySelector('#orderSubmit');
@@ -192,3 +200,56 @@ $orderSubmit.addEventListener('click', ()=>{
 //     const categoryNum = x.CATEGORY_NO;
 //     console.log(categoryNum);
 // })
+
+const $itemPrice = document.querySelector('#productPrice');
+const $kcal = document.querySelector('.kcal');
+const $g = document.querySelector('.g');
+
+const $b = document.querySelectorAll('input[type="radio"]');
+
+const $lettering = document.querySelector('input[type="text"]');
+
+
+for (let i=0;i<$b.length;i++){
+    $b[i].addEventListener('click', ()=>{
+
+        let totalPrice = 0;
+        let totalKcal = 0;
+        let totalG = 0;
+
+        const $selectedBtns = document.querySelectorAll('input[type="radio"]:checked+div>span');
+
+        for (let i=0;i<$selectedBtns.length;i++){
+            console.log($selectedBtns[i].className.split(',')[3]);
+            totalPrice += Number($selectedBtns[i].className.split(',')[4]);
+            totalKcal += Number($selectedBtns[i].className.split(',')[2]);
+            totalG += Number($selectedBtns[i].className.split(',')[3]);
+        }
+
+        // $lettering.addEventListener('focusout', ()=>{
+        //     $itemPrice.innerHTML = `${totalPrice} 원`;
+        // })
+
+        if($lettering.value !=="") totalPrice += 5000;
+
+        $itemPrice.innerHTML = `${totalPrice} 원`;
+
+        $kcal.innerHTML = `칼로리 ${totalKcal}`;
+        $g.innerHTML = `중량(g) ${totalG}`;
+    })
+}
+
+
+// 상세정보
+const $up = document.querySelector('.info-arrow-top');
+const $down = document.querySelector('.info-arrow-bottom');
+const $infoText = document.querySelector('.info-text');
+$infoText.setAttribute('style', 'opacity:0');
+
+$up.addEventListener('click', ()=>{
+    $infoText.setAttribute('style', 'opacity:0');
+})
+
+$down.addEventListener('click', ()=>{
+    $infoText.setAttribute('style', 'opacity:100');
+})
